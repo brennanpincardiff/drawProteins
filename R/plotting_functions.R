@@ -40,3 +40,23 @@ draw_mol_horiz <- function(names, features){
   text(max(features$end)/2, 5 , paste("Uniprot Accession Number:", names$accession), cex=0.8)
   text(max(features$end)/2, 3 , "Source of data: http://www.uniprot.org/uniprot/Q04206", cex=0.8)
 }
+
+
+#' @export
+
+# plotting function to add circles representing phosphorylation sites
+# needs to be tested robustly. 
+
+draw_phosphosites <- function(phospho_features){
+  screen.height <- 25  # this is a bit arbitary but is same as used in previous function
+  for (i in 1:nrow(phospho_features) ) {
+    plotrix::draw.circle(features$begin[i],
+                         screen.height/2 + 2.5,
+                         radius=20,
+                         nv=100,
+                         border=NULL,
+                         col="yellow",  # colour could be altered. 
+                         lty=1,
+                         lwd=1)
+  }
+}

@@ -50,6 +50,17 @@ extractFeaturesList <- function(features_list){
   return(features_dataframe)
 }
 
-  
+
+
+#' @export
+# function to reduce data.frame of features to just phosphorylation sites
+phospho_site_info <- function(features){
+  features <- features[features$type == "MOD_RES",]
+  phospho_list <- grep("Phospho", features$description)
+  phospho_features <- features[phospho_list,]
+  return(phospho_features)
+}
+
+
   
   
