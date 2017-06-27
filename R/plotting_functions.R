@@ -46,8 +46,9 @@ draw_mol_horiz <- function(names, features){
 
 # plotting function to add circles representing phosphorylation sites
 # needs to be tested robustly. 
+# default colour is yellow and radius = 10 but can be changed. 
 
-draw_phosphosites <- function(phospho_loc, radius){
+draw_phosphosites <- function(phospho_loc, radius = 10, colour = "yellow"){
   screen.height <- 25  # this is a bit arbitary but is same as used in previous function
   for (i in 1:nrow(phospho_loc) ) {
     plotrix::draw.circle(phospho_loc$begin[i],
@@ -55,7 +56,7 @@ draw_phosphosites <- function(phospho_loc, radius){
                          radius=radius,
                          nv=100,
                          border=NULL,
-                         col="yellow",  # colour could be altered. 
+                         col=colour,  # colour could be altered. 
                          lty=1,
                          lwd=1)
   }
