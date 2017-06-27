@@ -1,3 +1,5 @@
+#' @export
+
 # my first two functions for the package drawProteins
 
 # function to extract names into a list

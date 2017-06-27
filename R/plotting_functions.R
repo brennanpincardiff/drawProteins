@@ -1,3 +1,5 @@
+#' @export
+
 # first plotting function 
 
 # this function should work to draw a horizontal domain structure of a protein
