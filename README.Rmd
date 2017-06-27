@@ -1,11 +1,6 @@
-# 
+### Making functions to work with Uniprot Protein API in R
 
-The goal of  is to ...
+Two functions to turn JSON into lists and dataframes.
 
-## Example
+One function to plot the molecule using Base R. 
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-## basic example code
-```
