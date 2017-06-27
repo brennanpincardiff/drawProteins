@@ -1,5 +1,4 @@
 #' @export
-
 # my first two functions for the package drawProteins
 
 # function to extract names into a list
@@ -21,7 +20,7 @@ extract_names <- function(protein_json){
 
 
 
-
+#' @export
 # function to extract features from list into a dataframe
 # from a JSON object 
 # JSON object created by getting Uniprot Features API output
