@@ -3,5 +3,6 @@
 export(draw_mol_horiz)
 export(draw_phosphosites)
 export(extractFeaturesList)
+export(extractFeaturesListwithAcc)
 export(extract_names)
 export(phospho_site_info)
