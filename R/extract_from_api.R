@@ -29,8 +29,7 @@ extract_names <- function(protein_json){
 #  content() %>%
 #  flatten() -> prot_feat_list  # list of 6
 #
-# features_list <- prot_feat_list$features  # should be list...
-
+# features_list <- prot_feat_list$features  # should be list..
 
 extractFeaturesList <- function(features_list){
   features <- NULL
@@ -96,5 +95,33 @@ extractFeaturesListwithAcc <- function(prot_feat){
   return(features_dataframe)
 }
 
+
+#' @export
+# this function works on a List of 6 from the Uniprot API
+# it creates a data.frame of features
+# and now includes the accession number 
+# it should be a better function to use than either of the above functions
+# which I will probably remove at some point
+extract_feat_acc <- function(features_list){
   
+  # create the data.frame object called features
+  features <- NULL
+  for(i in 1:length(features_list$features)){
+    featuresTemp <- c(features_list$features[[i]]$type,
+                      as.character(features_list$features[[i]]$description),
+                      as.numeric(features_list$features[[i]]$begin),
+                      as.numeric(features_list$features[[i]]$end))
+    features <- rbind(features, featuresTemp) # combine
+  }
+  
+  features_dataframe <- as.data.frame(features, stringsAsFactors = FALSE)
+  colnames(features_dataframe) <- c("type", "description", "begin", "end")
+  features_dataframe$begin <- as.numeric(features_dataframe$begin)
+  features_dataframe$end <- as.numeric(features_dataframe$end)
+  features_dataframe$length <- features_dataframe$end - features_dataframe$begin
+  features_dataframe$accession <- rep(features_list$accession, times = nrow(features_dataframe))
+  features_dataframe$entryName <- rep(features_list$entryName, times = nrow(features_dataframe))
+  return(features_dataframe)
+}
+
   
