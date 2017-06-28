@@ -62,5 +62,39 @@ phospho_site_info <- function(features){
 }
 
 
+
+#' @export
+# I want to make the function work with the original JSON object
+# rather than needing to manipulate outside of the function
+# this seems to work. 
+# also data.frame now has accession number and entryName for each row
+
+extractFeaturesListwithAcc <- function(prot_feat){
+  
+  # extract the list that we need for the object obtained from API
+  prot_feat %>%
+    httr::content() %>%    # this produces a List of 1 with a List of 6 inside
+    purrr::flatten() -> features_list  # now just the List of 6 from inside
+  
+  # create the data.frame object called features
+  features <- NULL
+  for(i in 1:length(features_list$features)){
+    featuresTemp <- c(features_list$features[[i]]$type,
+                      as.character(features_list$features[[i]]$description),
+                      as.numeric(features_list$features[[i]]$begin),
+                      as.numeric(features_list$features[[i]]$end))
+    features <- rbind(features, featuresTemp) # combine
+  }
+  
+  features_dataframe <- as.data.frame(features, stringsAsFactors = FALSE)
+  colnames(features_dataframe) <- c("type", "description", "begin", "end")
+  features_dataframe$begin <- as.numeric(features_dataframe$begin)
+  features_dataframe$end <- as.numeric(features_dataframe$end)
+  features_dataframe$length <- features_dataframe$end - features_dataframe$begin
+  features_dataframe$accession <- rep(features_list$accession, times = nrow(features_dataframe))
+  features_dataframe$entryName <- rep(features_list$entryName, times = nrow(features_dataframe))
+  return(features_dataframe)
+}
+
   
   
