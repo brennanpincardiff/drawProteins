@@ -1,8 +1,10 @@
 Package: drawProteins
-Title: What the Package Does (one line, title case)
+Title: Package to Draw Protein Schematics from Uniprot API output
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Paul", "Brennan", email = "brennanp@cardiff.ac.uk", role = c("aut", "cre"))
+Description: This paragraph creates a dataframe from the Uniprot Features API. 
+From the JSON returned by the GET command, it extracts an dataframe. This
+dataframe can then be used by ggplot and base R to draw protein schematics. 
 Depends: R (>= 3.3.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
