@@ -6,14 +6,16 @@
 # JSON object created by getting Uniprot API output
 # and using httr::content() function to turn in to JSON 
 extract_names <- function(protein_json){
+  # Steph says create a variable of protein_json[[1]] to prevent repeating this below!!
+  prot_info <- protein_json[[1]]
   # extract list of names...
   names <- list(
-    accession = protein_json[[1]]$accession,
-    name = protein_json[[1]]$id,
-    protein.recommendedName.fullName = protein_json[[1]]$protein$recommendedName$fullName$value,
-    gene.name.primary = protein_json[[1]]$gene[[1]]$name$value,
-    gene.name.synonym = protein_json[[1]]$gene[[1]]$synonyms[[1]]$value,
-    organism.name.scientific = protein_json[[1]]$organism$names[[1]]$value
+    accession = prot_info$accession,
+    name = prot_info$id,
+    protein.recommendedName.fullName = prot_info$protein$recommendedName$fullName$value,
+    gene.name.primary = prot_info$gene[[1]]$name$value,
+    gene.name.synonym = prot_info$gene[[1]]$synonyms[[1]]$value,
+    organism.name.scientific = prot_info$organism$names[[1]]$value
   )
   return(names)
 }
