@@ -109,7 +109,7 @@ extract_feat_acc <- function(features_list){
   # create the data.frame object called features
   features <- NULL
   for(i in 1:length(features_list$features)){
-    if(features_list$features[[i]]$description = NULL){
+    if(is.null(features_list$features[[i]]$description) == TRUE){
       featuresTemp <- c(features_list$features[[i]]$type,
                         "NONE",
                         as.numeric(features_list$features[[i]]$begin),
