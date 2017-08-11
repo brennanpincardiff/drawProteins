@@ -3,9 +3,9 @@
 # extract_feat_acc
 # and the phosphosite extraction function.
 
-# the function works inside a loop which is NOT great.
+# the extract_feat_acc function works inside a loop which is NOT great.
 
-# it works with multiple accession numbers but NOT with one I think?
+# it works with multiple accession numbers and with one I think?
 
 
 # write function to do unit tests with is extract_feat_acc
@@ -21,22 +21,14 @@ test_that("extract_feat_acc works to give ",{
   # Nice simple test
   res <- extract_feat_acc(rel_A_features)
 
-  ### N.B. This gives 45 warnings!!! NOT good!! WHY????
-  ### going to get me in trouble
-  # have to stop now but this is important to remember...
-  # fiftieth element is an example
+  expect_is(res, "data.frame") # generic
+  expect_equal(ncol(res), 7)   # exact for sample data
+  expect_equal(nrow(res), 75)  # exact for sample data
+  expect_match(res[1,1], "CHAIN") # first element should be "CHAIN"
+  expect_match(colnames(res)[3], "begin") # 3rd column name is begin
+  expect_match(colnames(res)[4], "end") # 4th column name is end
+  expect_match(colnames(res)[6], "accession") # 6th column name is accession
 
-  # reason for this is that some of the features DON'T HAVE DESCRIPTIONS!!!
-  # SO WHEN LOOKING FOR DESCRIPTIONS - NONE RETURNED!!!
-
-  # GOING TO NEED AN IF STATEMENT FOR THIS, I THINK....
-
-  expect_is(res, "data.frame")
-  # expect_equal(res, ncol,7)
-  # expect_equal(res, nrow,75)
-
-  # should contain a type of "CHAIN"
-  # should have accession number, entryName
   # need to add tests to check structure is going to work for plotting...
 
 })

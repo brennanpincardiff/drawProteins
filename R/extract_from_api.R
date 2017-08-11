@@ -36,10 +36,11 @@ extract_names <- function(protein_json){
 extractFeaturesList <- function(features_list){
   features <- NULL
   for(i in 1:length(features_list)){
-    featuresTemp <- c(features_list[[i]]$type,
-                      as.character(features_list[[i]]$description),
-                      as.numeric(features_list[[i]]$begin),
-                      as.numeric(features_list[[i]]$end))
+    feat_list <- features_list[[i]]
+    featuresTemp <- c(feat_list$type,
+                      as.character(feat_list$description),
+                      as.numeric(feat_list$begin),
+                      as.numeric(feat_list$end))
     features <- rbind(features, featuresTemp) # combine
   }
 
