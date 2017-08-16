@@ -134,3 +134,23 @@ extract_feat_acc <- function(features_list){
   return(features_dataframe)
 }
 
+
+#' @export
+# this function works on the object returned from multiple GET Uniprot API
+# it creates a data.frame of features
+# includes the accession number AND an order number
+# it uses the extract_feat_acc function above.
+
+feature_to_dataframe <- function(features_in_lists_of_six){
+  ################
+  # loop to work through the API object and convert to data.frame
+  # probably there is a better way to do this
+  features_total_plot <- NULL
+  for(i in 1:length(features_in_lists_of_six)){
+    # the extract_feat_acc() function takes features into a data.frame
+    features_temp <- drawProteins::extract_feat_acc(features_in_lists_of_six[[i]])
+    features_temp$order <- i  # this order is needed for plotting later
+    features_total_plot <- rbind(features_total_plot, features_temp)
+  }
+  return(features_total_plot)
+}
