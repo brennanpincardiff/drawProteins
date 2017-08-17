@@ -1,9 +1,13 @@
 ---
 title: "Using drawProteins"
-author: "Dr Paul Brennan"
+author:
+- name: "Dr Paul Brennan"
+  affiliation: 
+  - "Centre for Medical Education, School of Medicine, Cardiff University, Cardiff, Wales, United Kingdom"
+  email: BrennanP@cardiff.ac.uk
 package: drawProteins
 date: "`r Sys.Date()`"
-output: BiocStyle::html_document2
+output: BiocStyle::pdf_document2
 vignette: >
   %\VignetteIndexEntry{Using drawProteins}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,11 +23,11 @@ library(ggplot2)
 library(knitr)
 opts_chunk$set(comment=NA,
                fig.align = "center",
-               out.width = "100%", 
+               out.width = "100%",
                dpi = 300)
 ```
 
-## Overview of drawProteins
+# Overview of drawProteins
 This package has been created to allow the creation of protein schematics based on the data obtained from the Uniprot Protein Database. 
 
 The basic workflow is:
@@ -38,7 +42,7 @@ The graphing package ggplot2 is then used to create the protein schematic.
 
 The package works best when pipes %>% provided by the magrittr package are also used. 
 
-## Getting the data from Uniprot
+# Getting the data from Uniprot
 
 Currently, drawProteins interacts with the [Uniprot database]<http://www.uniprot.org/>. At least one working Uniprot accession numbers must be provided. More than one can be provided but they must be separated by a single space. The spaces are replaced to create an url that can be used to query the Uniprot API 
 
@@ -61,7 +65,7 @@ With internet access, this can be retreived from Uniprot with this code:
   protein_json
 ```
 
-## Turning Uniprot data into a dataframe
+# Turning Uniprot data into a dataframe
 The next step in the workflow is to convert the data from the Uniprot API into a dataframe that can be used with ggplot2. 
 
 The feature_to_dataframe() function will  convert the list of lists of six provided by the get_features() function to a dataframe which can then be used to plot the schematics. 
@@ -75,93 +79,83 @@ The feature_to_dataframe() function will also add an "order" value to allow plot
   prot_data
 
 # show in console
-  head(prot_data)
+  head(prot_data[1:4])
 
 ```
 
 
-## Plot the data
+# Plot the data
 The data can be plotted with ggplot2 using the geom_rect() and geom_label. These have been combined into a geom_chain() function that can be used with pipes in the following way.
 
-```{r, fig.height=1}
+```{r, fig.height=3, fig.wide = TRUE}
 prot_data %>%
   geom_chains() %>%
   geom_domains -> p
 p
 ```
 
-The text on the chains and domains is a bit large. These can be controlled by the addition of a size argument. 
-```{r, fig.height=1}
-prot_data %>%
-  geom_chains(label_size = 1.25) %>%
-  geom_domains(label_size = 1.25) -> p
-p
-```
 
 To show this visualisation better, a white background helps as well as removing the y-axis and the grid.
-Also changing the size of the text. 
+Also changing the size of the text using the base_size argument. 
 This can be done with this code:
-```{r, fig.height=1}
+```{r, fig.height=3, fig.wide = TRUE}
 # white background and remove y-axis
-p <- p + theme_bw(base_size = 4) +  # white background
-  theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank()) +
-  theme(axis.ticks = element_blank(), axis.text.y = element_blank()) +
+p <- p + theme_bw(base_size = 20) +  # white background
+  theme(panel.grid.minor=element_blank(), 
+        panel.grid.major=element_blank()) +
+  theme(axis.ticks = element_blank(), 
+        axis.text.y = element_blank()) +
   theme(panel.border = element_blank())
 p
 ```
 
-I think the legend is taking up too much space too. So, we can change that. 
-```{r, fig.height=1}
-p <- p + guides(fill = guide_legend(keywidth = 0.5, keyheight = 1))
-p
-```
 
-## Checking the other features
+# Checking the other features
 
-```{r, fig.height=1}
+```{r, fig.height=3, fig.wide = TRUE}
 p %>% geom_region  # adds activation domain
 ```
 
-```{r, fig.height=1}
+```{r, fig.height=3, fig.wide = TRUE}
 p %>% geom_repeat  # doesn't add anything in this case
 ```
 
-```{r, fig.height=1}
+```{r, fig.height=3, fig.wide = TRUE}
 p %>% geom_motif   # adds 9aa Transactivation domain & NLS
 ```
 
 
-```{r, fig.height=1}
-p %>% geom_phospho()  # adds phosphorylation sites from Uniprot
+```{r, fig.height=3, fig.wide = TRUE}
+p %>% geom_phospho(size = 8)  # adds phosphorylation sites from Uniprot
 ```
 
-## Putting it all together
+# Putting it all together
 In this way it's possible to chose the geoms that give the information desired in the way you like. Some customisation is possible as described below. 
 
 For Rel A, my recommendation would be the following workflow.
-```{r, fig.height=1.2}
+```{r, fig.height=3.5, fig.wide = TRUE}
 prot_data %>%
-  geom_chains(label_size = 1.25) %>%
-  geom_domains(label_size = 1.25) %>%
+  geom_chains() %>%
+  geom_domains() %>%
   geom_region %>%
   geom_motif %>%
-  geom_phospho() -> p
+  geom_phospho(size = 8) -> p
 
-p <- p + theme_bw(base_size = 4) +  # white background and change text size
-  theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank()) +
-  theme(axis.ticks = element_blank(), axis.text.y = element_blank()) +
+p <- p + theme_bw(base_size = 20) +  # white background and change text size
+  theme(panel.grid.minor=element_blank(), 
+        panel.grid.major=element_blank()) +
+  theme(axis.ticks = element_blank(), 
+        axis.text.y = element_blank()) +
   theme(panel.border = element_blank())
-
-p <- p + guides(fill = guide_legend(keywidth = 0.5, keyheight = 1))
 
 p
 
 ```
 
-## Adding titles to the plots 
+# Adding titles to the plots 
 
 Using ggplot2 then allows the addition of titles:
-```{r, fig.height=1}
+```{r, fig.height=4, fig.wide = TRUE}
 # add titles
 p <- p + labs(x = "Amino acid number",         # label x-axis
               y = "",  # label y-axis
@@ -174,24 +168,26 @@ p
 ## Drawing schematic for multiple proteins
 
 With internet access, the script below shows the workflow for five proteins of the NFkappaB transcription factor family. 
-```{r, fig.height=2.5}
-# accession numbers of five rel proteins
+```{r, fig.height=10, fig.wide = TRUE}
+# accession numbers of five NF-kappaB proteins
 "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   drawProteins::get_features() %>%
   drawProteins::feature_to_dataframe() ->
   prot_data
 
 prot_data %>%
-  geom_chains(size = 0.25, label_size = 1.25) %>%
-  geom_domains(label_size = 1.25) %>%
-  geom_repeat(label_size = 0.75, outline = "lightblue", fill = "lightblue") %>%
+  geom_chains() %>%
+  geom_domains() %>%
+  geom_repeat() %>%
   geom_motif %>%
-  geom_phospho(size = 1) -> p
+  geom_phospho(size = 8) -> p
 
 # background and y-axis
-p <- p + theme_bw(base_size = 4) +  # white background and change text size
-  theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank()) +
-  theme(axis.ticks = element_blank(), axis.text.y = element_blank()) +
+p <- p + theme_bw(base_size = 20) +  # white background and change text size
+  theme(panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank()) +
+  theme(axis.ticks = element_blank(),
+        axis.text.y = element_blank()) +
   theme(panel.border = element_blank())
 
 # add titles
@@ -200,43 +196,44 @@ p <- p + labs(x = "Amino acid number",         # label x-axis
               title = "Schematic of human NF-kappaB proteins",
               subtitle = "circles = phosphorylation sites\nRHD = Rel Homology Domain\nsource:Uniprot")
 
-# make legend smaller and position it
-p <- p + guides(fill = guide_legend(keywidth = 0.5, keyheight = 1)) +
-         theme(legend.position="top") + labs(fill="")
+
+# move legend to top
+p <- p + theme(legend.position="top") + labs(fill="")
+
 p
 ```
 
 
 Adding geom_region give lots more information but perhaps adds confusion. What do you think?
 
-```{r, fig.height=2.5}
-p %>% geom_region %>% geom_motif %>% geom_phospho(size = 1)
+```{r, fig.height=10, fig.wide = TRUE}
+p %>% geom_region %>% geom_motif %>% geom_phospho(size = 8)
 ```
 
-## Customising the geoms
+# Customising the geoms
 Currently, it's possible to customise the chain colour and outline. It's possible to remove the labels. 
 
-```{r, fig.height=2}
+```{r, fig.height=6, fig.wide = TRUE}
 prot_data %>%
   geom_chains(label_chains = FALSE,
-              fill = "red", 
-              outline = "grey")
+              fill = "hotpink", 
+              outline = "midnightblue")
 ```
 
 
 It's also possible to change the size and colour of the phosphorylation symbols. 
-```{r, fig.height=3}
+```{r, fig.height=8, fig.wide = TRUE}
 prot_data %>%
   geom_chains(fill = "lightsteelblue1", 
               outline = "grey", 
-              label_size = 1.25) %>% 
-  geom_phospho(size = 2, fill = "red") -> p
+              label_size = 5) %>% 
+  geom_phospho(size = 10, fill = "red") -> p
   
 p + theme_bw()
 ```
 
 It's also possible to change the labels to a custom list. But remember that the plots are drawn from the bottom up. 
-```{r, fig.height=3}
+```{r, fig.height=8, fig.wide = TRUE}
 prot_data %>%
   geom_chains(fill = "lightsteelblue1", 
               outline = "grey",
@@ -247,10 +244,14 @@ prot_data %>%
                          "Rel B",
                          "c-Rel", 
                          "p65/Rel A"),
-              label_size = 1.25) %>% 
-  geom_phospho(size = 2, fill = "red") -> p
+              label_size = 5) %>% 
+  geom_phospho(size = 8, fill = "red") -> p
 
 p + theme_bw()
 ```
 
-That's enough for now - 16 August 2017
+# Session info
+Here is the output of sessionInfo() on the system on which this document was compiled:
+```{r, echo=FALSE}
+sessionInfo()
+```

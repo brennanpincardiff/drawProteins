@@ -10,6 +10,7 @@ LazyData: true
 Suggests: covr,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    BiocStyle
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

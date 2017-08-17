@@ -3,7 +3,7 @@ title: "Using drawProteins"
 author: "Dr Paul Brennan"
 package: drawProteins
 date: "`r Sys.Date()`"
-output: BiocStyle::html_document2
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using drawProteins}
   %\VignetteEngine{knitr::rmarkdown}
@@ -253,4 +253,8 @@ prot_data %>%
 p + theme_bw()
 ```
 
-That's enough for now - 16 August 2017
+### Session info
+Here is the output of sessionInfo() on the system on which this document was compiled:
+```{r, echo=FALSE}
+sessionInfo()
+```
