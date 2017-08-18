@@ -1,3 +1,24 @@
+#' GET features of protein(s) from UniProt API
+#'
+#' This function creates the URL required to query the UniProt API and returns
+#' the features of the protein or proteins in JSON format. It uses the GET()
+#' function from the httr package.
+#'
+#' @param proteins_acc A vector of length 1 with one or more UniProt accession
+#' numbers separated by spaces.
+#'
+#' @return If there is internet access and the UniProt accession numbers are
+#'  good, the function will return a list of lists. The list will be of length
+#'  equivalent to the number of Uniprot accession numbers supplied. The lists
+#'  inside will be of length 6 and will contain information about the proteins
+#'  and the features.
+#'
+#' @examples
+#' \dontrun{
+#' # Requires internet access
+#' prot_data <- get_features("Q04206 Q01201 Q04864 P19838 Q00653")
+#' }
+#'
 #' @export
 # get_features function to GET protein data from Uniprot
 get_features <- function(proteins_acc){
