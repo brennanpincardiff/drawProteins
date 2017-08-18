@@ -18,8 +18,9 @@ The Vignette gives a good overview of the package. Available as [PDF](https://gi
 This is a work in progress and is only available on GitHub.
 To install: 
 
+```{r, eval = FALSE}
 if (!require(devtools)) {
     install.packages('devtools')
 }
 devtools::install_github('brennanpincardiff/drawProteins')
-
+```
