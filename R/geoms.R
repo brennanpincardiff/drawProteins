@@ -13,7 +13,7 @@ geom_chains <- function(prot_data = prot_data,
     ggplot2::ylim(0.5, max(prot_data$order)+0.5) +
     ggplot2::xlim(-max(prot_data$end)*0.2, max(prot_data$end) + max(prot_data$end)*0.1) +
     ggplot2::geom_rect(data = prot_data[prot_data$type == "CHAIN",],
-                       mapping=aes(xmin=begin,
+                       mapping=ggplot2::aes(xmin=begin,
                                    xmax=end,
                                    ymin=order-0.2,
                                    ymax=order+0.2),
@@ -38,13 +38,13 @@ geom_domains <- function(p,
                          label_domains = TRUE,
                          label_size = 4){
   p <- p + ggplot2::geom_rect(data= prot_data[prot_data$type == "DOMAIN",],
-            mapping=aes(xmin=begin,
+            mapping=ggplot2::aes(xmin=begin,
                         xmax=end,
                         ymin=order-0.25,
                         ymax=order+0.25,
                         fill=description)) +
     ggplot2::geom_label(data = prot_data[prot_data$type == "DOMAIN", ],
-             aes(x = begin + (end-begin)/2,
+                        ggplot2::aes(x = begin + (end-begin)/2,
                  y = order,
                  label = description),
              size = label_size)
@@ -58,7 +58,7 @@ geom_phospho <- function(p,
                          size = 2,
                          fill = "yellow"){
   p <- p + ggplot2::geom_point(data = drawProteins::phospho_site_info(prot_data),
-                      aes(x = begin,
+                               ggplot2::aes(x = begin,
                           y = order+0.25),
                       shape = 21,
                       colour = "black",
@@ -73,7 +73,7 @@ geom_phospho <- function(p,
 geom_region <- function(p){
   ## plot motifs fill by description
   p <- p + ggplot2::geom_rect(data= prot_data[prot_data$type == "REGION",],
-                     mapping=aes(xmin=begin,
+                     mapping=ggplot2::aes(xmin=begin,
                                  xmax=end,
                                  ymin=order-0.25,
                                  ymax=order+0.25,
@@ -89,7 +89,7 @@ geom_region <- function(p){
 geom_motif <- function(p){
   ## plot motifs fill by description
   p <- p + ggplot2::geom_rect(data= prot_data[prot_data$type == "MOTIF",],
-                     mapping=aes(xmin=begin,
+                     mapping=ggplot2::aes(xmin=begin,
                                  xmax=end,
                                  ymin=order-0.25,
                                  ymax=order+0.25,
@@ -108,8 +108,8 @@ geom_repeat <- function(p,
                         fill = "dimgrey",
                         label_repeats = TRUE){
   ## step 6 plot repeats fill by description
-  p <- p + geom_rect(data= prot_data[prot_data$type == "REPEAT",],
-                     mapping=aes(xmin=begin,
+  p <- p + ggplot2::geom_rect(data= prot_data[prot_data$type == "REPEAT",],
+                     mapping=ggplot2::aes(xmin=begin,
                                  xmax=end,
                                  ymin=order-0.25,
                                  ymax=order+0.25),
@@ -119,7 +119,7 @@ geom_repeat <- function(p,
   if(label_repeats == TRUE){
     # label repeats (for this they are ANK but remove digits)
     p <- p + ggplot2::geom_text(data = prot_data[prot_data$type == "REPEAT",],
-                       aes(x = begin + (end-begin)/2,
+                                ggplot2::aes(x = begin + (end-begin)/2,
                            y = order,
                            label = gsub("\\d", "", description)),
                        size = label_size)

@@ -13,8 +13,7 @@ get_features <- function(proteins_acc){
 
   # basic function is GET() which accesses the API
   # accept_json() argument gives a JSON object
-  prots_feat <- httr::GET(url,
-                    accept_json())
+  prots_feat <- httr::GET(url, httr::accept_json())
 
   code <- httr::status_code(prots_feat)  # if it returns a 200 - that's good
   if(code == 200){

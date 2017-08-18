@@ -109,6 +109,7 @@ extract_feat_acc <- function(features_list){
 
   # create the data.frame object called features
   features <- NULL
+
   for(i in 1:length(features_list$features)){
     if(is.null(features_list$features[[i]]$description) == TRUE){
       featuresTemp <- c(features_list$features[[i]]$type,
@@ -129,9 +130,17 @@ extract_feat_acc <- function(features_list){
   features_dataframe$begin <- as.numeric(features_dataframe$begin)
   features_dataframe$end <- as.numeric(features_dataframe$end)
   features_dataframe$length <- features_dataframe$end - features_dataframe$begin
+
+  # add accession number to each row of dataframe
   features_dataframe$accession <- rep(features_list$accession, times = nrow(features_dataframe))
+
+  # add entryName (e.g. p65_HUMAN) to each row of dataframe
   features_dataframe$entryName <- rep(features_list$entryName, times = nrow(features_dataframe))
-  return(features_dataframe)
+
+  # add taxid to each row of datafame
+  features_dataframe$taxid <- rep(features_list$taxid, times = nrow(features_dataframe))
+
+    return(features_dataframe)
 }
 
 
