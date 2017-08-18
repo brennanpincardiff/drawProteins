@@ -1,6 +1,16 @@
-### Making functions to work with Uniprot Protein API in R
+# Overview of drawProteins
+This package has been created to allow the creation of protein schematics based on the data obtained from the Uniprot Protein Database. 
 
-Two functions to turn JSON into lists and dataframes.
+## The basic workflow is:
+<li> to provide one or more Uniprot IDs
+<li> get a list of feature from the Uniprot API
+<li> draw the basic chains of these proteins
+<li> add features as desired
 
-One function to plot the molecule using Base R. 
+drawProteins uses the package httr to interact with the Uniprot API and extract a JSON object into R. The JSON object is used to create a data.table. 
 
+The graphing package ggplot2 is then used to create the protein schematic. 
+
+The package works best when pipes %>% provided by the magrittr package are also used. 
+
+The Vignette gives a good overview of the package. Available as [PDF](https://github.com/brennanpincardiff/drawProteins/blob/master/vignettes/drawProteins_BiocStyle_pdf_output.pdf)
