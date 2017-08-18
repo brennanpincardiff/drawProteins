@@ -4,7 +4,8 @@
 # rel schematic again
 library(drawProteins)
 library(magrittr)
-library(devtools)
+library(ggplot2)
+
 # accession numbers of five rel proteins
 "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   drawProteins::get_features() %>%

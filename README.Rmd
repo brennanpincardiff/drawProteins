@@ -14,3 +14,12 @@ The graphing package ggplot2 is then used to create the protein schematic.
 The package works best when pipes %>% provided by the magrittr package are also used. 
 
 The Vignette gives a good overview of the package. Available as [PDF](https://github.com/brennanpincardiff/drawProteins/blob/master/vignettes/drawProteins_BiocStyle_pdf_output.pdf)
+
+This is a work in progress and is only available on GitHub.
+To install: 
+
+if (!require(devtools)) {
+    install.packages('devtools')
+}
+devtools::install_github('brennanpincardiff/drawProteins')
+
