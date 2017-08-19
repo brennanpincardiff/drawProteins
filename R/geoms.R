@@ -79,7 +79,7 @@ geom_chains <- function(prot_data = prot_data,
 
 
 
-#' Add domains to a ggplot object.
+#' Add protein domains to ggplot object.
 #'
 #' \code{geom_domains} adds domains to the ggplot object created by
 #' \code{\link{geom_chains}}.
@@ -128,6 +128,34 @@ geom_domains <- function(p,
   return(p)
 }
 
+
+
+#' Add protein phosphorylation sites to ggplot object.
+#'
+#' \code{geom_phospho} adds phosphorylation sites to ggplot object created by
+#' \code{\link{geom_chains}}.
+#'  It uses the prot_data object.
+#'   The ggplot function
+#'  \code{\link[ggplot2]{geom_point}} is used to draw each of the
+#'  phosphorylation sites at their location as determined by prot_data object.
+#'
+#' @param p ggplot object ideally created with \code{\link{geom_chains}}.
+#'
+#' @param size Size of the circle
+#'
+#' @param fill Colour of the circle.
+#'
+#' @return A ggplot object either in the plot window or as an object with an
+#' additional geom_point layer layer.
+#'
+#' @examples
+#' # combines will with geom_domains to plot chains and phosphorylation sites.
+#' library(magrittr)
+#' prot_data %>%
+#'      geom_chains(label_size = 1.25) %>%
+#'      geom_phospho() -> p
+#'      p
+#'
 #' @export
 # called geom_phospho
 # to draw phosphorylation sites on the protein with geom_point()

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geoms.R
 \name{geom_domains}
 \alias{geom_domains}
-\title{Add domains to a ggplot object.}
+\title{Add protein domains to ggplot object.}
 \usage{
 geom_domains(p, label_domains = TRUE, label_size = 4)
 }
@@ -20,7 +20,7 @@ additional geom_rect layer.
 \description{
 \code{geom_domains} adds domains to the ggplot object created by
 \code{\link{geom_chains}}.
- It inherits the prot_data object from \code{\link{geom_chains}}.
+ It uses the prot_data object.
   The ggplot function
  \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
  chains proportional to their number of amino acids (length).
