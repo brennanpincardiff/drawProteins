@@ -1,16 +1,15 @@
 #' Create ggplot object with protein chains from feature database
 #'
-#' This function uses the dataframe containing the protein features to plot
-#' the chains, the full length proteins. It creates the basic plot element by
-#' determining the length of the longest protein.
-#'
-#' The ggplot geom_rect is then used to draw each of the protein chains
-#' proportional to their number of amino acids (length)
+#' \code{geom_chains} uses the dataframe containing the protein features to plot
+#'  the chains, the full length proteins. It creates the basic plot element by
+#'  determining the length of the longest protein. The ggplot function
+#'  \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
+#'  chains proportional to their number of amino acids (length).
 #'
 #' @param prot_data Dataframe of one or more rows with the following column
-#' names: "type", "description", "begin", "end", "length", "accession",
-#' "entryName", "taxid", "order". Must contain a minimum of one "CHAIN" as
-#' prot_data$type.
+#'  names: "type", "description", "begin", "end", "length", "accession",
+#'  "entryName", "taxid", "order". Must contain a minimum of one "CHAIN" as
+#'  prot_data$type.
 #'
 #' @param outline Colour of the outline of each chain.
 #'
