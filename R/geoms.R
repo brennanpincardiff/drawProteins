@@ -79,6 +79,32 @@ geom_chains <- function(prot_data = prot_data,
 
 
 
+#' Add domains to a ggplot object.
+#'
+#' \code{geom_domains} adds domains to the ggplot object created by
+#' \code{\link{geom_chains}}.
+#'  It uses the prot_data object.
+#'   The ggplot function
+#'  \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
+#'  chains proportional to their number of amino acids (length).
+#'
+#' @param p ggplot object ideally created with \code{\link{geom_chains}}.
+#'
+#' @param label_domains Option to label domains or not.
+#'
+#' @param label_size Size of the text used for labels.
+#'
+#' @return A ggplot object either in the plot window or as an object with an
+#' additional geom_rect layer.
+#'
+#' @examples
+#' # combines will with geom_domains to plot chains and domains.
+#' library(magrittr)
+#' prot_data %>%
+#'      geom_chains(label_size = 1.25) %>%
+#'      geom_domains(label_size = 1.25) -> p
+#'      p
+#'
 #' @export
 # called geom_domains to plot just the domains
 geom_domains <- function(p,
@@ -89,12 +115,16 @@ geom_domains <- function(p,
                         xmax=end,
                         ymin=order-0.25,
                         ymax=order+0.25,
-                        fill=description)) +
-    ggplot2::geom_label(data = prot_data[prot_data$type == "DOMAIN", ],
+                        fill=description))
+
+  if(label_domains == TRUE){
+    p <- p + ggplot2::geom_label(data = prot_data[prot_data$type == "DOMAIN", ],
                         ggplot2::aes(x = begin + (end-begin)/2,
                  y = order,
                  label = description),
              size = label_size)
+  }
+
   return(p)
 }
 
