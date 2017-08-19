@@ -1,6 +1,51 @@
+#' Create ggplot object with protein chains from feature database
+#'
+#' This function uses the dataframe containing the protein features to plot
+#' the chains, the full length proteins. It creates the basic plot element by
+#' determining the length of the longest protein.
+#'
+#' The ggplot geom_rect is then used to draw each of the protein chains
+#' proportional to their number of amino acids (length)
+#'
+#' @param prot_data Dataframe of one or more rows with the following column
+#' names: "type", "description", "begin", "end", "length", "accession",
+#' "entryName", "taxid", "order". Must contain a minimum of one "CHAIN" as
+#' prot_data$type.
+#'
+#' @param outline Colour of the outline of each chain.
+#'
+#' @param fill Colour of the fill of each chain.
+#'
+#' @param label_chain Option to label chains or not.
+#'
+#' @param labels Vector with source of names for the chains. EntryName used as
+#' default but can be changed.
+#'
+#' @param size Size of the outline of the chains.
+#'
+#' @param label_size Size of the text used for labels.
+#'
+#' @return A ggplot object either in the plot window or as an object.
+#'
+#' @examples
+#' # draws five chains corresponding to human NF-kappaB proteins
+#' geom_chains(prot_data)
+#'
+#' # draws five chains with different colours to default
+#' library(magrittr)
+#' prot_data %>%
+#' geom_chains(label_chains = FALSE,
+#'            fill = "red",
+#'            outline = "grey")
+#'
+#' # combines will with geom_domains to plot chains and domains.
+#' library(magrittr)
+#' prot_data %>%
+#'      geom_chains(label_size = 1.25) %>%
+#'      geom_domains(label_size = 1.25) -> p
+#'      p
+#'
 #' @export
-# new function
-# called geom_chains to see if I can make it work
 geom_chains <- function(prot_data = prot_data,
                         outline = "black",
                         fill = "grey",
@@ -11,7 +56,8 @@ geom_chains <- function(prot_data = prot_data,
 
     p <-ggplot2::ggplot() +
     ggplot2::ylim(0.5, max(prot_data$order)+0.5) +
-    ggplot2::xlim(-max(prot_data$end)*0.2, max(prot_data$end) + max(prot_data$end)*0.1) +
+    ggplot2::xlim(-max(prot_data$end)*0.2,
+                  max(prot_data$end) + max(prot_data$end)*0.1) +
     ggplot2::geom_rect(data = prot_data[prot_data$type == "CHAIN",],
                        mapping=ggplot2::aes(xmin=begin,
                                    xmax=end,
@@ -30,6 +76,8 @@ geom_chains <- function(prot_data = prot_data,
   }
   return(p)
 }
+
+
 
 
 #' @export

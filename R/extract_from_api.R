@@ -16,12 +16,10 @@
 #' head(prot_data)
 #'
 #' @export
-
 # this function works on the object returned from multiple GET Uniprot API
 # it creates a data.frame of features
 # includes the accession number AND an order number
-# it uses the extract_feat_acc function above.
-
+# it uses the extract_feat_acc function below
 feature_to_dataframe <- function(features_in_lists_of_six){
   ################
   # loop to work through the API object and convert to data.frame
@@ -35,6 +33,8 @@ feature_to_dataframe <- function(features_in_lists_of_six){
   }
   return(features_total_plot)
 }
+
+
 
 
 
@@ -61,6 +61,75 @@ phospho_site_info <- function(features){
   phospho_features <- features[phospho_list,]
   return(phospho_features)
 }
+
+
+
+#' Create a dataframe of protein features from JSON object (List of 6)
+#'
+#' Converts the list of 6 JSON object created by getting the features from
+#' UniProt. Used in the feature_to_dataframe(). Does not give order. Does not
+#' operate on List of lists - just the list of 6.
+#'
+#' @param features_list A JSON object - list of 6 with features inside. Created
+#' as one of the lists in the list of lists by the get_features() function.
+#'
+#' @return A dataframe with features: "type", "description", "begin", "end" and
+#' adds accession, entryName and taxid for each row.
+#'
+#' @examples
+#' one_protein_features <- extract_feat_acc(five_rel_list[[1]])
+#' head(one_protein_features)
+#'
+#' @export
+# this function works on a List of 6 from the Uniprot API
+# it creates a data.frame of features
+# and now includes the accession number
+# it should be a better function to use than either of the above functions
+# which I will probably remove at some point
+extract_feat_acc <- function(features_list){
+
+  # create the data.frame object called features
+  features <- NULL
+
+  for(i in 1:length(features_list$features)){
+    if(is.null(features_list$features[[i]]$description) == TRUE){
+      featuresTemp <- c(features_list$features[[i]]$type,
+                        "NONE",
+                        as.numeric(features_list$features[[i]]$begin),
+                        as.numeric(features_list$features[[i]]$end))
+    } else{
+      featuresTemp <- c(features_list$features[[i]]$type,
+                        as.character(features_list$features[[i]]$description),
+                        as.numeric(features_list$features[[i]]$begin),
+                        as.numeric(features_list$features[[i]]$end))
+    }
+    features <- rbind(features, featuresTemp) # combine
+  }
+
+  features_dataframe <- as.data.frame(features, stringsAsFactors = FALSE)
+  colnames(features_dataframe) <- c("type", "description", "begin", "end")
+  features_dataframe$begin <- as.numeric(features_dataframe$begin)
+  features_dataframe$end <- as.numeric(features_dataframe$end)
+  features_dataframe$length <- features_dataframe$end - features_dataframe$begin
+
+  # add accession number to each row of dataframe
+  features_dataframe$accession <- rep(features_list$accession, times = nrow(features_dataframe))
+
+  # add entryName (e.g. p65_HUMAN) to each row of dataframe
+  features_dataframe$entryName <- rep(features_list$entryName, times = nrow(features_dataframe))
+
+  # add taxid to each row of datafame
+  features_dataframe$taxid <- rep(features_list$taxid, times = nrow(features_dataframe))
+
+  return(features_dataframe)
+}
+
+
+
+
+
+
+
 
 
 
@@ -164,48 +233,4 @@ extractFeaturesListwithAcc <- function(prot_feat){
   return(features_dataframe)
 }
 
-
-#' @export
-# this function works on a List of 6 from the Uniprot API
-# it creates a data.frame of features
-# and now includes the accession number
-# it should be a better function to use than either of the above functions
-# which I will probably remove at some point
-extract_feat_acc <- function(features_list){
-
-  # create the data.frame object called features
-  features <- NULL
-
-  for(i in 1:length(features_list$features)){
-    if(is.null(features_list$features[[i]]$description) == TRUE){
-      featuresTemp <- c(features_list$features[[i]]$type,
-                        "NONE",
-                        as.numeric(features_list$features[[i]]$begin),
-                        as.numeric(features_list$features[[i]]$end))
-    } else{
-      featuresTemp <- c(features_list$features[[i]]$type,
-                        as.character(features_list$features[[i]]$description),
-                        as.numeric(features_list$features[[i]]$begin),
-                        as.numeric(features_list$features[[i]]$end))
-    }
-    features <- rbind(features, featuresTemp) # combine
-  }
-
-  features_dataframe <- as.data.frame(features, stringsAsFactors = FALSE)
-  colnames(features_dataframe) <- c("type", "description", "begin", "end")
-  features_dataframe$begin <- as.numeric(features_dataframe$begin)
-  features_dataframe$end <- as.numeric(features_dataframe$end)
-  features_dataframe$length <- features_dataframe$end - features_dataframe$begin
-
-  # add accession number to each row of dataframe
-  features_dataframe$accession <- rep(features_list$accession, times = nrow(features_dataframe))
-
-  # add entryName (e.g. p65_HUMAN) to each row of dataframe
-  features_dataframe$entryName <- rep(features_list$entryName, times = nrow(features_dataframe))
-
-  # add taxid to each row of datafame
-  features_dataframe$taxid <- rep(features_list$taxid, times = nrow(features_dataframe))
-
-    return(features_dataframe)
-}
 
