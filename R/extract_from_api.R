@@ -1,6 +1,71 @@
+#' Create a dataframe of protein features from JSON object
+#'
+#' This function works on the object returned by the get_features() function.
+#' It creates a data.frame of features and includes the accession number AND
+#' an order number. It uses the extract_feat_acc function below.
+#'
+#' @param features_in_lists_of_six A list of lists returned by get_features()
+#' The number of lists corresponds to the number of accession numbers queried
+#' using get_features. The list of 6 contains protein names and features.
+#'
+#' @return A dataframe with 9 variables including type, description, begin,
+#' end, length, accession, entryName, taxid and order for plotting.
+#'
+#' @examples
+#' prot_data <- feature_to_dataframe(five_rel_list)
+#' head(prot_data)
+#'
 #' @export
-# my first two functions for the package drawProteins
 
+# this function works on the object returned from multiple GET Uniprot API
+# it creates a data.frame of features
+# includes the accession number AND an order number
+# it uses the extract_feat_acc function above.
+
+feature_to_dataframe <- function(features_in_lists_of_six){
+  ################
+  # loop to work through the API object and convert to data.frame
+  # probably there is a better way to do this
+  features_total_plot <- NULL
+  for(i in 1:length(features_in_lists_of_six)){
+    # the extract_feat_acc() function takes features into a data.frame
+    features_temp <- drawProteins::extract_feat_acc(features_in_lists_of_six[[i]])
+    features_temp$order <- i  # this order is needed for plotting later
+    features_total_plot <- rbind(features_total_plot, features_temp)
+  }
+  return(features_total_plot)
+}
+
+
+
+#' Create a dataframe of protein features from JSON object
+#'
+#' Reduces data.frame of features to just phosphorylation sites. Uses a
+#' subsetting step and a grep with the pattern "Phospho".
+#'
+#' @param features A dataframe of protein features, for example created by
+#' the feature_to_dataframe() function.
+#'
+#' @return A dataframe that only contains protein phosphorylation sites from
+#' Uniprot
+#'
+#' @examples
+#' sites <- phospho_site_info(prot_data)
+#' head(sites)
+#'
+#'
+#' @export
+phospho_site_info <- function(features){
+  features <- features[features$type == "MOD_RES",]
+  phospho_list <- grep("Phospho", features$description)
+  phospho_features <- features[phospho_list,]
+  return(phospho_features)
+}
+
+
+
+
+#' @export
 # function to extract names into a list
 # from a JSON object
 # JSON object created by getting Uniprot API output
@@ -19,6 +84,15 @@ extract_names <- function(protein_json){
   )
   return(names)
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -54,14 +128,6 @@ extractFeaturesList <- function(features_list){
 
 
 
-#' @export
-# function to reduce data.frame of features to just phosphorylation sites
-phospho_site_info <- function(features){
-  features <- features[features$type == "MOD_RES",]
-  phospho_list <- grep("Phospho", features$description)
-  phospho_features <- features[phospho_list,]
-  return(phospho_features)
-}
 
 
 
@@ -143,23 +209,3 @@ extract_feat_acc <- function(features_list){
     return(features_dataframe)
 }
 
-
-#' @export
-# this function works on the object returned from multiple GET Uniprot API
-# it creates a data.frame of features
-# includes the accession number AND an order number
-# it uses the extract_feat_acc function above.
-
-feature_to_dataframe <- function(features_in_lists_of_six){
-  ################
-  # loop to work through the API object and convert to data.frame
-  # probably there is a better way to do this
-  features_total_plot <- NULL
-  for(i in 1:length(features_in_lists_of_six)){
-    # the extract_feat_acc() function takes features into a data.frame
-    features_temp <- drawProteins::extract_feat_acc(features_in_lists_of_six[[i]])
-    features_temp$order <- i  # this order is needed for plotting later
-    features_total_plot <- rbind(features_total_plot, features_temp)
-  }
-  return(features_total_plot)
-}

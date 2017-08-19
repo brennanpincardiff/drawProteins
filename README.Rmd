@@ -1,5 +1,5 @@
 # Overview of drawProteins
-This package has been created to allow the creation of protein schematics based on the data obtained from the Uniprot Protein Database. 
+This package has been created to allow the creation of protein schematics based on the data obtained from the [Uniprot Protein Database](http://www.uniprot.org/). 
 
 ## The basic workflow is:
 <li> to provide one or more Uniprot IDs
@@ -13,7 +13,7 @@ The graphing package ggplot2 is then used to create the protein schematic.
 
 The package works best when pipes %>% provided by the magrittr package are also used. 
 
-The Vignette gives a good overview of the package. Available as [PDF](https://github.com/brennanpincardiff/drawProteins/blob/master/vignettes/drawProteins_BiocStyle_pdf_output.pdf)
+The Vignette gives a good overview of the package. Available as [PDF](https://github.com/brennanpincardiff/drawProteins/blob/master/vignettes/drawProteins_BiocStyle_pdf_output.pdf).
 
 This is a work in progress and is only available on GitHub.
 To install: 
