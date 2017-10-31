@@ -1,19 +1,5 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-R: bioc-devel
 sudo: false
 cache: packages
-
-install:
-  ## For a Bioconductor package
-  - ./travis-tool.sh install_bioc BiocStyle
-  - ./travis-tool.sh install_deps
-
-notifications:
-  email:
-    recipients:
-      - brennanpincardiff@gmail.com
-    on_success: never # default: change
-    on_failure: always # default: always
-
