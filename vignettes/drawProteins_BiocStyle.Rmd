@@ -7,7 +7,7 @@ author:
   email: BrennanP@cardiff.ac.uk
 package: drawProteins
 date: "`r Sys.Date()`"
-output: BiocStyle::html_document2
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Using drawProteins}
   %\VignetteEngine{knitr::rmarkdown}
