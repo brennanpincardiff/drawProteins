@@ -1,7 +1,16 @@
+### draw_mol_horiz
+#' Draw a horizontal domain structure of a protein using base R plot() function
+#'
+#' @param names List of names e.g. produced by extract_names().
+#'
+#' @param features dataframe of features e.g. produced by extractFeaturesList().
+#'
+#' @return Plot object in plot window
+#'
+#' @examples
+#'
 #' @export
-
 # first plotting function
-
 # this function should work to draw a horizontal domain structure of a protein
 # it works to draw a single protein.
 # needs to be tested robustly.
@@ -42,8 +51,22 @@ draw_mol_horiz <- function(names, features){
 }
 
 
-#' @export
 
+
+### draw_mol_horiz
+#' Draw a horizontal domain structure of a protein using base R plot() function
+#'
+#' @param phospho_loc Amino acid location of phosphorylation site
+#'
+#' @param radius Size of circle to designate phosphorylation site
+#'
+#' @param colour Colour of the circle to designate phosphorylation site
+#'
+#' @return Plot object in plot window
+#'
+#' @examples
+#'
+#' @export
 # plotting function to add circles representing phosphorylation sites
 # needs to be tested robustly.
 # default colour is yellow and radius = 10 but can be changed.

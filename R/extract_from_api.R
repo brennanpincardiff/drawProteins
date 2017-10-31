@@ -196,6 +196,15 @@ extractFeaturesList <- function(features_list){
 }
 
 
+
+#' Extract features from JSON object into a dataframe
+#'
+#' @param prot_feat Original JSON object from GET of Uniprot API
+#'
+#' @return A dataframe of features
+#'
+#' @examples
+#'
 #' @export
 # I want to make the function work with the original JSON object
 # rather than needing to manipulate outside of the function
