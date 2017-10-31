@@ -3,3 +3,8 @@
 language: R
 sudo: false
 cache: packages
+
+install:
+  ## For a Bioconductor package
+  - ./travis-tool.sh install_bioc BiocStyle
+  - ./travis-tool.sh install_deps
