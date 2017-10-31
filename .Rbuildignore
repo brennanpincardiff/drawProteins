@@ -5,3 +5,5 @@
 ^codecov\.yml$
 ^README\.Rmd$
 ^README-.*\.png$
+^README\.html$
+^drawProteins_BiocStyle_pdf_output\.pdf$
