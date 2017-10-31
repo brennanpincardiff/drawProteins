@@ -12,5 +12,13 @@ cache: packages
 
 notifications:
   email:
-    on_success: brennanpincardiff@gmail.com
+    on_success:
     on_failure: brennanpincardiff@gmail.com
+
+notifications:
+  email:
+    recipients:
+      - brennanpincardiff@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
+
