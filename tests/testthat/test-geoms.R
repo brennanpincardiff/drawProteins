@@ -110,6 +110,57 @@ test_that("geom_phospho",{
 
   })
 
+# unit tests with geom_motif
+context("geom_motif")
+
+test_that("geom_motif",{
+
+  # load data from the package
+  data("prot_data")
+  # prot_data was created 20170818 using this code:
+  # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
+  #   drawProteins::get_features() %>%
+  #   drawProteins::feature_to_dataframe() ->
+  #   prot_data
+
+  # prot_data is a dataframe - 319 obs of 9 variables.
+  p <- geom_chains(prot_data)
+  p <- geom_motif(p)
+
+  # p is a ggplot object and as such is a list of 9
+  expect_is(p,"ggplot")
+  expect_equal(mode(p), "list")
+  expect_equal(length(p), 9)
+
+  # p should have three layers at this point
+  expect_equal(length(p$layers), 3)
+  # two from geom_chains and one from geom_motif
+  # layers, 3 and 4 added by geom_domains
+  expect_equal(class(p$layers[[3]]$geom)[1], "GeomRect")
+
+  # https://stackoverflow.com/questions/13457562/how-to-determine-the-geom-type-of-each-layer-of-a-ggplot2-object/43982598#43982598
+  # types of layers...
+  expect_equal(class(p$layers[[1]]$geom)[1], "GeomRect")
+  expect_equal(class(p$layers[[2]]$geom)[1], "GeomText")
+
+  # p should have some labels
+  expect_equal(p$labels$xmin, "begin")
+  expect_equal(p$labels$xmax, "end")
+  expect_equal(p$labels$ymin, "order - 0.2")
+  expect_equal(p$labels$x, "x")
+  expect_equal(p$labels$y, "y")
+  expect_equal(length(prot_data[prot_data$type == "DOMAIN",]),
+               length(p$layers[[1]]$data))
+  # p$layers[[3]]$data contains the data that was extracted
+  # dimensions are 6 9
+  expect_equal(nrow(prot_data[prot_data$type == "MOTIF",]),
+               nrow(p$layers[[3]]$data))
+  expect_equal(p$layers[[3]]$data$type[1], "MOTIF" )
+})
+
+
+
+
 
 # useful advice here:
 # https://stackoverflow.com/questions/31038709/how-to-write-a-test-for-a-ggplot-plot

@@ -1,3 +1,4 @@
+### geom_chains
 #' Create ggplot object with protein chains from feature database
 #'
 #' \code{geom_chains} uses the dataframe containing the protein features to plot
@@ -79,6 +80,8 @@ geom_chains <- function(prot_data = prot_data,
 
 
 
+
+### geom_domains
 #' Add protein domains to ggplot object.
 #'
 #' \code{geom_domains} adds domains to the ggplot object created by
@@ -130,6 +133,7 @@ geom_domains <- function(p,
 
 
 
+### geom_phospho
 #' Add protein phosphorylation sites to ggplot object.
 #'
 #' \code{geom_phospho} adds phosphorylation sites to ggplot object created by
@@ -146,7 +150,7 @@ geom_domains <- function(p,
 #' @param fill Colour of the circle.
 #'
 #' @return A ggplot object either in the plot window or as an object with an
-#' additional geom_point layer layer.
+#' additional geom_point layer.
 #'
 #' @examples
 #' # combines will with geom_domains to plot chains and phosphorylation sites.
@@ -172,6 +176,31 @@ geom_phospho <- function(p,
   return(p)
 }
 
+
+
+### geom_motif
+#' Add protein motifs sites to ggplot object.
+#'
+#' \code{geom_motif} adds protein motifs from Uniprot to ggplot object created by
+#' \code{\link{geom_chains}}.
+#'  It uses the prot_data object.
+#'   The ggplot function
+#'  \code{\link[ggplot2]{geom_rect}} is used to draw each of the
+#'   motifs proportional to their number of amino acids (length).
+#'
+#' @param p ggplot object ideally created with \code{\link{geom_chains}}.
+#'
+#' @return A ggplot object either in the plot window or as an object with an
+#' additional geom_rect layer.
+#'
+#' @examples
+#' # combines will with geom_domains to plot chains and phosphorylation sites.
+#' library(magrittr)
+#' prot_data %>%
+#'      geom_chains(label_size = 1.25) %>%
+#'      geom_motif() -> p
+#'      p
+#'
 #' @export
 # called geom_motif
 # to draw MOTIFs - no label at the moment.
@@ -186,6 +215,9 @@ geom_region <- function(p){
 
   return(p)
 }
+
+
+
 
 
 #' @export
