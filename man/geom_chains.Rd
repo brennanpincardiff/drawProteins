@@ -18,14 +18,14 @@ prot_data$type.}
 
 \item{fill}{Colour of the fill of each chain.}
 
+\item{label_chains}{Option to label chains or not.}
+
 \item{labels}{Vector with source of names for the chains. EntryName used as
 default but can be changed.}
 
 \item{size}{Size of the outline of the chains.}
 
 \item{label_size}{Size of the text used for labels.}
-
-\item{label_chain}{Option to label chains or not.}
 }
 \value{
 A ggplot object either in the plot window or as an object.

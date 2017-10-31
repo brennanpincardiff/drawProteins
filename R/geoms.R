@@ -16,7 +16,7 @@
 #'
 #' @param fill Colour of the fill of each chain.
 #'
-#' @param label_chain Option to label chains or not.
+#' @param label_chains Option to label chains or not.
 #'
 #' @param labels Vector with source of names for the chains. EntryName used as
 #' default but can be changed.
@@ -178,15 +178,15 @@ geom_phospho <- function(p,
 
 
 
-### geom_motif
-#' Add protein motifs sites to ggplot object.
+### geom_region
+#' Add protein region sites to ggplot object.
 #'
-#' \code{geom_motif} adds protein motifs from Uniprot to ggplot object created by
+#' \code{geom_region} adds protein regions from Uniprot to ggplot object created by
 #' \code{\link{geom_chains}}.
 #'  It uses the prot_data object.
 #'   The ggplot function
 #'  \code{\link[ggplot2]{geom_rect}} is used to draw each of the
-#'   motifs proportional to their number of amino acids (length).
+#'   regions proportional to their number of amino acids (length).
 #'
 #' @param p ggplot object ideally created with \code{\link{geom_chains}}.
 #'
@@ -194,16 +194,16 @@ geom_phospho <- function(p,
 #' additional geom_rect layer.
 #'
 #' @examples
-#' # combines will with geom_domains to plot chains and phosphorylation sites.
+#' # combines well with geom_domains to plot chains and regions.
 #' library(magrittr)
 #' prot_data %>%
 #'      geom_chains(label_size = 1.25) %>%
-#'      geom_motif() -> p
+#'      geom_region() -> p
 #'      p
 #'
 #' @export
-# called geom_motif
-# to draw MOTIFs - no label at the moment.
+# called geom_region
+# to draw REGIONs
 geom_region <- function(p){
   ## plot motifs fill by description
   p <- p + ggplot2::geom_rect(data= prot_data[prot_data$type == "REGION",],
@@ -220,6 +220,31 @@ geom_region <- function(p){
 
 
 
+
+
+### geom_motif
+#' Add protein motifs sites to ggplot object.
+#'
+#' \code{geom_motif} adds protein motifs from Uniprot to ggplot object created by
+#' \code{\link{geom_chains}}.
+#'  It uses the prot_data object.
+#'   The ggplot function
+#'  \code{\link[ggplot2]{geom_rect}} is used to draw each of the
+#'   motifs proportional to their number of amino acids (length).
+#'
+#' @param p ggplot object ideally created with \code{\link{geom_chains}}.
+#'
+#' @return A ggplot object either in the plot window or as an object with an
+#' additional geom_rect layer.
+#'
+#' @examples
+#' # combines will with geom_domains to plot chains and protein motifs.
+#' library(magrittr)
+#' prot_data %>%
+#'      geom_chains(label_size = 1.25) %>%
+#'      geom_motif() -> p
+#'      p
+#'
 #' @export
 # called geom_motif
 # to draw MOTIFs - no label at the moment.
@@ -236,6 +261,37 @@ geom_motif <- function(p){
 }
 
 
+### geom_repeat
+#' Add protein repeats sites to ggplot object.
+#'
+#' \code{geom_repeat} adds protein repeats from Uniprot to ggplot object created by
+#' \code{\link{geom_chains}}.
+#'  It uses the prot_data object.
+#'   The ggplot function
+#'  \code{\link[ggplot2]{geom_rect}} is used to draw each of the
+#'   motifs proportional to their number of amino acids (length).
+#'
+#' @param p ggplot object ideally created with \code{\link{geom_chains}}.
+#'
+#' @param label_size Size of text used for labels of protein repeats.
+#'
+#' @param outline Colour of the outline of each repeat.
+#'
+#' @param fill Colour of the fill of each repeat.
+#'
+#' @param label_repeats Option to label repeats or not.
+#'
+#' @return A ggplot object either in the plot window or as an object with an
+#' additional geom_rect layer.
+#'
+#' @examples
+#' # combines will with geom_domains to plot chains and protein repeat.
+#' library(magrittr)
+#' prot_data %>%
+#'      geom_chains(label_size = 1.25) %>%
+#'      geom_repeat() -> p
+#'      p
+#'
 #' @export
 # called geom_repeat
 # to draw REPEATs & label

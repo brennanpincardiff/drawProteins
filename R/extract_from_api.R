@@ -63,7 +63,6 @@ phospho_site_info <- function(features){
 }
 
 
-
 #' Create a dataframe of protein features from JSON object (List of 6)
 #'
 #' Converts the list of 6 JSON object created by getting the features from
@@ -125,16 +124,19 @@ extract_feat_acc <- function(features_list){
 }
 
 
-
-
-
-
-
-
-
-
-
-#' @export
+#' Extract protein names into a list
+#'
+#' Converts the list of 6 JSON object created by getting the features from
+#' UniProt. Used in the feature_to_dataframe(). Does not give order. Does not
+#' operate on List of lists - just the list of 6.
+#'
+#' @param protein_json A JSON object
+#'
+#' @return A list with "accession", "name", "protein.recommendedName.fullName",
+#' gene.name.primary, gene.name.synonym and organism.name.scientific
+#'
+#' @examples
+#'
 # function to extract names into a list
 # from a JSON object
 # JSON object created by getting Uniprot API output
@@ -155,16 +157,14 @@ extract_names <- function(protein_json){
 }
 
 
-
-
-
-
-
-
-
-
-
-
+#' Extract features from list into a dataframe
+#'
+#' @param features_list A list of features
+#'
+#' @return A dataframe of features
+#'
+#' @examples
+#'
 #' @export
 # function to extract features from list into a dataframe
 # from a JSON object
@@ -194,10 +194,6 @@ extractFeaturesList <- function(features_list){
   features_dataframe$length <- features_dataframe$end - features_dataframe$begin
   return(features_dataframe)
 }
-
-
-
-
 
 
 #' @export
