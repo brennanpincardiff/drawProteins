@@ -1,6 +1,6 @@
-# drawProteins 0.0.0.9000
+# drawProteins 0.99.0
 
-* Added a `NEWS.md` file to track changes to the package.
+* Active area of development
 
 
 

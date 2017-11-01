@@ -51,19 +51,20 @@ The get_features() function uses the Uniprot API to return the features of a pro
 
 The httr::content() function is then used to extract the content. From the get_features() function, this will provide lists of lists. The length of the parent lists corresponds to the number of accession numbers provided. Interestingly, the order sometimes appears different to that provided. Each of lists inside the parent list are a list of six - one for each protein - that contains names of the proteins and the features. 
 
-An example List of 1, which then contains a List of 6, is provided as data in the package entitled protein_json. These are the features of a protein called Rel A or NF-kappaB, p65, a well studied transcription factor. 
+As an example, we will retrieve the details of a protein called Rel A or NF-kappaB, p65, a well studied transcription factor. 
 
-Without internet access, this can be pulled into the environment with this code:
-```{r, echo=TRUE}
-data("protein_json")
+Without internet access, this can be retrived from internal data:
+```{r data_rel_json, eval=TRUE, echo=TRUE}
+data(rel_json)
 ```
 
+
 With internet access, this can be retreived from Uniprot with this code:
-```{r, eval = FALSE, echo=TRUE}
+```{r download_rel_json, eval=FALSE, echo=TRUE}
 # accession numbers of rel A
 "Q04206" %>%
   drawProteins::get_features() ->
-  protein_json
+  rel_json
 ```
 
 # Turning Uniprot data into a dataframe
@@ -75,12 +76,12 @@ The feature_to_dataframe() function will also add an "order" value to allow plot
 
 ```{r, echo=TRUE}
 # included data in package of one protein
-  protein_json %>%
+  rel_json %>%
   drawProteins::feature_to_dataframe() ->
-  prot_data
+  rel_data
 
 # show in console
-  head(prot_data[1:4])
+  head(rel_data[1:4])
 
 ```
 
@@ -89,7 +90,7 @@ The feature_to_dataframe() function will also add an "order" value to allow plot
 The data can be plotted with ggplot2 using the geom_rect() and geom_label. These have been combined into a geom_chain() function that can be used with pipes in the following way.
 
 ```{r, fig.height=3, fig.wide = TRUE}
-prot_data %>%
+rel_data %>%
   geom_chains() %>%
   geom_domains -> p
 p
@@ -135,7 +136,7 @@ In this way it's possible to chose the geoms that give the information desired i
 
 For Rel A, my recommendation would be the following workflow.
 ```{r, fig.height=3.5, fig.wide = TRUE}
-prot_data %>%
+rel_data %>%
   geom_chains() %>%
   geom_domains() %>%
   geom_region %>%

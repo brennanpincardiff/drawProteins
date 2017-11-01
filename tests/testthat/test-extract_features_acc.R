@@ -47,7 +47,7 @@ test_that("extract_feat_acc works to give ",{
 
   # load data from the package - should I move it into the test folder
   data("rel_A_features")  # this is object created from whole Uniprot GET
-  # creates object protein_json in the environment.
+  # creates JSON object  in the environment.
   # it's the json data for Q04206 - for the transcription factor RelA
 
   # Nice simple test
@@ -66,4 +66,26 @@ test_that("extract_feat_acc works to give ",{
 
   # need to add tests to check structure is going to work for plotting...
 
+})
+
+
+
+# write function to do unit tests with is extract_names
+context("extract_names")
+
+test_that("extract_names",{
+
+  # load data from the package
+  data("protein_json")
+  prot_names <- extract_names(protein_json)
+
+  expect_is(prot_names, "list")
+  expect_equal(length(prot_names), 6)   # exact for sample data
+  expect_equal(prot_names$accession, "Q04206")
+  expect_equal(prot_names$name, "TF65_HUMAN")
+  expect_equal(prot_names$protein.recommendedName.fullName,
+                              "Transcription factor p65")
+  expect_equal(prot_names$gene.name.primary, "RELA")
+  expect_equal(prot_names$gene.name.synonym, "NFKB3")
+  expect_equal(prot_names$organism.name.scientific, "Homo sapiens")
 })

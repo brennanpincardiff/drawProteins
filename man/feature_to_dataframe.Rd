@@ -21,6 +21,9 @@ It creates a data.frame of features and includes the accession number AND
 an order number. It uses the extract_feat_acc function below.
 }
 \examples{
+rel_data <- feature_to_dataframe(rel_json)
+head(rel_data)
+
 prot_data <- feature_to_dataframe(five_rel_list)
 head(prot_data)
 

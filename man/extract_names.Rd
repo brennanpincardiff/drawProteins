@@ -7,17 +7,39 @@
 extract_names(protein_json)
 }
 \arguments{
-\item{protein_json}{A JSON object}
+\item{protein_json}{A JSON object from a search with 14 primary parts}
 }
 \value{
-A list with "accession", "name", "protein.recommendedName.fullName",
+A List of 6 with "accession", "name",
+"protein.recommendedName.fullName",
 gene.name.primary, gene.name.synonym and organism.name.scientific
 }
 \description{
-Converts the list of 6 JSON object created by getting the features from
-UniProt. Used in the feature_to_dataframe(). Does not give order. Does not
-operate on List of lists - just the list of 6.
+Extracts protein names from JSON object produced by a search of Uniprot
+with a single protein asking for all the information.
+The search produces a Large list that  contains all the Uniprot information
+about a protein.
 }
 \examples{
+  # using internal data
+  prot_names <- extract_names(protein_json)
+  # generates a list of 6
+
+  \dontrun{
+  # access the Uniprot Protein API
+  uniprot_acc <- c("Q04206")  # change this for your fav protein
+  # Get UniProt entry by accession
+  acc_uniprot_url <- c("https://www.ebi.ac.uk/proteins/api/proteins?accession=")
+  comb_acc_api <- paste0(acc_uniprot_url, uniprot_acc)
+  # basic function is GET() which accesses the API
+  # requires internet access
+  protein <- httr::GET(comb_acc_api, accept_json())
+  status_code(protein)  # returns a 200 means it worked
+  # use content() function from httr to give us a list
+  protein_json <- httr::content(protein) # gives a Large list
+  # with 14 primary parts and lots of bits inside
+  # function from my package to extract names of protein
+  names <- extract_names(protein_json)
+  }
 
 }

@@ -10,6 +10,7 @@
 #' @examples
 #'
 #' @export
+#' @importFrom graphics plot rect text
 # first plotting function
 # this function should work to draw a horizontal domain structure of a protein
 # it works to draw a single protein.
