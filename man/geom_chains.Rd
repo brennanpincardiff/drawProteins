@@ -10,8 +10,8 @@ geom_chains(prot_data = prot_data, outline = "black", fill = "grey",
 }
 \arguments{
 \item{prot_data}{Dataframe of one or more rows with the following column
-names: "type", "description", "begin", "end", "length", "accession",
-"entryName", "taxid", "order". Must contain a minimum of one "CHAIN" as
+names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 prot_data$type.}
 
 \item{outline}{Colour of the outline of each chain.}

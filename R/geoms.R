@@ -8,8 +8,8 @@
 #'  chains proportional to their number of amino acids (length).
 #'
 #' @param prot_data Dataframe of one or more rows with the following column
-#'  names: "type", "description", "begin", "end", "length", "accession",
-#'  "entryName", "taxid", "order". Must contain a minimum of one "CHAIN" as
+#'  names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+#'  'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #'  prot_data$type.
 #'
 #' @param outline Colour of the outline of each chain.
