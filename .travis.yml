@@ -6,3 +6,6 @@ r:
 
 cache: packages
 bioc_required: true
+
+after_success:
+  - Rscript -e 'covr::coveralls()'
