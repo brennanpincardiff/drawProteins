@@ -53,14 +53,8 @@ The httr::content() function is then used to extract the content. From the get_f
 
 As an example, we will retrieve the details of a protein called Rel A or NF-kappaB, p65, a well studied transcription factor. 
 
-Without internet access, this can be retrived from internal data:
-```{r data_rel_json, eval=TRUE, echo=TRUE}
-data(rel_json)
-```
-
-
 With internet access, this can be retreived from Uniprot with this code:
-```{r download_rel_json, eval=FALSE, echo=TRUE}
+```{r download_rel_json, eval=TRUE, echo=TRUE}
 # accession numbers of rel A
 "Q04206" %>%
   drawProteins::get_features() ->
@@ -74,11 +68,10 @@ The feature_to_dataframe() function will  convert the list of lists of six provi
 
 The feature_to_dataframe() function will also add an "order" value to allow plotting. The order goes from the bottom in the manner of a graph. 
 
-```{r, echo=TRUE}
-# included data in package of one protein
+```{r generate_dataframe}
   rel_json %>%
-  drawProteins::feature_to_dataframe() ->
-  rel_data
+    drawProteins::feature_to_dataframe() ->
+    rel_data
 
 # show in console
   head(rel_data[1:4])

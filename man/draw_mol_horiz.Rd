@@ -18,5 +18,20 @@ Plot object in plot window
 Draw a horizontal domain structure of a protein using base R plot() function
 }
 \examples{
+# using internal data
+  prot_names <- extract_names(protein_json)
+  protein_features <- extract_feat_acc(rel_A_features)
+  # clean up for plotting
+  # focus on those that we want to plot...
+  features_plot <- features[features$length > 0, ]
+  features_plot <- features_plot[complete.cases(features_plot),]
+  features_plot <- features_plot[features_plot$type!= "CONFLICT",]
+  # add colours
+  library(randomcoloR)   # might need install
+  colours <- distinctColorPalette(nrow(features_plot)-1)
+  features_plot$col <- c("white", colours)
+  # now draw with BaseR
+  # here is a function that does that....
+  drawProteins::draw_mol_horiz(names, features_plot)
 
 }

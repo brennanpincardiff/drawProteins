@@ -1,0 +1,7 @@
+base
+BiocStyle
+magrittr
+drawProteins
+httr
+ggplot2
+knitr

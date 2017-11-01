@@ -182,47 +182,6 @@ extract_names <- function(protein_json){
   return(names)
 }
 
-
-#' Extract features from list into a dataframe
-#'
-#' @param features_list A list of features
-#'
-#' @return A dataframe of features
-#'
-#' @examples
-#'
-#' @export
-# function to extract features from list into a dataframe
-# from a JSON object
-# JSON object created by getting Uniprot Features API output
-# using following code
-# prot_feat %>%
-#  content() %>%
-#  flatten() -> prot_feat_list  # list of 6
-#
-# features_list <- prot_feat_list$features  # should be list..
-
-extractFeaturesList <- function(features_list){
-  features <- NULL
-  for(i in 1:length(features_list)){
-    feat_list <- features_list[[i]]
-    featuresTemp <- c(feat_list$type,
-                      as.character(feat_list$description),
-                      as.numeric(feat_list$begin),
-                      as.numeric(feat_list$end))
-    features <- rbind(features, featuresTemp) # combine
-  }
-
-  features_dataframe <- as.data.frame(features, stringsAsFactors = FALSE)
-  colnames(features_dataframe) <- c("type", "description", "begin", "end")
-  features_dataframe$begin <- as.numeric(features_dataframe$begin)
-  features_dataframe$end <- as.numeric(features_dataframe$end)
-  features_dataframe$length <- features_dataframe$end - features_dataframe$begin
-  return(features_dataframe)
-}
-
-
-
 #' Extract features from JSON object into a dataframe
 #'
 #' @param prot_feat Original JSON object from GET of Uniprot API

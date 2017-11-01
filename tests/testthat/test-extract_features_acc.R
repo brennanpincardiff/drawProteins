@@ -14,6 +14,16 @@ context("features_to_dataframe")
 test_that("features_to_dataframe",{
 
   # load data from the package
+  data("rel_json")
+  # data for Rel A only
+  rel_json %>%
+    drawProteins::feature_to_dataframe() ->
+    rel_data
+  expect_is(rel_data, "data.frame")
+  expect_equal(nrow(rel_data), 75)
+  expect_equal(ncol(rel_data), 9)
+
+  # load data from the package
   data("five_rel_list")
   # five_rel_list was created 20170818 using this code:
   # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
