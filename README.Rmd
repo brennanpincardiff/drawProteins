@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/brennanpincardiff/drawProteins.svg?branch=master)](https://travis-ci.org/brennanpincardiff/drawProteins)
+
 # Overview of drawProteins
 This package has been created to allow the creation of protein schematics based on the data obtained from the [Uniprot Protein Database](http://www.uniprot.org/). 
 
