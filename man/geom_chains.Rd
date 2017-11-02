@@ -4,15 +4,15 @@
 \alias{geom_chains}
 \title{Create ggplot object with protein chains from feature database}
 \usage{
-geom_chains(prot_data = prot_data, outline = "black", fill = "grey",
-  label_chains = TRUE, labels = prot_data[prot_data$type == "CHAIN",
-  ]$entryName, size = 0.5, label_size = 4)
+geom_chains(data = data, outline = "black", fill = "grey",
+  label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
+  size = 0.5, label_size = 4)
 }
 \arguments{
-\item{prot_data}{Dataframe of one or more rows with the following column
+\item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
-prot_data$type.}
+data$type.}
 
 \item{outline}{Colour of the outline of each chain.}
 
@@ -39,20 +39,17 @@ A ggplot object either in the plot window or as an object.
 }
 \examples{
 # draws five chains corresponding to human NF-kappaB proteins
-geom_chains(prot_data)
+geom_chains(five_rel_data)
 
 # draws five chains with different colours to default
-library(magrittr)
-prot_data \%>\%
+five_rel_data \%>\%
 geom_chains(label_chains = FALSE,
            fill = "red",
            outline = "grey")
 
-# combines will with geom_domains to plot chains and domains.
-library(magrittr)
-prot_data \%>\%
-     geom_chains(label_size = 1.25) \%>\%
-     geom_domains(label_size = 1.25) -> p
-     p
+# combines well with geom_domains to plot chains and domains.
+ p <- geom_chains(five_rel_data, label_size = 1.25)
+ p <- geom_region(p, five_rel_data)
+ p
 
 }

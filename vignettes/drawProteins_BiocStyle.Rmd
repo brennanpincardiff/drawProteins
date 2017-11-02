@@ -84,8 +84,8 @@ The data can be plotted with ggplot2 using the geom_rect() and geom_label. These
 
 ```{r, fig.height=3, fig.wide = TRUE}
 rel_data %>%
-  geom_chains() %>%
-  geom_domains -> p
+  geom_chains() -> p
+  p <- geom_domains(p, rel_data)
 p
 ```
 
@@ -108,20 +108,22 @@ p
 # Checking the other features
 
 ```{r, fig.height=3, fig.wide = TRUE}
-p %>% geom_region  # adds activation domain
+geom_region(p, rel_data)  # adds activation domain
+
 ```
 
 ```{r, fig.height=3, fig.wide = TRUE}
-p %>% geom_repeat  # doesn't add anything in this case
+geom_repeat(p, rel_data)  # doesn't add anything in this case
+
 ```
 
 ```{r, fig.height=3, fig.wide = TRUE}
-p %>% geom_motif   # adds 9aa Transactivation domain & NLS
+geom_motif(p, rel_data)   # adds 9aa Transactivation domain & NLS
 ```
 
 
 ```{r, fig.height=3, fig.wide = TRUE}
-p %>% geom_phospho(size = 8)  # adds phosphorylation sites from Uniprot
+geom_phospho(p, rel_data, size = 8)  # adds phosphorylation sites from Uniprot
 ```
 
 # Putting it all together
@@ -129,12 +131,11 @@ In this way it's possible to chose the geoms that give the information desired i
 
 For Rel A, my recommendation would be the following workflow.
 ```{r, fig.height=3.5, fig.wide = TRUE}
-rel_data %>%
-  geom_chains() %>%
-  geom_domains() %>%
-  geom_region %>%
-  geom_motif %>%
-  geom_phospho(size = 8) -> p
+rel_data %>% geom_chains() -> p
+p <- geom_domains(p, rel_data)
+p <- geom_region(p, rel_data)
+p <- geom_motif(p, rel_data)
+p <- geom_phospho(p, rel_data, size = 8) 
 
 p <- p + theme_bw(base_size = 20) +  # white background and change text size
   theme(panel.grid.minor=element_blank(), 
@@ -170,12 +171,11 @@ With internet access, the script below shows the workflow for five proteins of t
   drawProteins::feature_to_dataframe() ->
   prot_data
 
-prot_data %>%
-  geom_chains() %>%
-  geom_domains() %>%
-  geom_repeat() %>%
-  geom_motif %>%
-  geom_phospho(size = 8) -> p
+p <- geom_chains(prot_data)
+p <- geom_domains(p, prot_data)
+p <- geom_repeat(p, prot_data)
+p <- geom_motif(p, prot_data)
+p <- geom_phospho(p, prot_data, size = 8)
 
 # background and y-axis
 p <- p + theme_bw(base_size = 20) +  # white background and change text size
@@ -199,18 +199,12 @@ p
 ```
 
 
-Adding geom_region give lots more information but perhaps adds confusion. What do you think?
-
-```{r, fig.height=10, fig.wide = TRUE}
-p %>% geom_region %>% geom_motif %>% geom_phospho(size = 8)
-```
-
 # Customising the geoms
 Currently, it's possible to customise the chain colour and outline. It's possible to remove the labels. 
 
 ```{r, fig.height=6, fig.wide = TRUE}
-prot_data %>%
-  geom_chains(label_chains = FALSE,
+  geom_chains(prot_data, 
+              label_chains = FALSE,
               fill = "hotpink", 
               outline = "midnightblue")
 ```
@@ -218,29 +212,31 @@ prot_data %>%
 
 It's also possible to change the size and colour of the phosphorylation symbols. 
 ```{r, fig.height=8, fig.wide = TRUE}
-prot_data %>%
-  geom_chains(fill = "lightsteelblue1", 
+
+p <-  geom_chains(prot_data, 
+              fill = "lightsteelblue1", 
               outline = "grey", 
-              label_size = 5) %>% 
-  geom_phospho(size = 10, fill = "red") -> p
+              label_size = 5) 
+p <- geom_phospho(p, prot_data, size = 10, fill = "red")
   
 p + theme_bw()
 ```
 
 It's also possible to change the labels to a custom list. But remember that the plots are drawn from the bottom up. 
 ```{r, fig.height=8, fig.wide = TRUE}
-prot_data %>%
-  geom_chains(fill = "lightsteelblue1", 
-              outline = "grey",
-              labels = c("p52/p100",
-                         "p52/p100",
-                         "p50/p105", 
-                         "p50/p105",
-                         "Rel B",
-                         "c-Rel", 
-                         "p65/Rel A"),
-              label_size = 5) %>% 
-  geom_phospho(size = 8, fill = "red") -> p
+
+p <- geom_chains(prot_data,
+            fill = "lightsteelblue1", 
+            outline = "grey",
+            labels = c("p52/p100",
+                       "p52/p100",
+                       "p50/p105", 
+                       "p50/p105",
+                       "Rel B",
+                       "c-Rel", 
+                       "p65/Rel A"),
+            label_size = 5) 
+p <- geom_phospho(p, prot_data, size = 8, fill = "red")
 
 p + theme_bw()
 ```

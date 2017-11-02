@@ -4,10 +4,15 @@
 \alias{geom_motif}
 \title{Add protein motifs sites to ggplot object.}
 \usage{
-geom_motif(p)
+geom_motif(p, data = data)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{geom_chains}}.}
+
+\item{data}{Dataframe of one or more rows with the following column
+names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
+data$type.}
 }
 \value{
 A ggplot object either in the plot window or as an object with an
@@ -16,17 +21,15 @@ additional geom_rect layer.
 \description{
 \code{geom_motif} adds protein motifs from Uniprot to ggplot object created by
 \code{\link{geom_chains}}.
- It uses the prot_data object.
+ It uses the data object.
   The ggplot function
  \code{\link[ggplot2]{geom_rect}} is used to draw each of the
   motifs proportional to their number of amino acids (length).
 }
 \examples{
 # combines will with geom_domains to plot chains and protein motifs.
-library(magrittr)
-prot_data \%>\%
-     geom_chains(label_size = 1.25) \%>\%
-     geom_motif() -> p
-     p
+ p <- geom_chains(five_rel_data, label_size = 1.25)
+ p <- geom_motif(p, five_rel_data)
+ p
 
 }

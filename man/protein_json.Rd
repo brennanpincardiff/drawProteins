@@ -3,23 +3,15 @@
 \docType{data}
 \name{protein_json}
 \alias{protein_json}
-\alias{protein_json}
 \title{Uniprot infor human Rel A protein in JSON format}
 \format{List of 1 with List of 14 inside}
 \source{
 \url{http://www.uniprot.org/uniprot/Q04206}
-
-\url{http://www.uniprot.org/uniprot/Q04206}
 }
 \usage{
 protein_json
-
-protein_json
 }
 \description{
-Large list (968.8 Kb) of information about human Rel A downloaded from
-Uniprot on 1 November 2017
-
 Large list (968.8 Kb) of information about human Rel A downloaded from
 Uniprot on 1 November 2017
 }

@@ -4,11 +4,16 @@
 \alias{geom_repeat}
 \title{Add protein repeats sites to ggplot object.}
 \usage{
-geom_repeat(p, label_size = 2, outline = "dimgrey", fill = "dimgrey",
-  label_repeats = TRUE)
+geom_repeat(p, data = data, label_size = 2, outline = "dimgrey",
+  fill = "dimgrey", label_repeats = TRUE)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{geom_chains}}.}
+
+\item{data}{Dataframe of one or more rows with the following column
+names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
+data$type.}
 
 \item{label_size}{Size of text used for labels of protein repeats.}
 
@@ -25,17 +30,15 @@ additional geom_rect layer.
 \description{
 \code{geom_repeat} adds protein repeats from Uniprot to ggplot object created by
 \code{\link{geom_chains}}.
- It uses the prot_data object.
+ It uses the data object.
   The ggplot function
  \code{\link[ggplot2]{geom_rect}} is used to draw each of the
   motifs proportional to their number of amino acids (length).
 }
 \examples{
 # combines will with geom_domains to plot chains and protein repeat.
-library(magrittr)
-prot_data \%>\%
-     geom_chains(label_size = 1.25) \%>\%
-     geom_repeat() -> p
-     p
+ p <- geom_chains(five_rel_data, label_size = 1.25)
+ p <- geom_repeat(p, five_rel_data)
+ p
 
 }

@@ -4,10 +4,15 @@
 \alias{geom_phospho}
 \title{Add protein phosphorylation sites to ggplot object.}
 \usage{
-geom_phospho(p, size = 2, fill = "yellow")
+geom_phospho(p, data = data, size = 2, fill = "yellow")
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{geom_chains}}.}
+
+\item{data}{Dataframe of one or more rows with the following column
+names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
+data$type.}
 
 \item{size}{Size of the circle}
 
@@ -20,17 +25,16 @@ additional geom_point layer.
 \description{
 \code{geom_phospho} adds phosphorylation sites to ggplot object created by
 \code{\link{geom_chains}}.
- It uses the prot_data object.
+ It uses the data object.
   The ggplot function
  \code{\link[ggplot2]{geom_point}} is used to draw each of the
- phosphorylation sites at their location as determined by prot_data object.
+ phosphorylation sites at their location as determined by data object.
 }
 \examples{
 # combines will with geom_domains to plot chains and phosphorylation sites.
 library(magrittr)
-prot_data \%>\%
-     geom_chains(label_size = 1.25) \%>\%
-     geom_phospho() -> p
-     p
+ p <- geom_chains(five_rel_data, label_size = 1.25)
+ p <- geom_phospho(p, five_rel_data)
+ p
 
 }

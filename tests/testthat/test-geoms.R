@@ -1,20 +1,20 @@
 # trying to write some tests for my draw_proteins package
 
-# unit tests with geom_chain
-context("geom_chain")
+# unit tests for geom_chains
+context("geom_chains")
 
 test_that("geom_chains",{
 
   # load data from the package
-  data("prot_data")
-  # prot_data was created 20170818 using this code:
+  data("five_rel_data")
+  # five_rel_data was created 20171101 using this code:
   # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   #   drawProteins::get_features() %>%
   #   drawProteins::feature_to_dataframe() ->
-  #   prot_data
+  #   five_rel_data
 
-  # prot_data is a dataframe - 319 obs of 9 variables.
-  p <- geom_chains(prot_data)
+  # five_rel_data is a dataframe - 320 obs of 9 variables.
+  p <- geom_chains(five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_is(p,"ggplot")
@@ -34,7 +34,7 @@ test_that("geom_chains",{
   expect_equal(p$labels$ymin, "order - 0.2")
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
-  expect_equal(length(prot_data[prot_data$type == "DOMAIN",]),
+  expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
                length(p$layers[[1]]$data))
 })
 
@@ -46,16 +46,16 @@ context("geom_domains")
 test_that("geom_domains",{
 
   # load data from the package
-  data("prot_data")
-  # prot_data was created 20170818 using this code:
+  data("five_rel_data")
+  # five_rel_data was created 20171101 using this code:
   # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   #   drawProteins::get_features() %>%
   #   drawProteins::feature_to_dataframe() ->
-  #   prot_data
+  #   five_rel_data
 
-  # prot_data is a dataframe - 319 obs of 9 variables.
-  p <- geom_chains(prot_data)
-  p <- geom_domains(p)
+  # five_rel_data is a dataframe - 320 obs of 9 variables.
+  p <- geom_chains(five_rel_data)
+  p <- geom_domains(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_equal(mode(p), "list")
@@ -65,7 +65,7 @@ test_that("geom_domains",{
   expect_equal(length(p$layers), 4)
   # two from geom_chains and two from geom_domains
 
-  expect_equal(length(prot_data[prot_data$type == "DOMAIN",]),
+  expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
                length(p$layers[[3]]$data))
 
   # types of layers, 3 and 4 added by geom_domains
@@ -83,16 +83,16 @@ context("geom_phospho")
 test_that("geom_phospho",{
 
   # load data from the package
-  data("prot_data")
-  # prot_data was created 20170818 using this code:
+  data("five_rel_data")
+  # five_rel_data was created 20171101 using this code:
   # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   #   drawProteins::get_features() %>%
   #   drawProteins::feature_to_dataframe() ->
-  #   prot_data
+  #   five_rel_data
 
-  # prot_data is a dataframe - 319 obs of 9 variables.
-  p <- geom_chains(prot_data)
-  p <- geom_phospho(p)
+  # five_rel_data is a dataframe - 320 obs of 9 variables.
+  p <- geom_chains(five_rel_data)
+  p <- geom_phospho(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_equal(mode(p), "list")
@@ -115,16 +115,16 @@ context("geom_motif")
 test_that("geom_motif",{
 
   # load data from the package
-  data("prot_data")
-  # prot_data was created 20170818 using this code:
+  data("five_rel_data")
+  # five_rel_data was created 20171101 using this code:
   # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   #   drawProteins::get_features() %>%
   #   drawProteins::feature_to_dataframe() ->
-  #   prot_data
+  #   five_rel_data
 
-  # prot_data is a dataframe - 319 obs of 9 variables.
-  p <- geom_chains(prot_data)
-  p <- geom_motif(p)
+  # five_rel_data is a dataframe - 320 obs of 9 variables.
+  p <- geom_chains(five_rel_data)
+  p <- geom_motif(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_is(p,"ggplot")
@@ -146,11 +146,11 @@ test_that("geom_motif",{
   expect_equal(p$labels$ymin, "order - 0.2")
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
-  expect_equal(length(prot_data[prot_data$type == "DOMAIN",]),
+  expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
                length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
   # dimensions are 6 9
-  expect_equal(nrow(prot_data[prot_data$type == "MOTIF",]),
+  expect_equal(nrow(five_rel_data[five_rel_data$type == "MOTIF",]),
                nrow(p$layers[[3]]$data))
   expect_equal(p$layers[[3]]$data$type[1], "MOTIF" )
 })
@@ -162,16 +162,16 @@ context("geom_region")
 test_that("geom_region",{
 
   # load data from the package
-  data("prot_data")
-  # prot_data was created 20170818 using this code:
+  data("five_rel_data")
+  # five_rel_data was created 20171101 using this code:
   # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   #   drawProteins::get_features() %>%
   #   drawProteins::feature_to_dataframe() ->
-  #   prot_data
+  #   five_rel_data
 
-  # prot_data is a dataframe - 319 obs of 9 variables.
-  p <- geom_chains(prot_data)
-  p <- geom_region(p)
+  # five_rel_data is a dataframe - 320 obs of 9 variables.
+  p <- geom_chains(five_rel_data)
+  p <- geom_region(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_is(p,"ggplot")
@@ -193,11 +193,11 @@ test_that("geom_region",{
   expect_equal(p$labels$ymin, "order - 0.2")
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
-  expect_equal(length(prot_data[prot_data$type == "DOMAIN",]),
+  expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
                length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
   # dimensions are 6 9
-  expect_equal(nrow(prot_data[prot_data$type == "REGION",]),
+  expect_equal(nrow(five_rel_data[five_rel_data$type == "REGION",]),
                nrow(p$layers[[3]]$data))
   expect_equal(p$layers[[3]]$data$type[1], "REGION" )
 })
@@ -210,16 +210,16 @@ context("geom_repeat")
 test_that("geom_repeat",{
 
   # load data from the package
-  data("prot_data")
-  # prot_data was created 20170818 using this code:
+  data("five_rel_data")
+  # five_rel_data was created 20171101 using this code:
   # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
   #   drawProteins::get_features() %>%
   #   drawProteins::feature_to_dataframe() ->
-  #   prot_data
+  #   five_rel_data
 
-  # prot_data is a dataframe - 319 obs of 9 variables.
-  p <- geom_chains(prot_data)
-  p <- geom_repeat(p)
+  # five_rel_data is a dataframe - 320 obs of 9 variables.
+  p <- geom_chains(five_rel_data)
+  p <- geom_repeat(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_is(p,"ggplot")
@@ -240,11 +240,11 @@ test_that("geom_repeat",{
   expect_equal(p$labels$ymin, "order - 0.2")
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
-  expect_equal(length(prot_data[prot_data$type == "REPEAT",]),
+  expect_equal(length(five_rel_data[five_rel_data$type == "REPEAT",]),
                length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
   # dimensions are 6 9
-  expect_equal(nrow(prot_data[prot_data$type == "REPEAT",]),
+  expect_equal(nrow(five_rel_data[five_rel_data$type == "REPEAT",]),
                nrow(p$layers[[3]]$data))
   expect_equal(p$layers[[3]]$data$type[1], "REPEAT" )
 })

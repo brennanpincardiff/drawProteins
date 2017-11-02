@@ -4,10 +4,15 @@
 \alias{geom_domains}
 \title{Add protein domains to ggplot object.}
 \usage{
-geom_domains(p, label_domains = TRUE, label_size = 4)
+geom_domains(p, data = data, label_domains = TRUE, label_size = 4)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{geom_chains}}.}
+
+\item{data}{Dataframe of one or more rows with the following column
+names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
+data$type.}
 
 \item{label_domains}{Option to label domains or not.}
 
@@ -20,17 +25,14 @@ additional geom_rect layer.
 \description{
 \code{geom_domains} adds domains to the ggplot object created by
 \code{\link{geom_chains}}.
- It uses the prot_data object.
+ It uses the data object.
   The ggplot function
  \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
  chains proportional to their number of amino acids (length).
 }
 \examples{
-# combines will with geom_domains to plot chains and domains.
-library(magrittr)
-prot_data \%>\%
-     geom_chains(label_size = 1.25) \%>\%
-     geom_domains(label_size = 1.25) -> p
-     p
+ p <- geom_chains(five_rel_data, label_size = 1.25)
+ p <- geom_domains(p, five_rel_data)
+ p
 
 }

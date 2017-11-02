@@ -53,7 +53,7 @@ feature_to_dataframe <- function(features_in_lists_of_six){
 #' Uniprot
 #'
 #' @examples
-#' sites <- phospho_site_info(prot_data)
+#' sites <- phospho_site_info(five_rel_data)
 #' head(sites)
 #'
 #'

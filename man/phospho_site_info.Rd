@@ -19,7 +19,7 @@ Reduces data.frame of features to just phosphorylation sites. Uses a
 subsetting step and a grep with the pattern "Phospho".
 }
 \examples{
-sites <- phospho_site_info(prot_data)
+sites <- phospho_site_info(five_rel_data)
 head(sites)
 
 

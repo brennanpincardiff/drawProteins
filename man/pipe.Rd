@@ -13,8 +13,6 @@ From \url{https://github.com/rstudio/ggvis/blob/master/R/pipe.R}
 }
 \examples{
 # Allows this workflow:
-prot_data \%>\%
-     geom_chains(label_size = 1.25) \%>\%
-     geom_domains(label_size = 1.25) -> p
-p
+five_rel_data \%>\%
+     geom_chains(label_size = 1.25)
 }
