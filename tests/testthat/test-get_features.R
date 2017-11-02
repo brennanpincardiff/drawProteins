@@ -19,4 +19,9 @@ test_that("get_features",{
   expect_is(res, "list")
   expect_equal(length(res), 5)
 
+  res2 <- get_features("")
+  expect_is(res2, "list")
+  expect_equal(res2$requestedURL,
+"http://www.ebi.ac.uk/proteins/api/features?offset=0&size=100&accession=")
+  expect_equal(names(res2[2]), "errorMessage")
 })
