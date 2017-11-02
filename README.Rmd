@@ -19,7 +19,7 @@ The package works best when pipes %>% provided by the magrittr package are also 
 
 The Vignette gives a good overview of the package. 
 
-Sample script on [R for Biochemists blog](http://rforbiochemists.blogspot.co.uk/2017/08/drawing-nfkappab-protein-schematics.html)
+Sample script on [R for Biochemists blog](http://rforbiochemists.blogspot.co.uk/2017/11/using-drawproteins-for-draw-nf-kappab.html)
 
 This is a work in progress and is only available on GitHub.
 To install: 
