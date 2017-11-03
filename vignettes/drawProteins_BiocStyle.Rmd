@@ -106,8 +106,8 @@ a pipe in the following way.
 
 ```{r, fig.height=3, fig.wide = TRUE}
 rel_data %>%
-    geom_chains() -> p
-    p <- geom_domains(p, rel_data)
+    draw_chains() -> p
+    p <- draw_domains(p, rel_data)
 p
 ```
 
@@ -131,23 +131,23 @@ p
 # Checking the other features
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_region(p, rel_data) # adds activation domain
+draw_regions(p, rel_data) # adds activation domain
 
 ```
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_repeat(p, rel_data) # doesn't add anything in this case
+draw_repeat(p, rel_data) # doesn't add anything in this case
 
 ```
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_motif(p, rel_data) # adds 9aa Transactivation domain & NLS
+draw_motif(p, rel_data) # adds 9aa Transactivation domain & NLS
 ```
 
 
 ```{r, fig.height=3, fig.wide = TRUE}
 # add phosphorylation sites from Uniprot
-geom_phospho(p, rel_data, size = 8)
+draw_phospho(p, rel_data, size = 8)
 ```
 
 # Putting it all together
@@ -156,11 +156,11 @@ in the way you like. Some customisation is possible as described below.
 
 For Rel A, my recommendation would be the following workflow.
 ```{r, fig.height=3.5, fig.wide = TRUE}
-rel_data %>% geom_chains() -> p
-p <- geom_domains(p, rel_data)
-p <- geom_region(p, rel_data)
-p <- geom_motif(p, rel_data)
-p <- geom_phospho(p, rel_data, size = 8) 
+rel_data %>% draw_chains() -> p
+p <- draw_domains(p, rel_data)
+p <- draw_regions(p, rel_data)
+p <- draw_motif(p, rel_data)
+p <- draw_phospho(p, rel_data, size = 8) 
 
 p <- p + theme_bw(base_size = 20) + # white backgnd & change text size
     theme(panel.grid.minor=element_blank(), 
@@ -198,11 +198,11 @@ the NFkappaB transcription factor family.
     drawProteins::feature_to_dataframe() ->
     prot_data
 
-p <- geom_chains(prot_data)
-p <- geom_domains(p, prot_data)
-p <- geom_repeat(p, prot_data)
-p <- geom_motif(p, prot_data)
-p <- geom_phospho(p, prot_data, size = 8)
+p <- draw_chains(prot_data)
+p <- draw_domains(p, prot_data)
+p <- draw_repeat(p, prot_data)
+p <- draw_motif(p, prot_data)
+p <- draw_phospho(p, prot_data, size = 8)
 
 # background and y-axis
 p <- p + theme_bw(base_size = 20) + # white backgnd & change text size
@@ -233,7 +233,7 @@ Currently, it's possible to customise the chain colour and outline. It's
 possible to remove the labels. 
 
 ```{r, fig.height=6, fig.wide = TRUE}
-geom_chains(prot_data, 
+draw_chains(prot_data, 
             label_chains = FALSE,
             fill = "hotpink", 
             outline = "midnightblue")
@@ -243,18 +243,18 @@ geom_chains(prot_data,
 It's also possible to change the size and colour of the phosphorylation symbols.
 
 ```{r, fig.height=8, fig.wide = TRUE}
-p <- geom_chains(prot_data, 
+p <- draw_chains(prot_data, 
             fill = "lightsteelblue1", 
             outline = "grey", 
             label_size = 5) 
-p <- geom_phospho(p, prot_data, size = 10, fill = "red")
+p <- draw_phospho(p, prot_data, size = 10, fill = "red")
 p + theme_bw()
 ```
 
 It's also possible to change the labels to a custom list. But remember that the
 plots are drawn from the bottom up. 
 ```{r, fig.height=8, fig.wide = TRUE}
-p <- geom_chains(prot_data,
+p <- draw_chains(prot_data,
             fill = "lightsteelblue1", 
             outline = "grey",
             labels = c("p52/p100",
@@ -265,7 +265,7 @@ p <- geom_chains(prot_data,
                         "c-Rel", 
                         "p65/Rel A"),
             label_size = 5) 
-p <- geom_phospho(p, prot_data, size = 8, fill = "red")
+p <- draw_phospho(p, prot_data, size = 8, fill = "red")
 p + theme_bw()
 ```
 

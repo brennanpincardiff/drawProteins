@@ -1,4 +1,16 @@
-LAUNCH VERSION 0.99.0
+CHANGES IN VERSION 0.98.2
+-----------------------
+
+FEATURES
+
+    o Rename functions from geom to draw. E.g geom_chains is now geom_draw.
+    This is because they weren't really geoms and using the word draw seem
+    more helpful and a better reflection of the function.
+
+
+
+
+LAUNCH VERSION 0.98.1
 -------------------------
 
 FEATURES
