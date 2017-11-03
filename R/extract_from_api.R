@@ -115,13 +115,16 @@ extract_feat_acc <- function(features_list){
   features_dataframe$length <- features_dataframe$end - features_dataframe$begin
 
   # add accession number to each row of dataframe
-  features_dataframe$accession <- rep(features_list$accession, times = nrow(features_dataframe))
+  features_dataframe$accession <- rep(features_list$accession,
+    times = nrow(features_dataframe))
 
   # add entryName (e.g. p65_HUMAN) to each row of dataframe
-  features_dataframe$entryName <- rep(features_list$entryName, times = nrow(features_dataframe))
+  features_dataframe$entryName <- rep(features_list$entryName,
+    times = nrow(features_dataframe))
 
   # add taxid to each row of datafame
-  features_dataframe$taxid <- rep(features_list$taxid, times = nrow(features_dataframe))
+  features_dataframe$taxid <- rep(features_list$taxid,
+    times = nrow(features_dataframe))
 
   return(features_dataframe)
 }
