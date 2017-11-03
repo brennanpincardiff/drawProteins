@@ -9,8 +9,7 @@
 #' Accession numbers Q04206 Q01201 Q04864 P19838 Q00653
 "five_rel_list"
 
-#' Dataframe with details of protein features for five human NFkappaB proteins
-#' Accessed from Uniprot on 1st November 2017
+#' Dataframe features of 5 human NFkappaB proteins Uniprot on 1 Nov 2017
 #'
 #' @format A data frame with 320 rows and 9 variables:
 #' \describe{

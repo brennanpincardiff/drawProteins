@@ -29,8 +29,8 @@ additional geom_rect layer.
 }
 \description{
 \code{geom_repeat} adds protein repeats from Uniprot to ggplot object
-created by \code{\link{geom_chains}}.
-It uses the data object. The ggplot function \code{\link[ggplot2]{geom_rect}}
+created by \code{\link{geom_chains}}. It uses the data object.
+The ggplot function \code{\link[ggplot2]{geom_rect}}
 is used to draw each of the motifs proportional to their number of
 amino acids (length).
 }

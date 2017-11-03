@@ -3,8 +3,7 @@
 \docType{data}
 \name{five_rel_data}
 \alias{five_rel_data}
-\title{Dataframe with details of protein features for five human NFkappaB proteins
-Accessed from Uniprot on 1st November 2017}
+\title{Dataframe features of 5 human NFkappaB proteins Uniprot on 1 Nov 2017}
 \format{A data frame with 320 rows and 9 variables:
 \describe{
     \item{type}{type of features - e.g. chain}
@@ -28,7 +27,6 @@ five_rel_data
 A data frame with 320 rows and 9 variables
 }
 \description{
-Dataframe with details of protein features for five human NFkappaB proteins
-Accessed from Uniprot on 1st November 2017
+Dataframe features of 5 human NFkappaB proteins Uniprot on 1 Nov 2017
 }
 \keyword{datasets}

@@ -19,8 +19,8 @@ A ggplot object either in the plot window or as an object with an
 additional geom_rect layer.
 }
 \description{
-\code{geom_region} adds protein regions from Uniprot to ggplot object created
-by \code{\link{geom_chains}}.
+\code{geom_region} adds protein regions from Uniprot to ggplot object
+created by \code{\link{geom_chains}}.
 It uses the data object.
 The ggplot function
 \code{\link[ggplot2]{geom_rect}} is used to draw each of the

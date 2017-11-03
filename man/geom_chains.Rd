@@ -31,9 +31,9 @@ default but can be changed.}
 A ggplot object either in the plot window or as an object.
 }
 \description{
-\code{geom_chains} uses the dataframe containing the protein features to plot
-the chains, the full length proteins. It creates the basic plot element by
-determining the length of the longest protein. The ggplot function
+\code{geom_chains} uses the dataframe containing the protein features to
+plot the chains, the full length proteins. It creates the basic plot element
+by determining the length of the longest protein. The ggplot function
 \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
 chains proportional to their number of amino acids (length).
 }
