@@ -4,7 +4,7 @@
 #' Uniprot on 15 August 2017
 #'
 #' @format Large List of 5 elements - one element for each protein
-#'
+#' @return Large List of 5 elements - one element for each protein
 #' @source Uniprot {http://www.uniprot.org}
 #' Accession numbers Q04206 Q01201 Q04864 P19838 Q00653
 "five_rel_list"
@@ -24,6 +24,7 @@
 #'    \item{taxid}{taxonomic identification - species}
 #'    \item{order}{plotting order from the bottom of the graph}
 #' }
+#' @return A data frame with 320 rows and 9 variables
 #' @source Uniprot {http://www.uniprot.org}
 #' Accession numbers Q04206 Q01201 Q04864 P19838 Q00653
 "five_rel_data"
@@ -34,7 +35,7 @@
 #' Uniprot on 15 August 2017
 #'
 #' @format List of 6 - information necessary to draw Rel A/p65
-#'
+#' @return List of 6 - information necessary to draw Rel A/p65
 #' @source \url{http://www.uniprot.org/uniprot/Q04206}
 "rel_A_features"
 
@@ -44,7 +45,7 @@
 #' Uniprot on 1 November 2017
 #'
 #' @format List of 1 with List of 14 inside
-#'
+#' @return List of 6 - information necessary to draw Rel A/p65
 #' @source \url{http://www.uniprot.org/uniprot/Q04206}
 "protein_json"
 
@@ -54,7 +55,7 @@
 #' Uniprot on 1 November 2017
 #'
 #' @format List of 1 with List of 6 - information necessary to draw Rel A/p65
-#'
+#' @return List of 1 with List of 6 - information necessary to draw Rel A/p65
 #' @source \url{http://www.uniprot.org/uniprot/Q04206}
 "rel_json"
 

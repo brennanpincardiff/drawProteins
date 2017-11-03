@@ -11,6 +11,9 @@
 \usage{
 protein_json
 }
+\value{
+List of 6 - information necessary to draw Rel A/p65
+}
 \description{
 Large list (968.8 Kb) of information about human Rel A downloaded from
 Uniprot on 1 November 2017

@@ -11,6 +11,9 @@
 \usage{
 rel_A_features
 }
+\value{
+List of 6 - information necessary to draw Rel A/p65
+}
 \description{
 List of features from human Rel A downloaded from
 Uniprot on 15 August 2017

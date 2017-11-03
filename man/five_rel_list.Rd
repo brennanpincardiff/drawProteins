@@ -12,6 +12,9 @@ Accession numbers Q04206 Q01201 Q04864 P19838 Q00653
 \usage{
 five_rel_list
 }
+\value{
+Large List of 5 elements - one element for each protein
+}
 \description{
 List of features from five human NFkappaB proteins downloaded from
 Uniprot on 15 August 2017

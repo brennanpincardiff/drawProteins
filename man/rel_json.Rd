@@ -11,6 +11,9 @@
 \usage{
 rel_json
 }
+\value{
+List of 1 with List of 6 - information necessary to draw Rel A/p65
+}
 \description{
 List of 1 with List of 6 inside downloaded from
 Uniprot on 1 November 2017

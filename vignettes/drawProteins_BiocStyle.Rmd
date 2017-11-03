@@ -181,7 +181,7 @@ p <- geom_motif(p, prot_data)
 p <- geom_phospho(p, prot_data, size = 8)
 
 # background and y-axis
-p <- p + theme_bw(base_size = 20) +  # white background and change text size
+p <- p + theme_bw(base_size = 20) +  # white backgnd & change text size
     theme(panel.grid.minor=element_blank(),
         panel.grid.major=element_blank()) +
     theme(axis.ticks = element_blank(),
