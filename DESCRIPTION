@@ -21,4 +21,6 @@ Suggests: covr,
     BiocStyle
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
+URL: https://github.com/brennanpincardiff/drawProteins
+BugReports: https://github.com/brennanpincardiff/drawProteins/issues/new
 biocViews: Visualization, FunctionalPrediction, Proteomics
