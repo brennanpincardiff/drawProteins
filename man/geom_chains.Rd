@@ -32,10 +32,10 @@ A ggplot object either in the plot window or as an object.
 }
 \description{
 \code{geom_chains} uses the dataframe containing the protein features to plot
- the chains, the full length proteins. It creates the basic plot element by
- determining the length of the longest protein. The ggplot function
- \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
- chains proportional to their number of amino acids (length).
+the chains, the full length proteins. It creates the basic plot element by
+determining the length of the longest protein. The ggplot function
+\code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
+chains proportional to their number of amino acids (length).
 }
 \examples{
 # draws five chains corresponding to human NF-kappaB proteins
@@ -44,12 +44,12 @@ geom_chains(five_rel_data)
 # draws five chains with different colours to default
 five_rel_data \%>\%
 geom_chains(label_chains = FALSE,
-   fill = "red",
-   outline = "grey")
+    fill = "red",
+    outline = "grey")
 
 # combines well with geom_domains to plot chains and domains.
- p <- geom_chains(five_rel_data, label_size = 1.25)
- p <- geom_region(p, five_rel_data)
- p
+p <- geom_chains(five_rel_data, label_size = 1.25)
+p <- geom_region(p, five_rel_data)
+p
 
 }

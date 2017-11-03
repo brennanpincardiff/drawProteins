@@ -154,7 +154,7 @@ extract_feat_acc <- function(features_list){
 #' uniprot_acc <- c("Q04206")  # change this for your fav protein
 #' # Get UniProt entry by accession
 #' acc_uniprot_url <-
-#'         c("https://www.ebi.ac.uk/proteins/api/proteins?accession=")
+#'     c("https://www.ebi.ac.uk/proteins/api/proteins?accession=")
 #' comb_acc_api <- paste0(acc_uniprot_url, uniprot_acc)
 #' # basic function is GET() which accesses the API
 #' # requires internet access

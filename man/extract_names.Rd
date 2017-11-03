@@ -21,25 +21,26 @@ The search produces a Large list that  contains all the Uniprot information
 about a protein.
 }
 \examples{
-  # using internal data
-  prot_names <- extract_names(protein_json)
-  # generates a list of 6
+# using internal data
+prot_names <- extract_names(protein_json)
+# generates a list of 6
 
-  \dontrun{
-  # access the Uniprot Protein API
-  uniprot_acc <- c("Q04206")  # change this for your fav protein
-  # Get UniProt entry by accession
-  acc_uniprot_url <- c("https://www.ebi.ac.uk/proteins/api/proteins?accession=")
-  comb_acc_api <- paste0(acc_uniprot_url, uniprot_acc)
-  # basic function is GET() which accesses the API
-  # requires internet access
-  protein <- httr::GET(comb_acc_api, accept_json())
-  status_code(protein)  # returns a 200 means it worked
-  # use content() function from httr to give us a list
-  protein_json <- httr::content(protein) # gives a Large list
-  # with 14 primary parts and lots of bits inside
-  # function from my package to extract names of protein
-  names <- extract_names(protein_json)
-  }
+\dontrun{
+# access the Uniprot Protein API
+uniprot_acc <- c("Q04206")  # change this for your fav protein
+# Get UniProt entry by accession
+acc_uniprot_url <-
+    c("https://www.ebi.ac.uk/proteins/api/proteins?accession=")
+comb_acc_api <- paste0(acc_uniprot_url, uniprot_acc)
+# basic function is GET() which accesses the API
+# requires internet access
+protein <- httr::GET(comb_acc_api, accept_json())
+status_code(protein)  # returns a 200 means it worked
+# use content() function from httr to give us a list
+protein_json <- httr::content(protein) # gives a Large list
+# with 14 primary parts and lots of bits inside
+# function from my package to extract names of protein
+names <- extract_names(protein_json)
+}
 
 }

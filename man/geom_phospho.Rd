@@ -25,10 +25,10 @@ additional geom_point layer.
 \description{
 \code{geom_phospho} adds phosphorylation sites to ggplot object created by
 \code{\link{geom_chains}}.
- It uses the data object.
-  The ggplot function
- \code{\link[ggplot2]{geom_point}} is used to draw each of the
- phosphorylation sites at their location as determined by data object.
+It uses the data object.
+The ggplot function
+\code{\link[ggplot2]{geom_point}} is used to draw each of the
+phosphorylation sites at their location as determined by data object.
 }
 \examples{
 # combines will with geom_domains to plot chains and phosphorylation sites.

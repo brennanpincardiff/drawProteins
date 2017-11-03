@@ -2,15 +2,15 @@
 #' Create ggplot object with protein chains from feature database
 #'
 #' \code{geom_chains} uses the dataframe containing the protein features to plot
-#'  the chains, the full length proteins. It creates the basic plot element by
-#'  determining the length of the longest protein. The ggplot function
-#'  \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
-#'  chains proportional to their number of amino acids (length).
+#' the chains, the full length proteins. It creates the basic plot element by
+#' determining the length of the longest protein. The ggplot function
+#' \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
+#' chains proportional to their number of amino acids (length).
 #'
 #' @param data Dataframe of one or more rows with the following column
-#'  names: 'type', 'description', 'begin', 'end', 'length', 'accession',
-#'  'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
-#'  data$type.
+#' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+#' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
+#' data$type.
 #'
 #' @param outline Colour of the outline of each chain.
 #'
@@ -34,13 +34,13 @@
 #' # draws five chains with different colours to default
 #' five_rel_data %>%
 #' geom_chains(label_chains = FALSE,
-#'    fill = "red",
-#'    outline = "grey")
+#'     fill = "red",
+#'     outline = "grey")
 #'
 #' # combines well with geom_domains to plot chains and domains.
-#'  p <- geom_chains(five_rel_data, label_size = 1.25)
-#'  p <- geom_region(p, five_rel_data)
-#'  p
+#' p <- geom_chains(five_rel_data, label_size = 1.25)
+#' p <- geom_region(p, five_rel_data)
+#' p
 #'
 #' @export
 geom_chains <- function(data = data,
@@ -84,17 +84,17 @@ geom_chains <- function(data = data,
 #'
 #' \code{geom_domains} adds domains to the ggplot object created by
 #' \code{\link{geom_chains}}.
-#'  It uses the data object.
-#'   The ggplot function
-#'  \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
-#'  chains proportional to their number of amino acids (length).
+#' It uses the data object.
+#' The ggplot function
+#' \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
+#' chains proportional to their number of amino acids (length).
 #'
 #' @param p ggplot object ideally created with \code{\link{geom_chains}}.
 #'
 #' @param data Dataframe of one or more rows with the following column
-#'  names: 'type', 'description', 'begin', 'end', 'length', 'accession',
-#'  'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
-#'  data$type.
+#' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+#' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
+#' data$type.
 #'
 #' @param label_domains Option to label domains or not.
 #'
@@ -140,10 +140,10 @@ geom_domains <- function(p,
 #'
 #' \code{geom_phospho} adds phosphorylation sites to ggplot object created by
 #' \code{\link{geom_chains}}.
-#'  It uses the data object.
-#'   The ggplot function
-#'  \code{\link[ggplot2]{geom_point}} is used to draw each of the
-#'  phosphorylation sites at their location as determined by data object.
+#' It uses the data object.
+#' The ggplot function
+#' \code{\link[ggplot2]{geom_point}} is used to draw each of the
+#' phosphorylation sites at their location as determined by data object.
 #'
 #' @param p ggplot object ideally created with \code{\link{geom_chains}}.
 #' @param data Dataframe of one or more rows with the following column

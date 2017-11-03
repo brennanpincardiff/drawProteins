@@ -25,10 +25,10 @@ additional geom_rect layer.
 \description{
 \code{geom_domains} adds domains to the ggplot object created by
 \code{\link{geom_chains}}.
- It uses the data object.
-  The ggplot function
- \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
- chains proportional to their number of amino acids (length).
+It uses the data object.
+The ggplot function
+\code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
+chains proportional to their number of amino acids (length).
 }
 \examples{
 p <- geom_chains(five_rel_data, label_size = 1.25)

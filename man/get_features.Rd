@@ -12,10 +12,10 @@ numbers separated by spaces.}
 }
 \value{
 If there is internet access and the UniProt accession numbers are
- good, the function will return a list of lists. The list will be of length
- equivalent to the number of Uniprot accession numbers supplied. The lists
- inside will be of length 6 and will contain information about the proteins
- and the features.
+good, the function will return a list of lists. The list will be of length
+equivalent to the number of Uniprot accession numbers supplied. The lists
+inside will be of length 6 and will contain information about the proteins
+and the features.
 }
 \description{
 This function creates the URL required to query the UniProt API and returns

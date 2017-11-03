@@ -23,9 +23,9 @@ library(httr)
 library(ggplot2)
 library(knitr)
 opts_chunk$set(comment=NA,
-               fig.align = "center",
-               out.width = "100%",
-               dpi = 300)
+                fig.align = "center",
+                out.width = "100%",
+                dpi = 300)
 ```
 
 # Overview of drawProteins
@@ -57,8 +57,8 @@ With internet access, this can be retreived from Uniprot with this code:
 ```{r download_rel_json, eval=TRUE, echo=TRUE}
 # accession numbers of rel A
 "Q04206" %>%
-  drawProteins::get_features() ->
-  rel_json
+    drawProteins::get_features() ->
+    rel_json
 ```
 
 # Turning Uniprot data into a dataframe
@@ -69,12 +69,12 @@ The feature_to_dataframe() function will  convert the list of lists of six provi
 The feature_to_dataframe() function will also add an "order" value to allow plotting. The order goes from the bottom in the manner of a graph. 
 
 ```{r generate_dataframe}
-  rel_json %>%
+rel_json %>%
     drawProteins::feature_to_dataframe() ->
-    rel_data
+        rel_data
 
 # show in console
-  head(rel_data[1:4])
+head(rel_data[1:4])
 
 ```
 
@@ -84,8 +84,8 @@ The data can be plotted with ggplot2 using the geom_rect() and geom_label. These
 
 ```{r, fig.height=3, fig.wide = TRUE}
 rel_data %>%
-  geom_chains() -> p
-  p <- geom_domains(p, rel_data)
+    geom_chains() -> p
+    p <- geom_domains(p, rel_data)
 p
 ```
 
@@ -96,11 +96,11 @@ This can be done with this code:
 ```{r, fig.height=3, fig.wide = TRUE}
 # white background and remove y-axis
 p <- p + theme_bw(base_size = 20) +  # white background
-  theme(panel.grid.minor=element_blank(), 
+    theme(panel.grid.minor=element_blank(), 
         panel.grid.major=element_blank()) +
-  theme(axis.ticks = element_blank(), 
+    theme(axis.ticks = element_blank(), 
         axis.text.y = element_blank()) +
-  theme(panel.border = element_blank())
+    theme(panel.border = element_blank())
 p
 ```
 
@@ -138,11 +138,11 @@ p <- geom_motif(p, rel_data)
 p <- geom_phospho(p, rel_data, size = 8) 
 
 p <- p + theme_bw(base_size = 20) +  # white backgnd & change text size
-  theme(panel.grid.minor=element_blank(), 
+    theme(panel.grid.minor=element_blank(), 
         panel.grid.major=element_blank()) +
-  theme(axis.ticks = element_blank(), 
+    theme(axis.ticks = element_blank(), 
         axis.text.y = element_blank()) +
-  theme(panel.border = element_blank())
+    theme(panel.border = element_blank())
 
 p
 
@@ -153,10 +153,13 @@ p
 Using ggplot2 then allows the addition of titles:
 ```{r, fig.height=4, fig.wide = TRUE}
 # add titles
+rel_subtitle <- paste0("circles = phosphorylation sites\n",
+                "RHD = Rel Homology Domain\nsource:Uniprot")
+
 p <- p + labs(x = "Amino acid number",         # label x-axis
-              y = "",  # label y-axis
-              title = "Rel A/p65",
-              subtitle = "circles = phosphorylation sites\nRHD = Rel Homology Domain\nsource:Uniprot")
+                y = "",  # label y-axis
+                title = "Rel A/p65",
+                subtitle = rel_subtitle)
 p
 ```
 
@@ -179,17 +182,20 @@ p <- geom_phospho(p, prot_data, size = 8)
 
 # background and y-axis
 p <- p + theme_bw(base_size = 20) +  # white background and change text size
-  theme(panel.grid.minor=element_blank(),
+    theme(panel.grid.minor=element_blank(),
         panel.grid.major=element_blank()) +
-  theme(axis.ticks = element_blank(),
+    theme(axis.ticks = element_blank(),
         axis.text.y = element_blank()) +
-  theme(panel.border = element_blank())
+    theme(panel.border = element_blank())
 
 # add titles
+rel_subtitle <- paste0("circles = phosphorylation sites\n",
+                "RHD = Rel Homology Domain\nsource:Uniprot")
+
 p <- p + labs(x = "Amino acid number",         # label x-axis
-              y = "",  # label y-axis
-              title = "Schematic of human NF-kappaB proteins",
-              subtitle = "circles = phosphorylation sites\nRHD = Rel Homology Domain\nsource:Uniprot")
+                y = "",  # label y-axis
+                title = "Schematic of human NF-kappaB proteins",
+                subtitle = rel_subtitle)
 
 
 # move legend to top
@@ -203,10 +209,10 @@ p
 Currently, it's possible to customise the chain colour and outline. It's possible to remove the labels. 
 
 ```{r, fig.height=6, fig.wide = TRUE}
-  geom_chains(prot_data, 
-              label_chains = FALSE,
-              fill = "hotpink", 
-              outline = "midnightblue")
+geom_chains(prot_data, 
+            label_chains = FALSE,
+            fill = "hotpink", 
+            outline = "midnightblue")
 ```
 
 
@@ -214,9 +220,9 @@ It's also possible to change the size and colour of the phosphorylation symbols.
 ```{r, fig.height=8, fig.wide = TRUE}
 
 p <-  geom_chains(prot_data, 
-              fill = "lightsteelblue1", 
-              outline = "grey", 
-              label_size = 5) 
+            fill = "lightsteelblue1", 
+            outline = "grey", 
+            label_size = 5) 
 p <- geom_phospho(p, prot_data, size = 10, fill = "red")
   
 p + theme_bw()
@@ -229,12 +235,12 @@ p <- geom_chains(prot_data,
             fill = "lightsteelblue1", 
             outline = "grey",
             labels = c("p52/p100",
-                       "p52/p100",
-                       "p50/p105", 
-                       "p50/p105",
-                       "Rel B",
-                       "c-Rel", 
-                       "p65/Rel A"),
+                        "p52/p100",
+                        "p50/p105", 
+                        "p50/p105",
+                        "Rel B",
+                        "c-Rel", 
+                        "p65/Rel A"),
             label_size = 5) 
 p <- geom_phospho(p, prot_data, size = 8, fill = "red")
 
