@@ -177,7 +177,8 @@ extract_names <- function(protein_json){
   names <- list(
     accession = prot_info$accession,
     name = prot_info$id,
-    protein.recommendedName.fullName = prot_info$protein$recommendedName$fullName$value,
+    protein.recommendedName.fullName =
+      prot_info$protein$recommendedName$fullName$value,
     gene.name.primary = prot_info$gene[[1]]$name$value,
     gene.name.synonym = prot_info$gene[[1]]$synonyms[[1]]$value,
     organism.name.scientific = prot_info$organism$names[[1]]$value
