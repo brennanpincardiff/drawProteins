@@ -39,8 +39,7 @@ test_that("draw_chains",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  five_rel_data %>%
-    draw_canvas() -> p
+  p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
@@ -74,8 +73,7 @@ test_that("draw_domains",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  five_rel_data %>%
-    draw_canvas() -> p
+  p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
   p <- draw_domains(p, five_rel_data)
 
@@ -113,8 +111,7 @@ test_that("draw_phospho",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  five_rel_data %>%
-    draw_canvas() -> p
+  p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
   p <- draw_phospho(p, five_rel_data)
 
@@ -147,8 +144,7 @@ test_that("draw_motif",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  five_rel_data %>%
-    draw_canvas() -> p
+  p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
   p <- draw_motif(p, five_rel_data)
 
@@ -193,8 +189,7 @@ test_that("draw_regions",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  five_rel_data %>%
-    draw_canvas() -> p
+  p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
   p <- draw_regions(p, five_rel_data)
 
@@ -240,8 +235,7 @@ test_that("draw_repeat",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  five_rel_data %>%
-    draw_canvas() -> p
+  p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
   p <- draw_repeat(p, five_rel_data)
 

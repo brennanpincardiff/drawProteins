@@ -17,7 +17,6 @@ vignette: >
 
 ```{r, eval = TRUE, echo=FALSE}
 library(BiocStyle)
-library(magrittr)
 library(drawProteins)
 library(httr)
 library(ggplot2)
@@ -25,7 +24,7 @@ library(knitr)
 opts_chunk$set(comment=NA,
                 fig.align = "center",
                 out.width = "100%",
-                dpi = 300)
+                dpi = 100)
 ```
 
 # Overview of drawProteins
@@ -43,9 +42,6 @@ a JSON object into R. The JSON object is used to create a data.table.
 
 The graphing package ggplot2 is then used to create the protein schematic. 
 
-The package works best when pipes %>% provided by the magrittr package are also
-used. 
-
 # Getting the data from Uniprot
 
 Currently, drawProteins interacts with the 
@@ -54,13 +50,13 @@ Uniprot accession numbers must be provided. More than one can be provided but
 they must be separated by a single space. The spaces are replaced to create an
 url that can be used to query the Uniprot API 
 
-The get_features() function uses the Uniprot API to return the features of a
+The `get_features()` function uses the Uniprot API to return the features of a
 protein - the chain, domain information and other annotated features such as
 "repeats" and "motifs". Post-translational modifications, such as
 phosphorylations, are also provided. 
 
-The httr::content() function is then used to extract the content. From the
-get_features() function, this will provide lists of lists. The length of the
+The `httr::content()` function is then used to extract the content. From the
+`get_features()` function, this will provide lists of lists. The length of the
 parent lists corresponds to the number of accession numbers provided.
 Interestingly, the order sometimes appears different to that provided. Each of
 lists inside the parent list are a list of six - one for each protein - that
@@ -72,8 +68,7 @@ NF-kappaB, p65, a well studied transcription factor.
 With internet access, this can be retreived from Uniprot with this code:
 ```{r download_rel_json, eval=TRUE, echo=TRUE}
 # accession numbers of rel A
-"Q04206" %>%
-    drawProteins::get_features() ->
+    drawProteins::get_features("Q04206") ->
     rel_json
 ```
 
@@ -81,17 +76,15 @@ With internet access, this can be retreived from Uniprot with this code:
 The next step in the workflow is to convert the data from the Uniprot API into 
 a dataframe that can be used with ggplot2. 
 
-The feature_to_dataframe() function will convert the list of lists of six
-provided by the get_features() function to a dataframe which can then be used 
-to plot the schematics. 
+The `feature_to_dataframe()` function will convert the list of lists of six
+provided by the `get_features()` function to a dataframe which can then be
+used to plot the schematics. 
 
-The feature_to_dataframe() function will also add an "order" value to allow
+The `feature_to_dataframe()` function will also add an "order" value to allow
 plotting. The order goes from the bottom in the manner of a graph. 
 
 ```{r generate_dataframe}
-rel_json %>%
-    drawProteins::feature_to_dataframe() ->
-        rel_data
+drawProteins::feature_to_dataframe(rel_json) -> rel_data
 
 # show in console
 head(rel_data[1:4])
@@ -106,8 +99,7 @@ longest protein that is being drawin. This can be done using a pipe in the
 following way.
 
 ```{r using_draw_canvas, fig.height=3, fig.wide = TRUE}
-rel_data %>%
-    draw_canvas() -> p
+draw_canvas(rel_data) -> p
 p
 ```
 
@@ -175,7 +167,7 @@ in the way you like. Some customisation is possible as described below.
 
 For Rel A, my recommendation would be the following workflow.
 ```{r, fig.height=3.5, fig.wide = TRUE}
-rel_data %>% draw_canvas() -> p
+draw_canvas(rel_data) -> p
 p <- draw_chains(p, rel_data)
 p <- draw_domains(p, rel_data)
 p <- draw_regions(p, rel_data)
@@ -211,10 +203,9 @@ With internet access, the script below shows the workflow for five proteins of
 the NFkappaB transcription factor family. 
 ```{r, fig.height=10, fig.wide = TRUE}
 # accession numbers of five NF-kappaB proteins
-"Q04206 Q01201 Q04864 P19838 Q00653" %>%
-    drawProteins::get_features() %>%
-    drawProteins::feature_to_dataframe() ->
-    prot_data
+prot_data <- drawProteins::get_features("Q04206 Q01201 Q04864 P19838 Q00653")
+prot_data <- drawProteins::feature_to_dataframe(prot_data)
+    
 
 p <- draw_canvas(prot_data)
 p <- draw_chains(p, prot_data)
@@ -255,6 +246,7 @@ p <- draw_chains(p, five_rel_data,
             label_chains = FALSE,
             fill = "hotpink", 
             outline = "midnightblue")
+p
 ```
 
 
@@ -290,7 +282,7 @@ p + theme_bw()
 ```
 
 # Session info
-Here is the output of sessionInfo() on the system on which this document was
+Here is the output of `sessionInfo()` on the system on which this document was
 compiled:
 ```{r, echo=FALSE}
 sessionInfo()
