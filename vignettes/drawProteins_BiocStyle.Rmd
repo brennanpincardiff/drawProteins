@@ -99,15 +99,34 @@ head(rel_data[1:4])
 ```
 
 
-# Plot the data
-The data can be plotted with ggplot2 using the geom_rect() and geom_label. 
-These have been combined into a geom_chain() function that can be used with 
-a pipe in the following way.
+# Draw the protein chains and domains
+The data can be plotted with ggplot2 using the `geom_rect()` and `geom_label`. 
+The first step is to make canvas with `draw_canvas` which is based on the 
+longest protein that is being drawin. This can be done using a pipe in the
+following way.
 
-```{r, fig.height=3, fig.wide = TRUE}
+```{r using_draw_canvas, fig.height=3, fig.wide = TRUE}
 rel_data %>%
-    draw_chains() -> p
-    p <- draw_domains(p, rel_data)
+    draw_canvas() -> p
+p
+```
+
+Then we can plot the protein chain. We use the `draw_chain()` function to which
+we have to provide the ggplot object `p` and the data which is 
+called `rel_data`.
+```{r using draw_chains, fig.height=3, fig.wide = TRUE}
+p <- draw_chains(p, rel_data)
+p
+```
+
+
+Now, we add the domains which are drawn to scale in terms of their lengths. We
+use the `draw_domains()` function to which we have to provide the
+ggplot object `p` and the data which is called `rel_data`. 
+The default is to label the chains. The labels can be removed using the 
+argument `label_chains = FALSE`.
+```{r using draw_domains, fig.height=3, fig.wide = TRUE}
+p <- draw_domains(p, rel_data)
 p
 ```
 
@@ -156,7 +175,8 @@ in the way you like. Some customisation is possible as described below.
 
 For Rel A, my recommendation would be the following workflow.
 ```{r, fig.height=3.5, fig.wide = TRUE}
-rel_data %>% draw_chains() -> p
+rel_data %>% draw_canvas() -> p
+p <- draw_chains(p, rel_data)
 p <- draw_domains(p, rel_data)
 p <- draw_regions(p, rel_data)
 p <- draw_motif(p, rel_data)
@@ -179,9 +199,7 @@ Using ggplot2 then allows the addition of titles:
 rel_subtitle <- paste0("circles = phosphorylation sites\n",
                 "RHD = Rel Homology Domain\nsource:Uniprot")
 
-p <- p + labs(x = "Amino acid number", # label x-axis
-                y = "", # label y-axis
-                title = "Rel A/p65",
+p <- p + labs(title = "Rel A/p65",
                 subtitle = rel_subtitle)
 p
 ```
@@ -198,7 +216,8 @@ the NFkappaB transcription factor family.
     drawProteins::feature_to_dataframe() ->
     prot_data
 
-p <- draw_chains(prot_data)
+p <- draw_canvas(prot_data)
+p <- draw_chains(p, prot_data)
 p <- draw_domains(p, prot_data)
 p <- draw_repeat(p, prot_data)
 p <- draw_motif(p, prot_data)
@@ -216,9 +235,7 @@ p <- p + theme_bw(base_size = 20) + # white backgnd & change text size
 rel_subtitle <- paste0("circles = phosphorylation sites\n",
                 "RHD = Rel Homology Domain\nsource:Uniprot")
 
-p <- p + labs(x = "Amino acid number", # label x-axis
-                y = "", # label y-axis
-                title = "Schematic of human NF-kappaB proteins",
+p <- p + labs(title = "Schematic of human NF-kappaB proteins",
                 subtitle = rel_subtitle)
 
 
@@ -228,12 +245,13 @@ p
 ```
 
 
-# Customising the geoms
+# Customising the draw functions
 Currently, it's possible to customise the chain colour and outline. It's 
 possible to remove the labels. 
 
 ```{r, fig.height=6, fig.wide = TRUE}
-draw_chains(prot_data, 
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, 
             label_chains = FALSE,
             fill = "hotpink", 
             outline = "midnightblue")
@@ -243,18 +261,20 @@ draw_chains(prot_data,
 It's also possible to change the size and colour of the phosphorylation symbols.
 
 ```{r, fig.height=8, fig.wide = TRUE}
-p <- draw_chains(prot_data, 
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, 
             fill = "lightsteelblue1", 
             outline = "grey", 
             label_size = 5) 
-p <- draw_phospho(p, prot_data, size = 10, fill = "red")
+p <- draw_phospho(p, five_rel_data, size = 10, fill = "red")
 p + theme_bw()
 ```
 
 It's also possible to change the labels to a custom list. But remember that the
 plots are drawn from the bottom up. 
 ```{r, fig.height=8, fig.wide = TRUE}
-p <- draw_chains(prot_data,
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, 
             fill = "lightsteelblue1", 
             outline = "grey",
             labels = c("p52/p100",
@@ -265,7 +285,7 @@ p <- draw_chains(prot_data,
                         "c-Rel", 
                         "p65/Rel A"),
             label_size = 5) 
-p <- draw_phospho(p, prot_data, size = 8, fill = "red")
+p <- draw_phospho(p, five_rel_data, size = 8, fill = "red")
 p + theme_bw()
 ```
 

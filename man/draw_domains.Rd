@@ -7,7 +7,7 @@
 draw_domains(p, data = data, label_domains = TRUE, label_size = 4)
 }
 \arguments{
-\item{p}{ggplot object ideally created with \code{\link{draw_chains}}.}
+\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
 
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -31,7 +31,9 @@ The ggplot function
 chains proportional to their number of amino acids (length).
 }
 \examples{
-p <- draw_chains(five_rel_data, label_size = 1.25)
+# combines with draw_chains to plot chains and domains.
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, label_size = 1.25)
 p <- draw_domains(p, five_rel_data)
 p
 

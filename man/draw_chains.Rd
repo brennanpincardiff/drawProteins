@@ -4,11 +4,13 @@
 \alias{draw_chains}
 \title{Create ggplot object with protein chains from feature database}
 \usage{
-draw_chains(data = data, outline = "black", fill = "grey",
+draw_chains(p, data = data, outline = "black", fill = "grey",
     label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
     size = 0.5, label_size = 4)
 }
 \arguments{
+\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
+
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -38,17 +40,21 @@ by determining the length of the longest protein. The ggplot function
 chains proportional to their number of amino acids (length).
 }
 \examples{
-# draws five chains corresponding to human NF-kappaB proteins
-draw_chains(five_rel_data)
+# combines with draw_canvas to plot and label chains.
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data)
+p
 
 # draws five chains with different colours to default
-five_rel_data \%>\%
-draw_chains(label_chains = FALSE,
+p <- draw_canvas(five_rel_data)
+draw_chains(p, five_rel_data,
+    label_chains = FALSE,
     fill = "red",
     outline = "grey")
 
-# combines well with draw_domains to plot chains and domains.
-p <- draw_chains(five_rel_data, label_size = 1.25)
+# combines with draw_chains to plot chains and domains.
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, label_size = 1.25)
 p <- draw_regions(p, five_rel_data)
 p
 

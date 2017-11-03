@@ -1,4 +1,4 @@
-# drawProteins 0.99.0
+# drawProteins 0.98.3
 
 * Active area of development
 

@@ -1,3 +1,14 @@
+CHANGES IN VERSION 0.98.3
+-----------------------
+
+FEATURES
+
+    o New function called draw_canvas. This function was previously within
+    draw_chains but has now been pulled out to allow the generation of a canvas
+    separately from the chains. It did require quite a rewrite but I think
+    it will make things more useful For example, it will allow the plotting of
+    domains without chains which has the potential to be very useful.
+
 CHANGES IN VERSION 0.98.2
 -----------------------
 

@@ -1,4 +1,29 @@
-# trying to write some tests for my draw_proteins package
+# unit tests for draw_chains
+context("draw_canvas")
+test_that("draw_canvas",{
+
+  # load data from the package
+  data("five_rel_data")
+  # five_rel_data was created 20171101 using this code:
+  # "Q04206 Q01201 Q04864 P19838 Q00653" %>%
+  #   drawProteins::get_features() %>%
+  #   drawProteins::feature_to_dataframe() ->
+  #   five_rel_data
+
+  # five_rel_data is a dataframe - 320 obs of 9 variables.
+  p <- draw_canvas(five_rel_data)
+
+  # p is a ggplot object and as such is a list of 9
+  expect_is(p,"ggplot")
+  expect_equal(mode(p), "list")
+  expect_equal(length(p), 9)
+
+  # p should have some labels
+  expect_equal(p$labels$x, "Amino acid number")
+  expect_equal(p$labels$y, "")
+
+})
+
 
 # unit tests for draw_chains
 context("draw_chains")
@@ -14,7 +39,9 @@ test_that("draw_chains",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  p <- draw_chains(five_rel_data)
+  five_rel_data %>%
+    draw_canvas() -> p
+  p <- draw_chains(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_is(p,"ggplot")
@@ -27,13 +54,6 @@ test_that("draw_chains",{
   # types of layers...
   expect_equal(class(p$layers[[1]]$geom)[1], "GeomRect")
   expect_equal(class(p$layers[[2]]$geom)[1], "GeomText")
-
-  # p should have some labels
-  expect_equal(p$labels$xmin, "begin")
-  expect_equal(p$labels$xmax, "end")
-  expect_equal(p$labels$ymin, "order - 0.2")
-  expect_equal(p$labels$x, "x")
-  expect_equal(p$labels$y, "y")
   expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
               length(p$layers[[1]]$data))
 })
@@ -54,7 +74,9 @@ test_that("draw_domains",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  p <- draw_chains(five_rel_data)
+  five_rel_data %>%
+    draw_canvas() -> p
+  p <- draw_chains(p, five_rel_data)
   p <- draw_domains(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
@@ -91,7 +113,9 @@ test_that("draw_phospho",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  p <- draw_chains(five_rel_data)
+  five_rel_data %>%
+    draw_canvas() -> p
+  p <- draw_chains(p, five_rel_data)
   p <- draw_phospho(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
@@ -123,7 +147,9 @@ test_that("draw_motif",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  p <- draw_chains(five_rel_data)
+  five_rel_data %>%
+    draw_canvas() -> p
+  p <- draw_chains(p, five_rel_data)
   p <- draw_motif(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
@@ -141,11 +167,8 @@ test_that("draw_motif",{
   expect_equal(class(p$layers[[2]]$geom)[1], "GeomText")
 
   # p should have some labels
-  expect_equal(p$labels$xmin, "begin")
-  expect_equal(p$labels$xmax, "end")
-  expect_equal(p$labels$ymin, "order - 0.2")
-  expect_equal(p$labels$x, "x")
-  expect_equal(p$labels$y, "y")
+  expect_equal(p$labels$x, "Amino acid number")
+  expect_equal(p$labels$y, "")
   expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
               length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
@@ -170,7 +193,9 @@ test_that("draw_regions",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  p <- draw_chains(five_rel_data)
+  five_rel_data %>%
+    draw_canvas() -> p
+  p <- draw_chains(p, five_rel_data)
   p <- draw_regions(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
@@ -188,11 +213,8 @@ test_that("draw_regions",{
   expect_equal(class(p$layers[[3]]$geom)[1], "GeomRect")
 
   # p should have some labels
-  expect_equal(p$labels$xmin, "begin")
-  expect_equal(p$labels$xmax, "end")
-  expect_equal(p$labels$ymin, "order - 0.2")
-  expect_equal(p$labels$x, "x")
-  expect_equal(p$labels$y, "y")
+  expect_equal(p$labels$x, "Amino acid number")
+  expect_equal(p$labels$y, "")
   expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
               length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
@@ -218,7 +240,9 @@ test_that("draw_repeat",{
   #   five_rel_data
 
   # five_rel_data is a dataframe - 320 obs of 9 variables.
-  p <- draw_chains(five_rel_data)
+  five_rel_data %>%
+    draw_canvas() -> p
+  p <- draw_chains(p, five_rel_data)
   p <- draw_repeat(p, five_rel_data)
 
   # p is a ggplot object and as such is a list of 9
@@ -235,11 +259,8 @@ test_that("draw_repeat",{
   expect_equal(class(p$layers[[4]]$geom)[1], "GeomText")
 
   # p should have some labels
-  expect_equal(p$labels$xmin, "begin")
-  expect_equal(p$labels$xmax, "end")
-  expect_equal(p$labels$ymin, "order - 0.2")
-  expect_equal(p$labels$x, "x")
-  expect_equal(p$labels$y, "y")
+  expect_equal(p$labels$x, "Amino acid number")
+  expect_equal(p$labels$y, "")
   expect_equal(length(five_rel_data[five_rel_data$type == "REPEAT",]),
               length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted

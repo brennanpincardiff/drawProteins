@@ -7,7 +7,7 @@
 draw_phospho(p, data = data, size = 2, fill = "yellow")
 }
 \arguments{
-\item{p}{ggplot object ideally created with \code{\link{draw_chains}}.}
+\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
 
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -24,7 +24,7 @@ additional geom_point layer.
 }
 \description{
 \code{draw_phospho} adds phosphorylation sites to ggplot object created by
-\code{\link{draw_chains}}.
+\code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 It uses the data object.
 The ggplot function
 \code{\link[ggplot2]{geom_point}} is used to draw each of the
@@ -32,8 +32,8 @@ phosphorylation sites at their location as determined by data object.
 }
 \examples{
 # combines will with draw_domains to plot chains and phosphorylation sites.
-library(magrittr)
-p <- draw_chains(five_rel_data, label_size = 1.25)
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, label_size = 1.25)
 p <- draw_phospho(p, five_rel_data)
 p
 

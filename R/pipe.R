@@ -12,5 +12,5 @@
 #' @examples
 #' # Allows this workflow:
 #' five_rel_data %>%
-#'     draw_chains(label_size = 1.25)
+#'     draw_canvas()
 NULL

@@ -7,7 +7,7 @@
 draw_motif(p, data = data)
 }
 \arguments{
-\item{p}{ggplot object ideally created with \code{\link{draw_chains}}.}
+\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
 
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -20,15 +20,16 @@ additional geom_rect layer.
 }
 \description{
 \code{draw_motif} adds protein motifs from Uniprot to ggplot object created
-by \code{\link{draw_chains}}.
+by \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 It uses the data object.
 The ggplot function
 \code{\link[ggplot2]{geom_rect}} is used to draw each of the
 motifs proportional to their number of amino acids (length).
 }
 \examples{
-# combines will with draw_domains to plot chains and protein motifs.
-p <- draw_chains(five_rel_data, label_size = 1.25)
+# combines with draw_chains to plot chains and motifs
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, label_size = 1.25)
 p <- draw_motif(p, five_rel_data)
 p
 

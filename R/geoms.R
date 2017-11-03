@@ -1,3 +1,40 @@
+### draw_canvas
+#' Create ggplot object with protein chains from feature database
+#'
+#' \code{draw_canvas} uses the dataframe containing the protein features to
+#' creates the basic plot element by determining the length of the longest
+#' protein.
+#'
+#' @param data Dataframe of one or more rows with the following column
+#' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+#' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
+#' data$type.
+#'
+#' @return A ggplot object either in the plot window or as an object.
+#'
+#' @examples
+#' # draws a blank canvas of the correct size
+#' draw_canvas(five_rel_data)
+#'
+#' # combines with draw_chains to plot and label chains.
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data)
+#' p
+#'
+#' @export
+draw_canvas <- function(data = data){
+    begin=end=NULL
+    p <-ggplot2::ggplot()
+    p <- p + ggplot2::ylim(0.5, max(data$order)+0.5)
+    p <- p + ggplot2::xlim(-max(data$end)*0.2,
+                            max(data$end) + max(data$end)*0.1)
+    p <- p + ggplot2::labs(x = "Amino acid number") # label x-axis
+    p <- p + ggplot2::labs(y = "") # label y-axis
+
+    return(p)
+}
+
+
 ### draw_chains
 #' Create ggplot object with protein chains from feature database
 #'
@@ -7,6 +44,7 @@
 #' \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
 #' chains proportional to their number of amino acids (length).
 #'
+#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -22,22 +60,27 @@
 #' @return A ggplot object either in the plot window or as an object.
 #'
 #' @examples
-#' # draws five chains corresponding to human NF-kappaB proteins
-#' draw_chains(five_rel_data)
+#' # combines with draw_canvas to plot and label chains.
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data)
+#' p
 #'
 #' # draws five chains with different colours to default
-#' five_rel_data %>%
-#' draw_chains(label_chains = FALSE,
+#' p <- draw_canvas(five_rel_data)
+#' draw_chains(p, five_rel_data,
+#'     label_chains = FALSE,
 #'     fill = "red",
 #'     outline = "grey")
 #'
-#' # combines well with draw_domains to plot chains and domains.
-#' p <- draw_chains(five_rel_data, label_size = 1.25)
+#' # combines with draw_chains to plot chains and domains.
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_regions(p, five_rel_data)
 #' p
 #'
 #' @export
-draw_chains <- function(data = data,
+draw_chains <- function(p,
+                        data = data,
                         outline = "black",
                         fill = "grey",
                         label_chains = TRUE,
@@ -45,11 +88,7 @@ draw_chains <- function(data = data,
                         size = 0.5,
                         label_size = 4){
     begin=end=NULL
-    p <-ggplot2::ggplot() +
-    ggplot2::ylim(0.5, max(data$order)+0.5) +
-    ggplot2::xlim(-max(data$end)*0.2,
-                    max(data$end) + max(data$end)*0.1) +
-    ggplot2::geom_rect(data = data[data$type == "CHAIN",],
+    p <- p + ggplot2::geom_rect(data = data[data$type == "CHAIN",],
                         mapping=ggplot2::aes(xmin=begin,
                                             xmax=end,
                                             ymin=order-0.2,
@@ -80,7 +119,7 @@ draw_chains <- function(data = data,
 #' \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
 #' chains proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_chains}}.
+#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -91,7 +130,9 @@ draw_chains <- function(data = data,
 #' additional geom_rect layer.
 #'
 #' @examples
-#' p <- draw_chains(five_rel_data, label_size = 1.25)
+#' # combines with draw_chains to plot chains and domains.
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_domains(p, five_rel_data)
 #' p
 #'
@@ -126,13 +167,13 @@ draw_domains <- function(p,
 #' Add protein phosphorylation sites to ggplot object.
 #'
 #' \code{draw_phospho} adds phosphorylation sites to ggplot object created by
-#' \code{\link{draw_chains}}.
+#' \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 #' It uses the data object.
 #' The ggplot function
 #' \code{\link[ggplot2]{geom_point}} is used to draw each of the
 #' phosphorylation sites at their location as determined by data object.
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_chains}}.
+#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -145,8 +186,8 @@ draw_domains <- function(p,
 #'
 #' @examples
 #' # combines will with draw_domains to plot chains and phosphorylation sites.
-#' library(magrittr)
-#' p <- draw_chains(five_rel_data, label_size = 1.25)
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_phospho(p, five_rel_data)
 #' p
 #'
@@ -173,13 +214,13 @@ draw_phospho <- function(p, data = data,
 #' Add protein region sites to ggplot object.
 #'
 #' \code{draw_regions} adds protein regions from Uniprot to ggplot object
-#' created by \code{\link{draw_chains}}.
+#' created by \code{\link{draw_canvas}} \code{\link{draw_chains}}.
 #' It uses the data object.
 #' The ggplot function
 #' \code{\link[ggplot2]{geom_rect}} is used to draw each of the
 #' regions proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_chains}}.
+#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -188,8 +229,9 @@ draw_phospho <- function(p, data = data,
 #' additional geom_rect layer.
 #'
 #' @examples
-#' # combines well with draw_domains to plot chains and regions.
-#' p <- draw_chains(five_rel_data, label_size = 1.25)
+#' # combines with draw_chains to plot chains and regions.
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_regions(p, five_rel_data)
 #' p
 #'
@@ -215,13 +257,13 @@ draw_regions <- function(p, data = data){
 #' Add protein motifs sites to ggplot object.
 #'
 #' \code{draw_motif} adds protein motifs from Uniprot to ggplot object created
-#' by \code{\link{draw_chains}}.
+#' by \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 #' It uses the data object.
 #' The ggplot function
 #' \code{\link[ggplot2]{geom_rect}} is used to draw each of the
 #' motifs proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_chains}}.
+#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -230,8 +272,9 @@ draw_regions <- function(p, data = data){
 #' additional geom_rect layer.
 #'
 #' @examples
-#' # combines will with draw_domains to plot chains and protein motifs.
-#' p <- draw_chains(five_rel_data, label_size = 1.25)
+#' # combines with draw_chains to plot chains and motifs
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_motif(p, five_rel_data)
 #' p
 #'
@@ -256,12 +299,13 @@ draw_motif <- function(p, data = data){
 #' Add protein repeats sites to ggplot object.
 #'
 #' \code{draw_repeat} adds protein repeats from Uniprot to ggplot object
-#' created by \code{\link{draw_chains}}. It uses the data object.
+#' created by \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
+#' It uses the data object.
 #' The ggplot function \code{\link[ggplot2]{geom_rect}}
 #' is used to draw each of the motifs proportional to their number of
 #' amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_chains}}.
+#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -274,8 +318,9 @@ draw_motif <- function(p, data = data){
 #' additional geom_rect layer.
 #'
 #' @examples
-#' # combines will with draw_domains to plot chains and protein repeat.
-#' p <- draw_chains(five_rel_data, label_size = 1.25)
+#' # combines with draw_chains to plot chains and repeats.
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_repeat(p, five_rel_data)
 #' p
 
