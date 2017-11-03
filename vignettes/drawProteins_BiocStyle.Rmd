@@ -2,16 +2,16 @@
 title: "Using drawProteins"
 author:
 - name: "Dr Paul Brennan"
-  affiliation: 
-  - "Centre for Medical Education, School of Medicine, Cardiff University, Cardiff, Wales, United Kingdom"
-  email: BrennanP@cardiff.ac.uk
+affiliation: 
+- "Centre for Medical Education, School of Medicine, Cardiff University, Cardiff, Wales, United Kingdom"
+email: BrennanP@cardiff.ac.uk
 package: drawProteins
 date: "`r Sys.Date()`"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Using drawProteins}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+    %\VignetteIndexEntry{Using drawProteins}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
 ---
 
 
@@ -123,7 +123,8 @@ geom_motif(p, rel_data)   # adds 9aa Transactivation domain & NLS
 
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_phospho(p, rel_data, size = 8)  # phosphoryln sites from Uniprot
+# add phosphorylation sites from Uniprot
+geom_phospho(p, rel_data, size = 8)  
 ```
 
 # Putting it all together
@@ -143,9 +144,7 @@ p <- p + theme_bw(base_size = 20) +  # white backgnd & change text size
     theme(axis.ticks = element_blank(), 
         axis.text.y = element_blank()) +
     theme(panel.border = element_blank())
-
 p
-
 ```
 
 ### Adding titles to the plots 
@@ -170,9 +169,9 @@ With internet access, the script below shows the workflow for five proteins of t
 ```{r, fig.height=10, fig.wide = TRUE}
 # accession numbers of five NF-kappaB proteins
 "Q04206 Q01201 Q04864 P19838 Q00653" %>%
-  drawProteins::get_features() %>%
-  drawProteins::feature_to_dataframe() ->
-  prot_data
+    drawProteins::get_features() %>%
+    drawProteins::feature_to_dataframe() ->
+    prot_data
 
 p <- geom_chains(prot_data)
 p <- geom_domains(p, prot_data)
@@ -200,7 +199,6 @@ p <- p + labs(x = "Amino acid number",         # label x-axis
 
 # move legend to top
 p <- p + theme(legend.position="top") + labs(fill="")
-
 p
 ```
 
@@ -218,19 +216,16 @@ geom_chains(prot_data,
 
 It's also possible to change the size and colour of the phosphorylation symbols. 
 ```{r, fig.height=8, fig.wide = TRUE}
-
-p <-  geom_chains(prot_data, 
+p <- geom_chains(prot_data, 
             fill = "lightsteelblue1", 
             outline = "grey", 
             label_size = 5) 
 p <- geom_phospho(p, prot_data, size = 10, fill = "red")
-  
 p + theme_bw()
 ```
 
 It's also possible to change the labels to a custom list. But remember that the plots are drawn from the bottom up. 
 ```{r, fig.height=8, fig.wide = TRUE}
-
 p <- geom_chains(prot_data,
             fill = "lightsteelblue1", 
             outline = "grey",
@@ -243,7 +238,6 @@ p <- geom_chains(prot_data,
                         "p65/Rel A"),
             label_size = 5) 
 p <- geom_phospho(p, prot_data, size = 8, fill = "red")
-
 p + theme_bw()
 ```
 

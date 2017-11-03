@@ -5,8 +5,8 @@
 \title{Create ggplot object with protein chains from feature database}
 \usage{
 geom_chains(data = data, outline = "black", fill = "grey",
-  label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
-  size = 0.5, label_size = 4)
+    label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
+    size = 0.5, label_size = 4)
 }
 \arguments{
 \item{data}{Dataframe of one or more rows with the following column

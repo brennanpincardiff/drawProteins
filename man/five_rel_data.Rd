@@ -7,15 +7,15 @@
 Accessed from Uniprot on 1st November 2017}
 \format{A data frame with 320 rows and 9 variables:
 \describe{
-   \item{type}{type of features - e.g. chain}
-   \item{description}{long name for the protein}
-   \item{begin}{starting position (amino acid number) of feature}
-   \item{end}{ending position (amino acid number) of feature}
-   \item{length}{length of feature - number of amino acids}
-   \item{accession}{protein Uniprot accession number}
-   \item{entryName}{protein Uniprot entry Name}
-   \item{taxid}{taxonomic identification - species}
-   \item{order}{plotting order from the bottom of the graph}
+    \item{type}{type of features - e.g. chain}
+    \item{description}{long name for the protein}
+    \item{begin}{starting position (amino acid number) of feature}
+    \item{end}{ending position (amino acid number) of feature}
+    \item{length}{length of feature - number of amino acids}
+    \item{accession}{protein Uniprot accession number}
+    \item{entryName}{protein Uniprot entry Name}
+    \item{taxid}{taxonomic identification - species}
+    \item{order}{plotting order from the bottom of the graph}
 }}
 \source{
 Uniprot {http://www.uniprot.org}

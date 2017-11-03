@@ -5,7 +5,7 @@
 \title{Add protein repeats sites to ggplot object.}
 \usage{
 geom_repeat(p, data = data, label_size = 2, outline = "dimgrey",
-  fill = "dimgrey", label_repeats = TRUE)
+    fill = "dimgrey", label_repeats = TRUE)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{geom_chains}}.}
@@ -28,12 +28,11 @@ A ggplot object either in the plot window or as an object with an
 additional geom_rect layer.
 }
 \description{
-\code{geom_repeat} adds protein repeats from Uniprot to ggplot object created
-by \code{\link{geom_chains}}.
-It uses the data object.
-The ggplot function
-\code{\link[ggplot2]{geom_rect}} is used to draw each of the
-motifs proportional to their number of amino acids (length).
+\code{geom_repeat} adds protein repeats from Uniprot to ggplot object
+created by \code{\link{geom_chains}}.
+It uses the data object. The ggplot function \code{\link[ggplot2]{geom_rect}}
+is used to draw each of the motifs proportional to their number of
+amino acids (length).
 }
 \examples{
 # combines will with geom_domains to plot chains and protein repeat.

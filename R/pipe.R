@@ -12,5 +12,5 @@
 #' @examples
 #' # Allows this workflow:
 #' five_rel_data %>%
-#'      geom_chains(label_size = 1.25)
+#'     geom_chains(label_size = 1.25)
 NULL

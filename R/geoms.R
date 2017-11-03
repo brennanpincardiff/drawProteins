@@ -1,9 +1,9 @@
 ### geom_chains
 #' Create ggplot object with protein chains from feature database
 #'
-#' \code{geom_chains} uses the dataframe containing the protein features to plot
-#' the chains, the full length proteins. It creates the basic plot element by
-#' determining the length of the longest protein. The ggplot function
+#' \code{geom_chains} uses the dataframe containing the protein features to
+#' plot the chains, the full length proteins. It creates the basic plot element
+#' by determining the length of the longest protein. The ggplot function
 #' \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
 #' chains proportional to their number of amino acids (length).
 #'
@@ -11,18 +11,12 @@
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
-#'
 #' @param outline Colour of the outline of each chain.
-#'
 #' @param fill Colour of the fill of each chain.
-#'
 #' @param label_chains Option to label chains or not.
-#'
 #' @param labels Vector with source of names for the chains. EntryName used as
 #' default but can be changed.
-#'
 #' @param size Size of the outline of the chains.
-#'
 #' @param label_size Size of the text used for labels.
 #'
 #' @return A ggplot object either in the plot window or as an object.
@@ -54,7 +48,7 @@ geom_chains <- function(data = data,
     p <-ggplot2::ggplot() +
     ggplot2::ylim(0.5, max(data$order)+0.5) +
     ggplot2::xlim(-max(data$end)*0.2,
-                  max(data$end) + max(data$end)*0.1) +
+                    max(data$end) + max(data$end)*0.1) +
     ggplot2::geom_rect(data = data[data$type == "CHAIN",],
                         mapping=ggplot2::aes(xmin=begin,
                                             xmax=end,
@@ -66,17 +60,14 @@ geom_chains <- function(data = data,
 
     if(label_chains == TRUE){
         p <- p +
-          ggplot2::annotate("text", x = -10,
-              y = data[data$type == "CHAIN",]$order,
+            ggplot2::annotate("text", x = -10,
+                y = data[data$type == "CHAIN",]$order,
                         label = labels,
                         hjust = 1,
                         size = label_size)
     }
     return(p)
 }
-
-
-
 
 
 ### geom_domains
@@ -90,16 +81,12 @@ geom_chains <- function(data = data,
 #' chains proportional to their number of amino acids (length).
 #'
 #' @param p ggplot object ideally created with \code{\link{geom_chains}}.
-#'
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
-#'
 #' @param label_domains Option to label domains or not.
-#'
 #' @param label_size Size of the text used for labels.
-#'
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -125,9 +112,9 @@ geom_domains <- function(p,
     if(label_domains == TRUE){
         p <- p + ggplot2::geom_label(data = data[data$type == "DOMAIN", ],
                         ggplot2::aes(x = begin + (end-begin)/2,
-                  y = order,
-                  label = description),
-                  size = label_size)
+                            y = order,
+                            label = description),
+                            size = label_size)
     }
 
     return(p)
@@ -151,7 +138,6 @@ geom_domains <- function(p,
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
 #' @param size Size of the circle
-#'
 #' @param fill Colour of the circle.
 #'
 #' @return A ggplot object either in the plot window or as an object with an
@@ -168,16 +154,16 @@ geom_domains <- function(p,
 # called geom_phospho
 # to draw phosphorylation sites on the protein with geom_point()
 geom_phospho <- function(p, data = data,
-                         size = 2,
-                         fill = "yellow"){
+                        size = 2,
+                        fill = "yellow"){
     begin=end=description=NULL
     p <- p + ggplot2::geom_point(data = drawProteins::phospho_site_info(data),
-                               ggplot2::aes(x = begin,
-                          y = order+0.25),
-                      shape = 21,
-                      colour = "black",
-                      fill = fill,
-                      size = size)
+                                ggplot2::aes(x = begin,
+                        y = order+0.25),
+                        shape = 21,
+                        colour = "black",
+                        fill = fill,
+                        size = size)
     return(p)
 }
 
@@ -186,8 +172,8 @@ geom_phospho <- function(p, data = data,
 ### geom_region
 #' Add protein region sites to ggplot object.
 #'
-#' \code{geom_region} adds protein regions from Uniprot to ggplot object created
-#' by \code{\link{geom_chains}}.
+#' \code{geom_region} adds protein regions from Uniprot to ggplot object
+#' created by \code{\link{geom_chains}}.
 #' It uses the data object.
 #' The ggplot function
 #' \code{\link[ggplot2]{geom_rect}} is used to draw each of the
@@ -214,11 +200,11 @@ geom_region <- function(p, data = data){
     begin=end=description=NULL
     ## plot motifs fill by description
     p <- p + ggplot2::geom_rect(data= data[data$type == "REGION",],
-                     mapping=ggplot2::aes(xmin=begin,
-                                 xmax=end,
-                                 ymin=order-0.25,
-                                 ymax=order+0.25,
-                                 fill=description))
+                        mapping=ggplot2::aes(xmin=begin,
+                                xmax=end,
+                                ymin=order-0.25,
+                                ymax=order+0.25,
+                                fill=description))
 
     return(p)
 }
@@ -260,7 +246,7 @@ geom_motif <- function(p, data = data){
     begin=end=description=NULL
     ## plot motifs fill by description
     p <- p + ggplot2::geom_rect(data= data[data$type == "MOTIF",],
-                      mapping=ggplot2::aes(xmin=begin,
+                                mapping=ggplot2::aes(xmin=begin,
                                 xmax=end,
                                 ymin=order-0.25,
                                 ymax=order+0.25,
@@ -273,12 +259,11 @@ geom_motif <- function(p, data = data){
 ### geom_repeat
 #' Add protein repeats sites to ggplot object.
 #'
-#' \code{geom_repeat} adds protein repeats from Uniprot to ggplot object created
-#' by \code{\link{geom_chains}}.
-#' It uses the data object.
-#' The ggplot function
-#' \code{\link[ggplot2]{geom_rect}} is used to draw each of the
-#' motifs proportional to their number of amino acids (length).
+#' \code{geom_repeat} adds protein repeats from Uniprot to ggplot object
+#' created by \code{\link{geom_chains}}. It uses the data object.
+#' The ggplot function \code{\link[ggplot2]{geom_rect}}
+#' is used to draw each of the motifs proportional to their number of
+#' amino acids (length).
 #'
 #' @param p ggplot object ideally created with \code{\link{geom_chains}}.
 #' @param data Dataframe of one or more rows with the following column
@@ -286,13 +271,9 @@ geom_motif <- function(p, data = data){
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
 #' @param label_size Size of text used for labels of protein repeats.
-#'
 #' @param outline Colour of the outline of each repeat.
-#'
 #' @param fill Colour of the fill of each repeat.
-#'
 #' @param label_repeats Option to label repeats or not.
-#'
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -322,12 +303,12 @@ geom_repeat <- function(p, data = data,
                         fill = fill)
 
     if(label_repeats == TRUE){
-      # label repeats (for this they are ANK but remove digits)
-      p <- p + ggplot2::geom_text(data = data[data$type == "REPEAT",],
-                          ggplot2::aes(x = begin + (end-begin)/2,
-                          y = order,
-                          label = gsub("\\d", "", description)),
-                          size = label_size)
+        # label repeats (for this they are ANK but remove digits)
+        p <- p + ggplot2::geom_text(data = data[data$type == "REPEAT",],
+                                ggplot2::aes(x = begin + (end-begin)/2,
+                                y = order,
+                                label = gsub("\\d", "", description)),
+                                size = label_size)
     }
     return(p)
 }
