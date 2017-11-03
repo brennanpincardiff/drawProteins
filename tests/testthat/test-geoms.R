@@ -35,7 +35,7 @@ test_that("geom_chains",{
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
   expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
-               length(p$layers[[1]]$data))
+              length(p$layers[[1]]$data))
 })
 
 
@@ -66,7 +66,7 @@ test_that("geom_domains",{
   # two from geom_chains and two from geom_domains
 
   expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
-               length(p$layers[[3]]$data))
+              length(p$layers[[3]]$data))
 
   # types of layers, 3 and 4 added by geom_domains
   expect_equal(class(p$layers[[3]]$geom)[1], "GeomRect")
@@ -147,11 +147,11 @@ test_that("geom_motif",{
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
   expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
-               length(p$layers[[1]]$data))
+              length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
   # dimensions are 6 9
   expect_equal(nrow(five_rel_data[five_rel_data$type == "MOTIF",]),
-               nrow(p$layers[[3]]$data))
+              nrow(p$layers[[3]]$data))
   expect_equal(p$layers[[3]]$data$type[1], "MOTIF" )
 })
 
@@ -194,11 +194,11 @@ test_that("geom_region",{
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
   expect_equal(length(five_rel_data[five_rel_data$type == "DOMAIN",]),
-               length(p$layers[[1]]$data))
+              length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
   # dimensions are 6 9
   expect_equal(nrow(five_rel_data[five_rel_data$type == "REGION",]),
-               nrow(p$layers[[3]]$data))
+              nrow(p$layers[[3]]$data))
   expect_equal(p$layers[[3]]$data$type[1], "REGION" )
 })
 
@@ -241,14 +241,14 @@ test_that("geom_repeat",{
   expect_equal(p$labels$x, "x")
   expect_equal(p$labels$y, "y")
   expect_equal(length(five_rel_data[five_rel_data$type == "REPEAT",]),
-               length(p$layers[[1]]$data))
+              length(p$layers[[1]]$data))
   # p$layers[[3]]$data contains the data that was extracted
   # dimensions are 6 9
   expect_equal(nrow(five_rel_data[five_rel_data$type == "REPEAT",]),
-               nrow(p$layers[[3]]$data))
+              nrow(p$layers[[3]]$data))
   expect_equal(p$layers[[3]]$data$type[1], "REPEAT" )
 })
 
 
 # useful advice here:
-# https://stackoverflow.com/questions/31038709/how-to-write-a-test-for-a-ggplot-plot
+#https://stackoverflow.com/questions/31038709/how-to-write-a-test-for-a-ggplot-plot

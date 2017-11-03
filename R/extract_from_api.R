@@ -24,17 +24,18 @@
 # includes the accession number AND an order number
 # it uses the extract_feat_acc function below
 feature_to_dataframe <- function(features_in_lists_of_six){
-  ################
-  # loop to work through the API object and convert to data.frame
-  # probably there is a better way to do this
-  features_total_plot <- NULL
-  for(i in 1:length(features_in_lists_of_six)){
-    # the extract_feat_acc() function takes features into a data.frame
-    features_temp <- drawProteins::extract_feat_acc(features_in_lists_of_six[[i]])
-    features_temp$order <- i  # this order is needed for plotting later
-    features_total_plot <- rbind(features_total_plot, features_temp)
-  }
-  return(features_total_plot)
+    ################
+    # loop to work through the API object and convert to data.frame
+    # probably there is a better way to do this
+    features_total_plot <- NULL
+    for(i in 1:length(features_in_lists_of_six)){
+        # the extract_feat_acc() function takes features into a data.frame
+        features_temp <-
+            drawProteins::extract_feat_acc(features_in_lists_of_six[[i]])
+        features_temp$order <- i  # this order is needed for plotting later
+        features_total_plot <- rbind(features_total_plot, features_temp)
+    }
+    return(features_total_plot)
 }
 
 
@@ -59,10 +60,10 @@ feature_to_dataframe <- function(features_in_lists_of_six){
 #'
 #' @export
 phospho_site_info <- function(features){
-  features <- features[features$type == "MOD_RES",]
-  phospho_list <- grep("Phospho", features$description)
-  phospho_features <- features[phospho_list,]
-  return(phospho_features)
+    features <- features[features$type == "MOD_RES",]
+    phospho_list <- grep("Phospho", features$description)
+    phospho_features <- features[phospho_list,]
+    return(phospho_features)
 }
 
 
@@ -89,44 +90,44 @@ phospho_site_info <- function(features){
 # it should be a better function to use than either of the above functions
 # which I will probably remove at some point
 extract_feat_acc <- function(features_list){
+    # create the data.frame object called features
+    features <- NULL
 
-  # create the data.frame object called features
-  features <- NULL
-
-  for(i in 1:length(features_list$features)){
-    if(is.null(features_list$features[[i]]$description) == TRUE){
-      featuresTemp <- c(features_list$features[[i]]$type,
+    for(i in 1:length(features_list$features)){
+        if(is.null(features_list$features[[i]]$description) == TRUE){
+        featuresTemp <- c(features_list$features[[i]]$type,
                         "NONE",
                         as.numeric(features_list$features[[i]]$begin),
                         as.numeric(features_list$features[[i]]$end))
     } else{
-      featuresTemp <- c(features_list$features[[i]]$type,
+        featuresTemp <- c(features_list$features[[i]]$type,
                         as.character(features_list$features[[i]]$description),
                         as.numeric(features_list$features[[i]]$begin),
                         as.numeric(features_list$features[[i]]$end))
     }
     features <- rbind(features, featuresTemp) # combine
-  }
+    }
 
-  features_dataframe <- as.data.frame(features, stringsAsFactors = FALSE)
-  colnames(features_dataframe) <- c("type", "description", "begin", "end")
-  features_dataframe$begin <- as.numeric(features_dataframe$begin)
-  features_dataframe$end <- as.numeric(features_dataframe$end)
-  features_dataframe$length <- features_dataframe$end - features_dataframe$begin
+    features_dataframe <- as.data.frame(features, stringsAsFactors = FALSE)
+    colnames(features_dataframe) <- c("type", "description", "begin", "end")
+    features_dataframe$begin <- as.numeric(features_dataframe$begin)
+    features_dataframe$end <- as.numeric(features_dataframe$end)
+    features_dataframe$length <-
+        features_dataframe$end - features_dataframe$begin
 
-  # add accession number to each row of dataframe
-  features_dataframe$accession <- rep(features_list$accession,
-    times = nrow(features_dataframe))
+    # add accession number to each row of dataframe
+    features_dataframe$accession <- rep(features_list$accession,
+        times = nrow(features_dataframe))
 
-  # add entryName (e.g. p65_HUMAN) to each row of dataframe
-  features_dataframe$entryName <- rep(features_list$entryName,
-    times = nrow(features_dataframe))
+    # add entryName (e.g. p65_HUMAN) to each row of dataframe
+    features_dataframe$entryName <- rep(features_list$entryName,
+        times = nrow(features_dataframe))
 
-  # add taxid to each row of datafame
-  features_dataframe$taxid <- rep(features_list$taxid,
-    times = nrow(features_dataframe))
+    # add taxid to each row of datafame
+    features_dataframe$taxid <- rep(features_list$taxid,
+        times = nrow(features_dataframe))
 
-  return(features_dataframe)
+    return(features_dataframe)
 }
 
 
@@ -144,26 +145,27 @@ extract_feat_acc <- function(features_list){
 #' gene.name.primary, gene.name.synonym and organism.name.scientific
 #'
 #' @examples
-#'   # using internal data
-#'   prot_names <- extract_names(protein_json)
-#'   # generates a list of 6
+#' # using internal data
+#' prot_names <- extract_names(protein_json)
+#' # generates a list of 6
 #'
-#'   \dontrun{
-#'   # access the Uniprot Protein API
-#'   uniprot_acc <- c("Q04206")  # change this for your fav protein
-#'   # Get UniProt entry by accession
-#'   acc_uniprot_url <- c("https://www.ebi.ac.uk/proteins/api/proteins?accession=")
-#'   comb_acc_api <- paste0(acc_uniprot_url, uniprot_acc)
-#'   # basic function is GET() which accesses the API
-#'   # requires internet access
-#'   protein <- httr::GET(comb_acc_api, accept_json())
-#'   status_code(protein)  # returns a 200 means it worked
-#'   # use content() function from httr to give us a list
-#'   protein_json <- httr::content(protein) # gives a Large list
-#'   # with 14 primary parts and lots of bits inside
-#'   # function from my package to extract names of protein
-#'   names <- extract_names(protein_json)
-#'   }
+#' \dontrun{
+#' # access the Uniprot Protein API
+#' uniprot_acc <- c("Q04206")  # change this for your fav protein
+#' # Get UniProt entry by accession
+#' acc_uniprot_url <-
+#'         c("https://www.ebi.ac.uk/proteins/api/proteins?accession=")
+#' comb_acc_api <- paste0(acc_uniprot_url, uniprot_acc)
+#' # basic function is GET() which accesses the API
+#' # requires internet access
+#' protein <- httr::GET(comb_acc_api, accept_json())
+#' status_code(protein)  # returns a 200 means it worked
+#' # use content() function from httr to give us a list
+#' protein_json <- httr::content(protein) # gives a Large list
+#' # with 14 primary parts and lots of bits inside
+#' # function from my package to extract names of protein
+#' names <- extract_names(protein_json)
+#' }
 #'
 #' @export
 # function to extract names into a list
@@ -171,17 +173,17 @@ extract_feat_acc <- function(features_list){
 # JSON object created by getting Uniprot API output
 # and using httr::content() function to turn in to JSON
 extract_names <- function(protein_json){
-  # Steph says create a variable of protein_json[[1]] to prevent repitition
-  prot_info <- protein_json[[1]]
-  # extract list of names...
-  names <- list(
-    accession = prot_info$accession,
-    name = prot_info$id,
-    protein.recommendedName.fullName =
-      prot_info$protein$recommendedName$fullName$value,
-    gene.name.primary = prot_info$gene[[1]]$name$value,
-    gene.name.synonym = prot_info$gene[[1]]$synonyms[[1]]$value,
-    organism.name.scientific = prot_info$organism$names[[1]]$value
-  )
-  return(names)
+    # Steph says create a variable of protein_json[[1]] to prevent repitition
+    prot_info <- protein_json[[1]]
+    # extract list of names...
+    names <- list(
+        accession = prot_info$accession,
+        name = prot_info$id,
+        protein.recommendedName.fullName =
+            prot_info$protein$recommendedName$fullName$value,
+        gene.name.primary = prot_info$gene[[1]]$name$value,
+        gene.name.synonym = prot_info$gene[[1]]$synonyms[[1]]$value,
+      organism.name.scientific = prot_info$organism$names[[1]]$value
+    )
+    return(names)
 }

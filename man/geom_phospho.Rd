@@ -33,8 +33,8 @@ additional geom_point layer.
 \examples{
 # combines will with geom_domains to plot chains and phosphorylation sites.
 library(magrittr)
- p <- geom_chains(five_rel_data, label_size = 1.25)
- p <- geom_phospho(p, five_rel_data)
- p
+p <- geom_chains(five_rel_data, label_size = 1.25)
+p <- geom_phospho(p, five_rel_data)
+p
 
 }

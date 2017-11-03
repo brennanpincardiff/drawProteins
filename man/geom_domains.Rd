@@ -31,8 +31,8 @@ additional geom_rect layer.
  chains proportional to their number of amino acids (length).
 }
 \examples{
- p <- geom_chains(five_rel_data, label_size = 1.25)
- p <- geom_domains(p, five_rel_data)
- p
+p <- geom_chains(five_rel_data, label_size = 1.25)
+p <- geom_domains(p, five_rel_data)
+p
 
 }

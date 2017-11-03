@@ -123,7 +123,7 @@ geom_motif(p, rel_data)   # adds 9aa Transactivation domain & NLS
 
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_phospho(p, rel_data, size = 8)  # adds phosphorylation sites from Uniprot
+geom_phospho(p, rel_data, size = 8)  # phosphoryln sites from Uniprot
 ```
 
 # Putting it all together
@@ -137,7 +137,7 @@ p <- geom_region(p, rel_data)
 p <- geom_motif(p, rel_data)
 p <- geom_phospho(p, rel_data, size = 8) 
 
-p <- p + theme_bw(base_size = 20) +  # white background and change text size
+p <- p + theme_bw(base_size = 20) +  # white backgnd & change text size
   theme(panel.grid.minor=element_blank(), 
         panel.grid.major=element_blank()) +
   theme(axis.ticks = element_blank(), 

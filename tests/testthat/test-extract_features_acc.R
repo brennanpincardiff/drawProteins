@@ -42,8 +42,8 @@ test_that("features_to_dataframe",{
   expect_match(colnames(prot_data)[3], "begin") # 3rd column name is begin
   expect_match(colnames(prot_data)[4], "end") # 4th column name is end
   expect_match(colnames(prot_data)[5], "length") # 5th column name is length
-  expect_match(colnames(prot_data)[6], "accession") # 6th column name is accession
-  expect_match(colnames(prot_data)[7], "entryName") # 7th column name is entryName
+  expect_match(colnames(prot_data)[6], "accession") # 6th col name - accession
+  expect_match(colnames(prot_data)[7], "entryName") # 7th col name is entryName
   expect_match(colnames(prot_data)[8], "taxid") # 8th column name is taxid
   expect_match(colnames(prot_data)[9], "order") # 9th column name is order
 

@@ -23,9 +23,7 @@ the features of the protein or proteins in JSON format. It uses the GET()
 function from the httr package.
 }
 \examples{
-\dontrun{
 # Requires internet access
 prot_data <- get_features("Q04206 Q01201 Q04864 P19838 Q00653")
-}
 
 }

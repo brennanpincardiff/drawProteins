@@ -44,8 +44,8 @@ geom_chains(five_rel_data)
 # draws five chains with different colours to default
 five_rel_data \%>\%
 geom_chains(label_chains = FALSE,
-           fill = "red",
-           outline = "grey")
+   fill = "red",
+   outline = "grey")
 
 # combines well with geom_domains to plot chains and domains.
  p <- geom_chains(five_rel_data, label_size = 1.25)

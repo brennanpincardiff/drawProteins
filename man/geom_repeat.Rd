@@ -28,17 +28,17 @@ A ggplot object either in the plot window or as an object with an
 additional geom_rect layer.
 }
 \description{
-\code{geom_repeat} adds protein repeats from Uniprot to ggplot object created by
-\code{\link{geom_chains}}.
- It uses the data object.
-  The ggplot function
- \code{\link[ggplot2]{geom_rect}} is used to draw each of the
-  motifs proportional to their number of amino acids (length).
+\code{geom_repeat} adds protein repeats from Uniprot to ggplot object created
+by \code{\link{geom_chains}}.
+It uses the data object.
+The ggplot function
+\code{\link[ggplot2]{geom_rect}} is used to draw each of the
+motifs proportional to their number of amino acids (length).
 }
 \examples{
 # combines will with geom_domains to plot chains and protein repeat.
- p <- geom_chains(five_rel_data, label_size = 1.25)
- p <- geom_repeat(p, five_rel_data)
- p
+p <- geom_chains(five_rel_data, label_size = 1.25)
+p <- geom_repeat(p, five_rel_data)
+p
 
 }
