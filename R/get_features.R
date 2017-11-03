@@ -57,4 +57,3 @@ get_features <- function(proteins_acc){
 # import from other Bioconductor packages
 # formats other than accession numbers?
 # - other databases...
-

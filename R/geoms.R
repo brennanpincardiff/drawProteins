@@ -211,10 +211,6 @@ geom_region <- function(p, data = data){
 
 
 
-
-
-
-
 ### geom_motif
 #' Add protein motifs sites to ggplot object.
 #'
