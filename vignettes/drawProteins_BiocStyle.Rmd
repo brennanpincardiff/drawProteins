@@ -64,7 +64,7 @@ With internet access, this can be retreived from Uniprot with this code:
 # Turning Uniprot data into a dataframe
 The next step in the workflow is to convert the data from the Uniprot API into a dataframe that can be used with ggplot2. 
 
-The feature_to_dataframe() function will  convert the list of lists of six provided by the get_features() function to a dataframe which can then be used to plot the schematics. 
+The feature_to_dataframe() function will convert the list of lists of six provided by the get_features() function to a dataframe which can then be used to plot the schematics. 
 
 The feature_to_dataframe() function will also add an "order" value to allow plotting. The order goes from the bottom in the manner of a graph. 
 
@@ -95,7 +95,7 @@ Also changing the size of the text using the base_size argument.
 This can be done with this code:
 ```{r, fig.height=3, fig.wide = TRUE}
 # white background and remove y-axis
-p <- p + theme_bw(base_size = 20) +  # white background
+p <- p + theme_bw(base_size = 20) + # white background
     theme(panel.grid.minor=element_blank(), 
         panel.grid.major=element_blank()) +
     theme(axis.ticks = element_blank(), 
@@ -108,23 +108,23 @@ p
 # Checking the other features
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_region(p, rel_data)  # adds activation domain
+geom_region(p, rel_data) # adds activation domain
 
 ```
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_repeat(p, rel_data)  # doesn't add anything in this case
+geom_repeat(p, rel_data) # doesn't add anything in this case
 
 ```
 
 ```{r, fig.height=3, fig.wide = TRUE}
-geom_motif(p, rel_data)   # adds 9aa Transactivation domain & NLS
+geom_motif(p, rel_data) # adds 9aa Transactivation domain & NLS
 ```
 
 
 ```{r, fig.height=3, fig.wide = TRUE}
 # add phosphorylation sites from Uniprot
-geom_phospho(p, rel_data, size = 8)  
+geom_phospho(p, rel_data, size = 8)
 ```
 
 # Putting it all together
@@ -138,7 +138,7 @@ p <- geom_region(p, rel_data)
 p <- geom_motif(p, rel_data)
 p <- geom_phospho(p, rel_data, size = 8) 
 
-p <- p + theme_bw(base_size = 20) +  # white backgnd & change text size
+p <- p + theme_bw(base_size = 20) + # white backgnd & change text size
     theme(panel.grid.minor=element_blank(), 
         panel.grid.major=element_blank()) +
     theme(axis.ticks = element_blank(), 
@@ -155,8 +155,8 @@ Using ggplot2 then allows the addition of titles:
 rel_subtitle <- paste0("circles = phosphorylation sites\n",
                 "RHD = Rel Homology Domain\nsource:Uniprot")
 
-p <- p + labs(x = "Amino acid number",         # label x-axis
-                y = "",  # label y-axis
+p <- p + labs(x = "Amino acid number", # label x-axis
+                y = "", # label y-axis
                 title = "Rel A/p65",
                 subtitle = rel_subtitle)
 p
@@ -180,7 +180,7 @@ p <- geom_motif(p, prot_data)
 p <- geom_phospho(p, prot_data, size = 8)
 
 # background and y-axis
-p <- p + theme_bw(base_size = 20) +  # white backgnd & change text size
+p <- p + theme_bw(base_size = 20) + # white backgnd & change text size
     theme(panel.grid.minor=element_blank(),
         panel.grid.major=element_blank()) +
     theme(axis.ticks = element_blank(),
@@ -191,8 +191,8 @@ p <- p + theme_bw(base_size = 20) +  # white backgnd & change text size
 rel_subtitle <- paste0("circles = phosphorylation sites\n",
                 "RHD = Rel Homology Domain\nsource:Uniprot")
 
-p <- p + labs(x = "Amino acid number",         # label x-axis
-                y = "",  # label y-axis
+p <- p + labs(x = "Amino acid number", # label x-axis
+                y = "", # label y-axis
                 title = "Schematic of human NF-kappaB proteins",
                 subtitle = rel_subtitle)
 
