@@ -26,8 +26,9 @@ It creates a data.frame of features and includes the accession number AND
 an order number. It uses the extract_feat_acc function below.
 }
 \examples{
+data(five_rel_data)
 new_data <- extract_transcripts(five_rel_data)
 # because there are two entries with two transcripts
-max(prot_data$order) # should now be 7...
+max(new_data$order) # should now be 7...
 
 }
