@@ -1,3 +1,15 @@
+CHANGES IN VERSION 0.99.4
+-----------------------
+
+FEATURES
+
+    o New function called extract_transcripts. This function modifies the
+    dataframe that holds the protein data. It separates the data for each
+    protein transcript to allow the schemat to be drawn. In our example data,
+    which is human NF-kappaB proteins, it will lead to seven protein chains to
+    be drawn rather than five as two of the proteins are found as two forms or
+    transcripts.
+
 CHANGES IN VERSION 0.98.3
 -----------------------
 
