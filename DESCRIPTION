@@ -1,6 +1,6 @@
 Package: drawProteins
 Title: Package to Draw Protein Schematics from Uniprot API output
-Version: 0.99.4
+Version: 0.99.3
 Authors@R: person("Paul", "Brennan", email = "brennanpincardiff@gmail.com", 
                     role = c("aut", "cre"))
 Description: This package draws protein schematics from Uniprot API output. 
