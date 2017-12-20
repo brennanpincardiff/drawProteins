@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_transcripts.R
 \name{extract_transcripts}
 \alias{extract_transcripts}
-\title{Create a new dataframe of protein features from JSON object with multiple
+\title{Create a new dataframe of protein features from dataframe with multiple
 transcripts separated so that each transcript is drawn separtely with
 only the appropriate features.}
 \usage{
@@ -23,7 +23,7 @@ end, length, accession, entryName, taxid and order for plotting.
 \description{
 This function works on the object returned by the get_features() function.
 It creates a data.frame of features and includes the accession number AND
-an order number. It uses the extract_feat_acc function below.
+an order number. It uses the extract_feat_acc function
 }
 \examples{
 data(five_rel_data)

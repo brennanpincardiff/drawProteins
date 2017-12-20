@@ -1,10 +1,10 @@
-#' Create a new dataframe of protein features from JSON object with multiple
+#' Create a new dataframe of protein features from dataframe with multiple
 #' transcripts separated so that each transcript is drawn separtely with
 #' only the appropriate features.
 #'
 #' This function works on the object returned by the get_features() function.
 #' It creates a data.frame of features and includes the accession number AND
-#' an order number. It uses the extract_feat_acc function below.
+#' an order number. It uses the extract_feat_acc function
 #'
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
