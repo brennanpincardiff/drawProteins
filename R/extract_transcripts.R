@@ -17,10 +17,9 @@
 #' end, length, accession, entryName, taxid and order for plotting.
 #'
 #' @examples
-#' data(five_rel_data)
 #' new_data <- extract_transcripts(five_rel_data)
 #' # because there are two entries with two transcripts
-#' max(new_data$order) # should now be 7...
+#' max(prot_data$order) # should now be 7...
 #'
 #' @export
 # multiple protein transcripts seems like an important challenge
@@ -36,7 +35,7 @@ extract_transcripts <- function(data){
     for(i in 1:max_order) {
         # if number of chains > 1 then adjust order...
         data_s <- dplyr::filter(data, order == i)
-        data_s_c <- dplyr::filter(data, order == i & data$type == "CHAIN")
+        data_s_c <- dplyr::filter(data, order == i & type == "CHAIN")
         if (nrow(data_s_c) >1){   # means there is more than one chain
             # print("true")
             extra_chains <- nrow(data_s_c)-1
@@ -49,10 +48,10 @@ extract_transcripts <- function(data){
                 # remove first chain (first row)
                 data_s <- data_s[2:nrow(data_s),]
                 # remove domains that are longer than this transcript
-                data_s <- dplyr::filter(data_s, data_s$begin < data_s[1,4])
+                data_s <- filter(data_s, begin < data_s[1,4])
                 # because transcripts may not start at 1
                 # keep them if the domains before the start
-                data_s <- dplyr::filter(data_s, data_s$begin >= data_s[1,3])
+                data_s <- filter(data_s, begin >= data_s[1,3])
                 transcript_data <- rbind(transcript_data, data_s)
             }
         }
