@@ -5,8 +5,8 @@
 \title{Create ggplot object with protein chains from feature database}
 \usage{
 draw_chains(p, data = data, outline = "black", fill = "grey",
-    label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
-    size = 0.5, label_size = 4)
+  label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
+  size = 0.5, label_size = 4)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}

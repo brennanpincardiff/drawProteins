@@ -12,7 +12,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: ggplot2,
-    httr
+    httr,
+    dplyr
 Suggests: covr,
     testthat,
     knitr,
