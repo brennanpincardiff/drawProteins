@@ -12,9 +12,11 @@
 #' end, length, accession, entryName, taxid and order for plotting.
 #'
 #' @examples
+#' data("rel_json")
 #' rel_data <- feature_to_dataframe(rel_json)
 #' head(rel_data)
 #'
+#' data("five_rel_list")
 #' prot_data <- feature_to_dataframe(five_rel_list)
 #' head(prot_data)
 #'
@@ -54,6 +56,7 @@ feature_to_dataframe <- function(features_in_lists_of_six){
 #' Uniprot
 #'
 #' @examples
+#' data("five_rel_data")
 #' sites <- phospho_site_info(five_rel_data)
 #' head(sites)
 #'
@@ -80,6 +83,7 @@ phospho_site_info <- function(features){
 #' adds accession, entryName and taxid for each row.
 #'
 #' @examples
+#' data("five_rel_list")
 #' one_protein_features <- extract_feat_acc(five_rel_list[[1]])
 #' head(one_protein_features)
 #'
@@ -146,6 +150,7 @@ extract_feat_acc <- function(features_list){
 #'
 #' @examples
 #' # using internal data
+#' data("protein_json")
 #' prot_names <- extract_names(protein_json)
 #' # generates a list of 6
 #'

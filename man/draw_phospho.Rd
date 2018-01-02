@@ -32,6 +32,7 @@ phosphorylation sites at their location as determined by data object.
 }
 \examples{
 # combines will with draw_domains to plot chains and phosphorylation sites.
+data("five_rel_data")
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, label_size = 1.25)
 p <- draw_phospho(p, five_rel_data)

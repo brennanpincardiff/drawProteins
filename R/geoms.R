@@ -14,9 +14,11 @@
 #'
 #' @examples
 #' # draws a blank canvas of the correct size
+#' data("five_rel_data")
 #' draw_canvas(five_rel_data)
 #'
 #' # combines with draw_chains to plot and label chains.
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data)
 #' p
@@ -61,11 +63,13 @@ draw_canvas <- function(data = data){
 #'
 #' @examples
 #' # combines with draw_canvas to plot and label chains.
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data)
 #' p
 #'
 #' # draws five chains with different colours to default
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' draw_chains(p, five_rel_data,
 #'     label_chains = FALSE,
@@ -73,6 +77,7 @@ draw_canvas <- function(data = data){
 #'     outline = "grey")
 #'
 #' # combines with draw_chains to plot chains and domains.
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_regions(p, five_rel_data)
@@ -131,6 +136,7 @@ draw_chains <- function(p,
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and domains.
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_domains(p, five_rel_data)
@@ -186,6 +192,7 @@ draw_domains <- function(p,
 #'
 #' @examples
 #' # combines will with draw_domains to plot chains and phosphorylation sites.
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_phospho(p, five_rel_data)
@@ -230,6 +237,7 @@ draw_phospho <- function(p, data = data,
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and regions.
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_regions(p, five_rel_data)
@@ -273,6 +281,7 @@ draw_regions <- function(p, data = data){
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and motifs
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_motif(p, five_rel_data)
@@ -319,6 +328,7 @@ draw_motif <- function(p, data = data){
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and repeats.
+#' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <- draw_repeat(p, five_rel_data)

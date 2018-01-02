@@ -22,9 +22,11 @@ protein.
 }
 \examples{
 # draws a blank canvas of the correct size
+data("five_rel_data")
 draw_canvas(five_rel_data)
 
 # combines with draw_chains to plot and label chains.
+data("five_rel_data")
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data)
 p
