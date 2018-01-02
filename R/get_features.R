@@ -17,6 +17,8 @@
 #' # Requires internet access
 #' prot_data <- get_features("Q04206 Q01201 Q04864 P19838 Q00653")
 #'
+#' @import httr
+#'
 #' @export
 # get_features function to GET protein data from Uniprot
 get_features <- function(proteins_acc){

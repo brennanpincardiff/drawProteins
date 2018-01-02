@@ -23,6 +23,8 @@
 #' p <- draw_chains(p, five_rel_data)
 #' p
 #'
+#' @import ggplot2
+#'
 #' @export
 draw_canvas <- function(data = data){
     begin=end=NULL
