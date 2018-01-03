@@ -22,6 +22,7 @@ about a protein.
 }
 \examples{
 # using internal data
+data("protein_json")
 prot_names <- extract_names(protein_json)
 # generates a list of 6
 

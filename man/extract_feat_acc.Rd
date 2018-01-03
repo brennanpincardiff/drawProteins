@@ -20,6 +20,7 @@ UniProt. Used in the feature_to_dataframe(). Does not give order. Does not
 operate on List of lists - just the list of 6.
 }
 \examples{
+data("five_rel_list")
 one_protein_features <- extract_feat_acc(five_rel_list[[1]])
 head(one_protein_features)
 

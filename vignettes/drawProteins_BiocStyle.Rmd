@@ -241,6 +241,7 @@ Currently, it's possible to customise the chain colour and outline. It's
 possible to remove the labels. 
 
 ```{r, fig.height=6, fig.wide = TRUE}
+data("five_rel_data")
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, 
             label_chains = FALSE,
@@ -269,10 +270,10 @@ p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, 
             fill = "lightsteelblue1", 
             outline = "grey",
-            labels = c("p52/p100",
-                        "p52/p100",
-                        "p50/p105", 
+            labels = c("p50/p105",
                         "p50/p105",
+                        "p52/p100", 
+                        "p52/p100",
                         "Rel B",
                         "c-Rel", 
                         "p65/Rel A"),
