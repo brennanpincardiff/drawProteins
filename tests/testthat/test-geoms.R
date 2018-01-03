@@ -265,5 +265,46 @@ test_that("draw_repeat",{
 })
 
 
+# unit tests for draw_recept_dom
+context("draw_recept_dom")
+
+test_that("draw_recept_dom",{
+
+  # load data from the package
+  data("tnfs_data")
+  # tnfs_data was created 20190103 using this code:
+  # "P19438 P25942" %>%
+  #   drawProteins::get_features() %>%
+  #   drawProteins::feature_to_dataframe() ->
+  #   tnfs_data
+
+  # tnfs_data is a dataframe - 127 obs of 9 variables.
+  p <- draw_canvas(tnfs_data)
+  p <- draw_chains(p, tnfs_data)
+  p <- draw_recept_dom(p, tnfs_data)
+
+  # p is a ggplot object and as such is a list of 9
+  expect_is(p,"ggplot")
+  expect_equal(mode(p), "list")
+  expect_equal(length(p), 9)
+
+  # p should have four layers at this point
+  # because TOPO_DOM and TRANSMEM added separately
+  expect_equal(length(p$layers), 4)
+  # https://stackoverflow.com/questions/13457562/how-to-determine-the-geom-type-of-each-layer-of-a-ggplot2-object/43982598#43982598
+  # types of layers...
+  expect_equal(class(p$layers[[1]]$geom)[1], "GeomRect")
+  expect_equal(class(p$layers[[2]]$geom)[1], "GeomText")
+  expect_equal(class(p$layers[[3]]$geom)[1], "GeomRect")
+  expect_equal(class(p$layers[[4]]$geom)[1], "GeomRect")
+
+  # in this case nrow of layer 3 should be 4
+  # and nrow of layer 4 should be 2
+  expect_equal(nrow(p$layers[[3]]$data), 4) # 2 receptors - EC and Cyto domain
+  expect_equal(nrow(p$layers[[4]]$data), 2) # 2 receptors - 2 TM domain
+
+})
+
+
 # useful advice here:
 #https://stackoverflow.com/questions/31038709/how-to-write-a-test-for-a-ggplot-plot
