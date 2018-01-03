@@ -1,3 +1,14 @@
+CHANGES IN VERSION 0.99.8
+-----------------------
+
+FEATURES
+    o New function called extact_transcripts. This function will ammend the
+    data frame to allow each chain from the same UniProt accession number to
+    to drawn separately. A vignette entitled drawProteins_extract_transcripts
+    has been written to demonstrate.
+    o LazyData is now false and NAMESPACE updated as per Bioconductor review.
+
+
 CHANGES IN VERSION 0.98.3
 -----------------------
 
