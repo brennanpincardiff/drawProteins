@@ -365,3 +365,74 @@ draw_repeat <- function(p, data = data,
     }
     return(p)
 }
+
+
+### draw_recept_dom
+#' Add receptor domains to ggplot object.
+#'
+#' \code{draw_recept_dom} adds receptor domains to the ggplot object created by
+#' \code{\link{draw_chains}}.
+#' It uses the data object.
+#' The ggplot function
+#' \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
+#' chains proportional to their number of amino acids (length).
+#'
+#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param data Dataframe of one or more rows with the following column
+#' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+#' 'entryName', 'taxid', 'order'. Uses TOPO_DOM and TRANSMEM type to plot
+#' these parts of receptors
+#' @param label_domains Option to label receptor domains or not.
+#' @param label_size Size of the text used for labels.
+#' @return A ggplot object either in the plot window or as an object with an
+#' additional geom_rect layer.
+#'
+#' @examples
+#' # combines with draw_chains to plot chains and domains.
+#' data("tnfs_data")
+#' p <- draw_canvas(tnfs_data)
+#' p <- draw_chains(p, tnfs_data, label_size = 1.25)
+#' p <- draw_recept_dom(p, tnfs_data)
+#' # we like to draw receptors vertically so flip using ggplot functions
+#'
+#' p + ggplot2::scale_x_reverse() + ggplot2::coord_flip()
+#'
+#' @export
+# called draw_recept_dom - to plot just the domains from receptors
+draw_recept_dom <- function(p,
+                            data = data,
+                            label_domains = FALSE,
+                            label_size = 4){
+    begin=end=description=NULL
+
+    p <- p + ggplot2::geom_rect(data= data[data$type == "TOPO_DOM",],
+                            mapping=ggplot2::aes(xmin=begin,
+                                xmax=end,
+                                ymin=order-0.25,
+                                ymax=order+0.25,
+                                fill=description))
+
+    p <- p + ggplot2::geom_rect(data= data[data$type == "TRANSMEM",],
+                            mapping=ggplot2::aes(xmin=begin,
+                                xmax=end,
+                                ymin=order-0.25,
+                                ymax=order+0.25,
+                                fill=description))
+
+    if(label_domains == TRUE){
+        p <- p + ggplot2::geom_label(data = data[data$type == "TOPO_DOM", ],
+                            ggplot2::aes(x = begin + (end-begin)/2,
+                                y = order,
+                                label = description),
+                                size = label_size)
+
+        p <- p + ggplot2::geom_label(data = data[data$type == "TRANSMEM", ],
+                            ggplot2::aes(x = begin + (end-begin)/2,
+                                y = order,
+                                label = "TM"),
+                                size = label_size)
+    }
+
+    return(p)
+}
+
