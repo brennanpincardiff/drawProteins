@@ -15,18 +15,20 @@ drawProteins uses the package httr to interact with the Uniprot API and extract 
 
 The graphing package ggplot2 is then used to create the protein schematic. 
 
-The package works best when pipes %>% provided by the magrittr package are also used. 
-
 The Vignette gives a good overview of the package. 
 
 Sample script on [R for Biochemists blog](http://rforbiochemists.blogspot.co.uk/2017/11/using-drawproteins-for-draw-nf-kappab.html)
 
-This is a work in progress and is only available on GitHub.
-To install: 
+This package has been accepted for distribution through
+[Bioconductor](https://github.com/Bioconductor/Contributions/issues/541).
+It is currently available here through GitHub.
 
+To install: 
 ```{r, eval = FALSE}
 if (!require(devtools)) {
     install.packages('devtools')
 }
 devtools::install_github('brennanpincardiff/drawProteins')
 ```
+
+Please raise issues to provide bug reports, give feedback or request features.  
