@@ -1,3 +1,12 @@
+CHANGES IN VERSION 0.99.9
+-----------------------
+
+FEATURES
+    o New function called draw_recept_dom(). This function allows the drawing
+    of the TOPO_DOM and TRANSMEM types of receptors. Data from TNFR1 and CD40
+    are included to demonstate the function.
+
+
 CHANGES IN VERSION 0.99.8
 -----------------------
 
