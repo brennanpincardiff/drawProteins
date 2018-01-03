@@ -1,0 +1,129 @@
+---
+title: "Using extract_transcripts in drawProteins"
+author:
+- name: "Dr Paul Brennan"
+affiliation: 
+- "Centre for Medical Education, School of Medicine, Cardiff University, 
+    Cardiff, Wales, United Kingdom"
+email: BrennanP@cardiff.ac.uk
+package: drawProteins
+date: "`r Sys.Date()`"
+output: BiocStyle::html_document
+vignette: >
+    %\VignetteIndexEntry{Using drawProteins}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+
+```{r, eval = TRUE, echo=FALSE}
+library(BiocStyle)
+library(drawProteins)
+library(ggplot2)
+library(knitr)
+opts_chunk$set(comment=NA,
+                fig.align = "center",
+                out.width = "100%",
+                dpi = 100)
+```
+
+# Introducing extract_transcripts() in drawProteins
+Many proteins are present as alternate transcripts where the same gene is 
+produces alternative forms of the protein through differential mRNA splicing or
+post-translational cleavage. 
+
+These are detailed in UniProt. When they are extracted by the UniProt API, it
+gives lists of alternative forms followed by lists of features. In order to 
+plot each protein and the appropriate features, these need to be separated in 
+our dataframe. This is done using the `extract_transcripts()` function. 
+
+This Vignette shows how this works and gives an example. 
+
+The workflow using extract_transcripts() is:
+
+1. to provide one or more Uniprot IDs
+2. get a list of features from the Uniprot API
+3. run `extract_transcripts()` to generate a new dataframe
+4. draw the chains and features as desired
+
+Steps 1 and 2 are illustrated in drawProteins Vignette so only step3 and the 
+visualisation of step 4 will be shown here. 
+
+
+# Making a new dataframe with each transcript separated
+The NFkappaB transcription factor family contains two proteins that are present
+in two forms. The dataframe obtained from Uniprot is contained in the
+drawProtein package as "five_rel_data" and can be loaded using the `data()` 
+function. 
+
+When loaded this has 320 obs of 9 variables and will plot five chains as
+shown by checking the `max(five_rel_data$order)` function. 
+
+To plot all the transcripts, a new dataframe is produced using the 
+`extact_transcripts()` function. The new dataframe is called prot_data and 
+has 430 obs of 9 variables and will plot seven chains as shown by checking
+the `max(prot_data$order)` function.
+
+```{r, fig.height=10, fig.wide = TRUE}
+# load up data for five NF-kappaB proteins
+data("five_rel_data")
+max(five_rel_data$order)
+# returns 5
+
+# use extract_transcripts() to create a new data frame
+prot_data <- extract_transcripts(five_rel_data)
+max(prot_data$order)
+# returns 7
+```
+
+Now, let's check out the chains for the two objects for comparison purposes.
+
+```{r, fig.height=10, fig.wide = TRUE}
+p1 <- draw_canvas(five_rel_data)
+p1 <- draw_chains(p1, five_rel_data)
+p1 <- p1 + ggtitle("Five chains plotted")
+
+p2 <- draw_canvas(prot_data)
+p2 <- draw_chains(p2, prot_data)
+p2 <- p2 + ggtitle("Seven chains plotted")
+
+p1
+p2
+```
+
+The appropriate domains and phosphorylation sites can be drawn correctly. 
+
+```{r, fig.height=10, fig.wide = TRUE}
+p2 <- draw_domains(p2, prot_data)
+p2 <- draw_phospho(p2, prot_data, size =8) 
+p2
+
+```
+
+Note that the names of the different transcripts are the same so it's wise to 
+use the option customize the labels.
+
+```{r, fig.height=8, fig.wide = TRUE}
+p2 <- draw_canvas(prot_data)
+p2 <- draw_chains(p2, prot_data,
+            fill = "lightsteelblue1", 
+            outline = "grey",
+            labels = c("p105",
+                        "p105",
+                        "p100", 
+                        "p100",
+                        "Rel B",
+                        "c-Rel", 
+                        "p65/Rel A",
+                        "p50",
+                        "p52"),
+            label_size = 5)
+p2 <- draw_phospho(p2, prot_data, size = 8, fill = "red")
+p2 + theme_bw()
+```
+
+# Session info
+Here is the output of `sessionInfo()` on the system on which this document was
+compiled:
+```{r, echo=FALSE}
+sessionInfo()
+```

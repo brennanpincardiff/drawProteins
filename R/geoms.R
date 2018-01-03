@@ -21,10 +21,12 @@
 #' p <- draw_chains(p, five_rel_data)
 #' p
 #'
+#' @import ggplot2
+#'
 #' @export
 draw_canvas <- function(data = data){
     begin=end=NULL
-    p <-ggplot2::ggplot()
+    p <- ggplot2::ggplot()
     p <- p + ggplot2::ylim(0.5, max(data$order)+0.5)
     p <- p + ggplot2::xlim(-max(data$end)*0.2,
                             max(data$end) + max(data$end)*0.1)
