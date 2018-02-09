@@ -4,7 +4,8 @@
 \alias{draw_domains}
 \title{Add protein domains to ggplot object.}
 \usage{
-draw_domains(p, data = data, label_domains = TRUE, label_size = 4)
+draw_domains(p, data = data, label_domains = TRUE, label_size = 4,
+    show.legend = TRUE)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
@@ -17,6 +18,8 @@ data$type.}
 \item{label_domains}{Option to label domains or not.}
 
 \item{label_size}{Size of the text used for labels.}
+
+\item{show.legend}{Option to include legend in this layer}
 }
 \value{
 A ggplot object either in the plot window or as an object with an

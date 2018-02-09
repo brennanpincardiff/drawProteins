@@ -4,7 +4,7 @@
 \alias{draw_regions}
 \title{Add protein region sites to ggplot object.}
 \usage{
-draw_regions(p, data = data)
+draw_regions(p, data = data, show.legend = TRUE)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
@@ -13,6 +13,8 @@ draw_regions(p, data = data)
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 data$type.}
+
+\item{show.legend}{Option to include legend in this layer}
 }
 \value{
 A ggplot object either in the plot window or as an object with an
