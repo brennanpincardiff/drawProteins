@@ -45,7 +45,7 @@ draw_canvas <- function(data = data){
 #' \code{draw_chains} uses the dataframe containing the protein features to
 #' plot the chains, the full length proteins. It creates the basic plot element
 #' by determining the length of the longest protein. The ggplot function
-#' \code{\link[ggplot2]{geom_rect}} is then used to draw each of the protein
+#' \code{geom_rect} is then used to draw each of the protein
 #' chains proportional to their number of amino acids (length).
 #'
 #' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
@@ -133,6 +133,7 @@ draw_chains <- function(p,
 #' data$type.
 #' @param label_domains Option to label domains or not.
 #' @param label_size Size of the text used for labels.
+#' @param show.legend Option to include legend in this layer
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -149,14 +150,16 @@ draw_chains <- function(p,
 draw_domains <- function(p,
                         data = data,
                         label_domains = TRUE,
-                        label_size = 4){
+                        label_size = 4,
+                        show.legend = TRUE){
     begin=end=description=NULL
     p <- p + ggplot2::geom_rect(data= data[data$type == "DOMAIN",],
             mapping=ggplot2::aes(xmin=begin,
                         xmax=end,
                         ymin=order-0.25,
                         ymax=order+0.25,
-                        fill=description))
+                        fill=description),
+                        show.legend = show.legend)
 
     if(label_domains == TRUE){
         p <- p + ggplot2::geom_label(data = data[data$type == "DOMAIN", ],
@@ -188,6 +191,7 @@ draw_domains <- function(p,
 #' data$type.
 #' @param size Size of the circle
 #' @param fill Colour of the circle.
+#' @param show.legend Option to include legend in this layer
 #'
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_point layer.
@@ -205,7 +209,8 @@ draw_domains <- function(p,
 # to draw phosphorylation sites on the protein with geom_point()
 draw_phospho <- function(p, data = data,
                         size = 2,
-                        fill = "yellow"){
+                        fill = "yellow",
+                        show.legend = FALSE){
     begin=end=description=NULL
     p <- p + ggplot2::geom_point(data = drawProteins::phospho_site_info(data),
                                 ggplot2::aes(x = begin,
@@ -213,7 +218,8 @@ draw_phospho <- function(p, data = data,
                         shape = 21,
                         colour = "black",
                         fill = fill,
-                        size = size)
+                        size = size,
+                        show.legend = show.legend)
     return(p)
 }
 
@@ -234,6 +240,7 @@ draw_phospho <- function(p, data = data,
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
+#' @param show.legend Option to include legend in this layer
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -248,7 +255,7 @@ draw_phospho <- function(p, data = data,
 #' @export
 # called draw_regions
 # to draw REGIONs
-draw_regions <- function(p, data = data){
+draw_regions <- function(p, data = data, show.legend=TRUE){
     begin=end=description=NULL
     ## plot motifs fill by description
     p <- p + ggplot2::geom_rect(data= data[data$type == "REGION",],
@@ -256,7 +263,8 @@ draw_regions <- function(p, data = data){
                                 xmax=end,
                                 ymin=order-0.25,
                                 ymax=order+0.25,
-                                fill=description))
+                                fill=description),
+                                show.legend = show.legend)
 
     return(p)
 }
@@ -278,6 +286,7 @@ draw_regions <- function(p, data = data){
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
+#' @param show.legend Option to include legend in this layer
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -292,7 +301,7 @@ draw_regions <- function(p, data = data){
 #' @export
 # called draw_motif
 # to draw MOTIFs - no label at the moment.
-draw_motif <- function(p, data = data){
+draw_motif <- function(p, data = data, show.legend = TRUE){
     begin=end=description=NULL
     ## plot motifs fill by description
     p <- p + ggplot2::geom_rect(data= data[data$type == "MOTIF",],
@@ -300,7 +309,8 @@ draw_motif <- function(p, data = data){
                                 xmax=end,
                                 ymin=order-0.25,
                                 ymax=order+0.25,
-                                fill=description))
+                                fill=description),
+                                show.legend = show.legend)
 
     return(p)
 }
@@ -325,6 +335,7 @@ draw_motif <- function(p, data = data){
 #' @param outline Colour of the outline of each repeat.
 #' @param fill Colour of the fill of each repeat.
 #' @param label_repeats Option to label repeats or not.
+#' @param show.legend Option to include legend in this layer
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -344,7 +355,8 @@ draw_repeat <- function(p, data = data,
                         label_size = 2,
                         outline = "dimgrey",
                         fill = "dimgrey",
-                        label_repeats = TRUE){
+                        label_repeats = TRUE,
+                        show.legend = TRUE){
     begin=end=description=NULL
     ## step 6 plot repeats fill by description
     p <- p + ggplot2::geom_rect(data= data[data$type == "REPEAT",],
@@ -353,7 +365,8 @@ draw_repeat <- function(p, data = data,
                                 ymin=order-0.25,
                                 ymax=order+0.25),
                         colour = outline,
-                        fill = fill)
+                        fill = fill,
+                        show.legend = show.legend)
 
     if(label_repeats == TRUE){
         # label repeats (for this they are ANK but remove digits)
@@ -384,6 +397,7 @@ draw_repeat <- function(p, data = data,
 #' these parts of receptors
 #' @param label_domains Option to label receptor domains or not.
 #' @param label_size Size of the text used for labels.
+#' @param show.legend Option to include legend in this layer
 #' @return A ggplot object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -402,7 +416,8 @@ draw_repeat <- function(p, data = data,
 draw_recept_dom <- function(p,
                             data = data,
                             label_domains = FALSE,
-                            label_size = 4){
+                            label_size = 4,
+                            show.legend = TRUE){
     begin=end=description=NULL
 
     p <- p + ggplot2::geom_rect(data= data[data$type == "TOPO_DOM",],
@@ -410,14 +425,16 @@ draw_recept_dom <- function(p,
                                 xmax=end,
                                 ymin=order-0.25,
                                 ymax=order+0.25,
-                                fill=description))
+                                fill=description),
+                                show.legend = show.legend)
 
     p <- p + ggplot2::geom_rect(data= data[data$type == "TRANSMEM",],
                             mapping=ggplot2::aes(xmin=begin,
                                 xmax=end,
                                 ymin=order-0.25,
                                 ymax=order+0.25,
-                                fill=description))
+                                fill=description),
+                                show.legend = show.legend)
 
     if(label_domains == TRUE){
         p <- p + ggplot2::geom_label(data = data[data$type == "TOPO_DOM", ],

@@ -4,7 +4,8 @@
 \alias{draw_phospho}
 \title{Add protein phosphorylation sites to ggplot object.}
 \usage{
-draw_phospho(p, data = data, size = 2, fill = "yellow")
+draw_phospho(p, data = data, size = 2, fill = "yellow",
+    show.legend = FALSE)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
@@ -17,6 +18,8 @@ data$type.}
 \item{size}{Size of the circle}
 
 \item{fill}{Colour of the circle.}
+
+\item{show.legend}{Option to include legend in this layer}
 }
 \value{
 A ggplot object either in the plot window or as an object with an

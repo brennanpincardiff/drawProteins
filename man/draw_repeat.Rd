@@ -5,7 +5,7 @@
 \title{Add protein repeats sites to ggplot object.}
 \usage{
 draw_repeat(p, data = data, label_size = 2, outline = "dimgrey",
-    fill = "dimgrey", label_repeats = TRUE)
+    fill = "dimgrey", label_repeats = TRUE, show.legend = TRUE)
 }
 \arguments{
 \item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
@@ -22,6 +22,8 @@ data$type.}
 \item{fill}{Colour of the fill of each repeat.}
 
 \item{label_repeats}{Option to label repeats or not.}
+
+\item{show.legend}{Option to include legend in this layer}
 }
 \value{
 A ggplot object either in the plot window or as an object with an
