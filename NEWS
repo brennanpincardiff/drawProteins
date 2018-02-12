@@ -1,3 +1,11 @@
+CHANGES IN VERSION 0.99.10
+-----------------------
+
+ARGUEMENT
+    o show.legend added as argument to allow the option to show or not show
+    the legend as per ggplot2.
+
+
 CHANGES IN VERSION 0.99.9
 -----------------------
 
