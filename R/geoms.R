@@ -1,5 +1,5 @@
 ### draw_canvas
-#' Create ggplot object with protein chains from feature database
+#' Create ggplot2 object with protein chains from feature database
 #'
 #' \code{draw_canvas} uses the dataframe containing the protein features to
 #' creates the basic plot element by determining the length of the longest
@@ -10,7 +10,7 @@
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
 #'
-#' @return A ggplot object either in the plot window or as an object.
+#' @return A ggplot2 object either in the plot window or as an object.
 #'
 #' @examples
 #' # draws a blank canvas of the correct size
@@ -40,15 +40,15 @@ draw_canvas <- function(data = data){
 
 
 ### draw_chains
-#' Create ggplot object with protein chains from feature database
+#' Create ggplot2 object with protein chains from feature database
 #'
 #' \code{draw_chains} uses the dataframe containing the protein features to
 #' plot the chains, the full length proteins. It creates the basic plot element
-#' by determining the length of the longest protein. The ggplot function
+#' by determining the length of the longest protein. The ggplot2 function
 #' \code{geom_rect} is then used to draw each of the protein
 #' chains proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -61,7 +61,7 @@ draw_canvas <- function(data = data){
 #' @param size Size of the outline of the chains.
 #' @param label_size Size of the text used for labels.
 #'
-#' @return A ggplot object either in the plot window or as an object.
+#' @return A ggplot2 object either in the plot window or as an object.
 #'
 #' @examples
 #' # combines with draw_canvas to plot and label chains.
@@ -117,16 +117,15 @@ draw_chains <- function(p,
 
 
 ### draw_domains
-#' Add protein domains to ggplot object.
+#' Add protein domains to ggplot2 object.
 #'
-#' \code{draw_domains} adds domains to the ggplot object created by
+#' \code{draw_domains} adds domains to the ggplot2 object created by
 #' \code{\link{draw_chains}}.
 #' It uses the data object.
-#' The ggplot function
-#' \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
+#' The ggplot2 function \code{geom_rect} is used to draw each of the domain
 #' chains proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -134,7 +133,7 @@ draw_chains <- function(p,
 #' @param label_domains Option to label domains or not.
 #' @param label_size Size of the text used for labels.
 #' @param show.legend Option to include legend in this layer
-#' @return A ggplot object either in the plot window or as an object with an
+#' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
 #' @examples
@@ -175,16 +174,16 @@ draw_domains <- function(p,
 
 
 ### draw_phospho
-#' Add protein phosphorylation sites to ggplot object.
+#' Add protein phosphorylation sites to ggplot2 object.
 #'
-#' \code{draw_phospho} adds phosphorylation sites to ggplot object created by
+#' \code{draw_phospho} adds phosphorylation sites to ggplot2 object created by
 #' \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 #' It uses the data object.
-#' The ggplot function
+#' The ggplot2 function
 #' \code{\link[ggplot2]{geom_point}} is used to draw each of the
 #' phosphorylation sites at their location as determined by data object.
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -193,7 +192,7 @@ draw_domains <- function(p,
 #' @param fill Colour of the circle.
 #' @param show.legend Option to include legend in this layer
 #'
-#' @return A ggplot object either in the plot window or as an object with an
+#' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_point layer.
 #'
 #' @examples
@@ -226,22 +225,21 @@ draw_phospho <- function(p, data = data,
 
 
 ### draw_regions
-#' Add protein region sites to ggplot object.
+#' Add protein region sites to ggplot2 object.
 #'
-#' \code{draw_regions} adds protein regions from Uniprot to ggplot object
+#' \code{draw_regions} adds protein regions from Uniprot to ggplot2 object
 #' created by \code{\link{draw_canvas}} \code{\link{draw_chains}}.
 #' It uses the data object.
-#' The ggplot function
-#' \code{\link[ggplot2]{geom_rect}} is used to draw each of the
+#' The ggplot2 function \code{geom_rect} is used to draw each of the
 #' regions proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
 #' @param show.legend Option to include legend in this layer
-#' @return A ggplot object either in the plot window or as an object with an
+#' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
 #' @examples
@@ -272,22 +270,21 @@ draw_regions <- function(p, data = data, show.legend=TRUE){
 
 
 ### draw_motif
-#' Add protein motifs sites to ggplot object.
+#' Add protein motifs sites to ggplot2 object.
 #'
-#' \code{draw_motif} adds protein motifs from Uniprot to ggplot object created
+#' \code{draw_motif} adds protein motifs from Uniprot to ggplot2 object created
 #' by \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 #' It uses the data object.
-#' The ggplot function
-#' \code{\link[ggplot2]{geom_rect}} is used to draw each of the
+#' The ggplot2 function \code{geom_rect} is used to draw each of the
 #' motifs proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
 #' data$type.
 #' @param show.legend Option to include legend in this layer
-#' @return A ggplot object either in the plot window or as an object with an
+#' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
 #' @examples
@@ -317,16 +314,16 @@ draw_motif <- function(p, data = data, show.legend = TRUE){
 
 
 ### draw_repeat
-#' Add protein repeats sites to ggplot object.
+#' Add protein repeats sites to ggplot2 object.
 #'
-#' \code{draw_repeat} adds protein repeats from Uniprot to ggplot object
+#' \code{draw_repeat} adds protein repeats from Uniprot to ggplot2 object
 #' created by \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 #' It uses the data object.
-#' The ggplot function \code{\link[ggplot2]{geom_rect}}
+#' The ggplot2 function \code{geom_rect}
 #' is used to draw each of the motifs proportional to their number of
 #' amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Must contain a minimum of one "CHAIN" as
@@ -336,7 +333,7 @@ draw_motif <- function(p, data = data, show.legend = TRUE){
 #' @param fill Colour of the fill of each repeat.
 #' @param label_repeats Option to label repeats or not.
 #' @param show.legend Option to include legend in this layer
-#' @return A ggplot object either in the plot window or as an object with an
+#' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
 #' @examples
@@ -381,16 +378,15 @@ draw_repeat <- function(p, data = data,
 
 
 ### draw_recept_dom
-#' Add receptor domains to ggplot object.
+#' Add receptor domains to ggplot2 object.
 #'
-#' \code{draw_recept_dom} adds receptor domains to the ggplot object created by
+#' \code{draw_recept_dom} adds receptor domains to the ggplot2 object created by
 #' \code{\link{draw_chains}}.
 #' It uses the data object.
-#' The ggplot function
-#' \code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
+#' The ggplot2 function \code{geom_rect} is used to draw each of the domain
 #' chains proportional to their number of amino acids (length).
 #'
-#' @param p ggplot object ideally created with \code{\link{draw_canvas}}.
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 #' 'entryName', 'taxid', 'order'. Uses TOPO_DOM and TRANSMEM type to plot
@@ -398,7 +394,7 @@ draw_repeat <- function(p, data = data,
 #' @param label_domains Option to label receptor domains or not.
 #' @param label_size Size of the text used for labels.
 #' @param show.legend Option to include legend in this layer
-#' @return A ggplot object either in the plot window or as an object with an
+#' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
 #' @examples
@@ -407,7 +403,7 @@ draw_repeat <- function(p, data = data,
 #' p <- draw_canvas(tnfs_data)
 #' p <- draw_chains(p, tnfs_data, label_size = 1.25)
 #' p <- draw_recept_dom(p, tnfs_data)
-#' # we like to draw receptors vertically so flip using ggplot functions
+#' # we like to draw receptors vertically so flip using ggplot2 functions
 #'
 #' p + ggplot2::scale_x_reverse() + ggplot2::coord_flip()
 #'
