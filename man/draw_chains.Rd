@@ -2,14 +2,14 @@
 % Please edit documentation in R/geoms.R
 \name{draw_chains}
 \alias{draw_chains}
-\title{Create ggplot object with protein chains from feature database}
+\title{Create ggplot2 object with protein chains from feature database}
 \usage{
 draw_chains(p, data = data, outline = "black", fill = "grey",
     label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
     size = 0.5, label_size = 4)
 }
 \arguments{
-\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
+\item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
 
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -30,12 +30,12 @@ default but can be changed.}
 \item{label_size}{Size of the text used for labels.}
 }
 \value{
-A ggplot object either in the plot window or as an object.
+A ggplot2 object either in the plot window or as an object.
 }
 \description{
 \code{draw_chains} uses the dataframe containing the protein features to
 plot the chains, the full length proteins. It creates the basic plot element
-by determining the length of the longest protein. The ggplot function
+by determining the length of the longest protein. The ggplot2 function
 \code{geom_rect} is then used to draw each of the protein
 chains proportional to their number of amino acids (length).
 }
