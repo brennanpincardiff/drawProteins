@@ -5,6 +5,8 @@
 # Overview of drawProteins
 This package has been created to allow the creation of protein schematics based on the data obtained from the [Uniprot Protein Database](http://www.uniprot.org/). 
 
+<img src="https://raw.githubusercontent.com/Bioconductor/BiocStickers/master/drawProteins/drawProteins.png" height="200" align="right" />
+
 ## The basic workflow is:
 <li> to provide one or more Uniprot IDs
 <li> get a list of feature from the Uniprot API
