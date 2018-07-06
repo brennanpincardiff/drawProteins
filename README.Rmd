@@ -19,11 +19,11 @@ The Vignette gives a good overview of the package.
 
 Sample script on [R for Biochemists blog](http://rforbiochemists.blogspot.co.uk/2017/11/using-drawproteins-for-draw-nf-kappab.html)
 
-This package has been accepted for distribution through
-[Bioconductor](https://github.com/Bioconductor/Contributions/issues/541).
-It is currently available here through GitHub.
+This package is available through
+[Bioconductor](https://bioconductor.org/packages/devel/bioc/html/drawProteins.html).
+Installation instructions and documentation are [available](https://bioconductor.org/packages/devel/bioc/html/drawProteins.html). 
 
-To install: 
+To install from Github: 
 ```{r, eval = FALSE}
 if (!require(devtools)) {
     install.packages('devtools')
@@ -31,4 +31,5 @@ if (!require(devtools)) {
 devtools::install_github('brennanpincardiff/drawProteins')
 ```
 
-Please raise issues to provide bug reports, give feedback or request features.  
+Feedback is <b>very</b> welcome. 
+Please raise [issues](https://github.com/brennanpincardiff/drawProteins/issues) to provide bug reports, give feedback or request features.  
