@@ -22,6 +22,6 @@ protein information that is then changed to allow it to work with
 \code{draw_canvas} and other draw functions in drawProteins.
 }
 \examples{
-
+data <- parse_gff("https://www.uniprot.org/uniprot/Q04206.gff")
 
 }

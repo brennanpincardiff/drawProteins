@@ -1,6 +1,6 @@
 Package: drawProteins
 Title: Package to Draw Protein Schematics from Uniprot API output
-Version: 0.99.9
+Version: 1.1.0
 Authors@R: person("Paul", "Brennan", email = "brennanpincardiff@gmail.com", 
                     role = c("aut", "cre"))
 Description: This package draws protein schematics from Uniprot API output. 
@@ -13,7 +13,9 @@ Encoding: UTF-8
 LazyData: false
 Imports: ggplot2,
     httr,
-    dplyr
+    dplyr,
+    readr,
+    stringr
 Suggests: covr,
     testthat,
     knitr,

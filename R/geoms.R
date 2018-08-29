@@ -480,42 +480,57 @@ draw_recept_dom <- function(p,
 #' @export
 #'
 #' @examples
+#' # combines with draw_chains to colour chain with helicies, strands and turns.
+#' data("five_rel_data")
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
+#' p <- draw_structures(p, five_rel_data)
+#' p
+#'
+#' # only colour alpha helix regions
+#' p <- draw_canvas(five_rel_data)
+#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
+#' p <-draw_structures(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
+#' p
+
 draw_structures <- function(p,
-  data = data,
-  show.legend = TRUE,
-  show_strand = TRUE,
-  show_helix = TRUE,
-  show_turn = TRUE){
-  begin=end=description=NULL
-  # STRAND first
-  if(show_strand == TRUE){
-    p <- p + ggplot2::geom_rect(
-      data = dplyr::filter(data, grepl('STRAND', type)),
-      mapping=ggplot2::aes(xmin=begin,
-        xmax=end,
-        ymin=order-0.25,
-        ymax=order+0.25,
-        fill=type),
-      show.legend = show.legend)
-  }
-  if(show_helix == TRUE){
-    p <- p + ggplot2::geom_rect(data= data[data$type == "HELIX",],
-      mapping=ggplot2::aes(xmin=begin,
-        xmax=end,
-        ymin=order-0.25,
-        ymax=order+0.25,
-        fill=type),
-      show.legend = show.legend)
-  }
-  if(show_turn == TRUE){
-    p <- p + ggplot2::geom_rect(data= data[data$type == "TURN",],
-      mapping=ggplot2::aes(xmin=begin,
-        xmax=end,
-        ymin=order-0.25,
-        ymax=order+0.25,
-        fill=type),
-      show.legend = show.legend)
-  }
-  return(p)
+    data = data,
+    show.legend = TRUE,
+    show_strand = TRUE,
+    show_helix = TRUE,
+    show_turn = TRUE){
+    begin=end=description=type=NULL
+    # STRAND first
+    if(show_strand == TRUE){
+        p <- p + ggplot2::geom_rect(
+            data = dplyr::filter(data, grepl('STRAND', type)),
+            mapping=ggplot2::aes(xmin=begin,
+            xmax=end,
+            ymin=order-0.2,
+            ymax=order+0.2,
+            fill=type),
+            show.legend = show.legend)
+    }
+    # then HELIX
+    if(show_helix == TRUE){
+        p <- p + ggplot2::geom_rect(data= data[data$type == "HELIX",],
+            mapping=ggplot2::aes(xmin=begin,
+            xmax=end,
+            ymin=order-0.2,
+            ymax=order+0.2,
+            fill=type),
+            show.legend = show.legend)
+    }
+    # finally TURN
+    if(show_turn == TRUE){
+        p <- p + ggplot2::geom_rect(data= data[data$type == "TURN",],
+            mapping=ggplot2::aes(xmin=begin,
+            xmax=end,
+            ymin=order-0.2,
+            ymax=order+0.2,
+            fill=type),
+            show.legend = show.legend)
+    }
+    return(p)
 }
 

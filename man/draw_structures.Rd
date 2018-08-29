@@ -35,3 +35,17 @@ The ggplot2 function \code{geom_rect} is used to draw parts of the protein
 chain which has alpha-helixes, beta-strands and turns proportional to the
 number of amino acids (length).
 }
+\examples{
+# combines with draw_chains to colour chain with helicies, strands and turns.
+data("five_rel_data")
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, label_size = 1.25)
+p <- draw_structures(p, five_rel_data)
+p
+
+# only colour alpha helix regions
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, label_size = 1.25)
+p <-draw_structures(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
+p
+}
