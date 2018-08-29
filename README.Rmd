@@ -19,16 +19,30 @@ The Vignette gives a good overview of the package.
 
 Sample script on [R for Biochemists blog](http://rforbiochemists.blogspot.co.uk/2017/11/using-drawproteins-for-draw-nf-kappab.html)
 
-This package has been accepted for distribution through
-[Bioconductor](https://github.com/Bioconductor/Contributions/issues/541).
-It is currently available here through GitHub.
+The `master` version of this package is available through 
+[Bioconductor](http://bioconductor.org/packages/release/bioc/html/drawProteins.html).
+The `development` version is currently available here through GitHub.
 
-To install: 
+To install and use development branch: 
 ```{r, eval = FALSE}
 if (!require(devtools)) {
     install.packages('devtools')
 }
+dev_mode(on=TRUE)
 devtools::install_github('brennanpincardiff/drawProteins')
 ```
 
-Please raise issues to provide bug reports, give feedback or request features.  
+
+-----------------------------------------------------
+
+Please cite the following article when using `drawProteins`:
+
+__Brennan P__. drawProteins: a Bioconductor/R package for reproducible and
+programmatic generation of protein schematics [version 1; referees: 2 approved].
+__*F1000Research*__ 2018, 7:1105 
+
+-------------------------------------------------------
+
+Please raise 
+[Github issues](https://github.com/brennanpincardiff/drawProteins/issues)
+to provide bug reports, give feedback or request features.  
