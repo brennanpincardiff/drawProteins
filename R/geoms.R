@@ -453,3 +453,69 @@ draw_recept_dom <- function(p,
     return(p)
 }
 
+
+### draw_structures
+#' Add regions to ggplot object: alpha-helixes, beta-strands and turns.
+#'
+#' \code{draw_structures} adds alpha-helixes, beta-strands and turns to the
+#' ggplot2 object created by \code{\link{draw_chains}}.
+#' It uses the data object.
+#' The ggplot2 function \code{geom_rect} is used to draw parts of the protein
+#' chain which has alpha-helixes, beta-strands and turns proportional to the
+#' number of amino acids (length).
+#'
+#'
+#' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
+#' @param data Dataframe of one or more rows with the following column
+#' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
+#' 'entryName', 'taxid', 'order'. Uses STRAND, HELIX and TURN type to indicate
+#' these parts of the proteins.
+#' @param show.legend Option to include legend in this layer
+#' @param show_strand Option to show STRAND in this layer
+#' @param show_helix Option to show HELIX in this layer
+#' @param show_turn Option to show TURN in this layer
+#'
+#' @return A ggplot2 object either in the plot window or as an object with an
+#' additional geom_rect layer.
+#' @export
+#'
+#' @examples
+draw_structures <- function(p,
+  data = data,
+  show.legend = TRUE,
+  show_strand = TRUE,
+  show_helix = TRUE,
+  show_turn = TRUE){
+  begin=end=description=NULL
+  # STRAND first
+  if(show_strand == TRUE){
+    p <- p + ggplot2::geom_rect(
+      data = dplyr::filter(data, grepl('STRAND', type)),
+      mapping=ggplot2::aes(xmin=begin,
+        xmax=end,
+        ymin=order-0.25,
+        ymax=order+0.25,
+        fill=type),
+      show.legend = show.legend)
+  }
+  if(show_helix == TRUE){
+    p <- p + ggplot2::geom_rect(data= data[data$type == "HELIX",],
+      mapping=ggplot2::aes(xmin=begin,
+        xmax=end,
+        ymin=order-0.25,
+        ymax=order+0.25,
+        fill=type),
+      show.legend = show.legend)
+  }
+  if(show_turn == TRUE){
+    p <- p + ggplot2::geom_rect(data= data[data$type == "TURN",],
+      mapping=ggplot2::aes(xmin=begin,
+        xmax=end,
+        ymin=order-0.25,
+        ymax=order+0.25,
+        fill=type),
+      show.legend = show.legend)
+  }
+  return(p)
+}
+

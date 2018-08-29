@@ -1,3 +1,15 @@
+CHANGES IN VERSION 1.1.0 (devel)
+-----------------------
+
+FEATURES
+    o New function called draw_structures(). This function allows the drawing
+    of the STRAND, HELIX and TURN types which denote regions of the proteins
+    that assemble as beta-strands, alpha helicies or make a turn in the 3D
+    structure of the protein.
+    o New function called parse_gff(). This function imports files or urls
+    that link to a GFF3 format and parses the data to allow it to be plotted.
+
+
 CHANGES IN VERSION 0.99.9
 -----------------------
 
