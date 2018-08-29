@@ -1,0 +1,21 @@
+citHeader("To cite drawProteins in publications use:")
+
+citEntry(
+    entry  = "article",
+    title  = "drawProteins: a Bioconductor/R package for reproducible and
+    programmatic generation of protein schematics [version 1; referees: 2
+    approved]",
+    author = "Paul Brennan",
+    year    = "2018",
+    journal = "F1000Research",
+    volume  = "7",
+    issue   = "",
+    number  = "",
+    pages   = "1105",
+    doi     = "10.12688/f1000research.14541.1",
+    PMID    = "",
+    url     = "https://f1000research.com/articles/7-1105/v1",
+    textVersion = paste("Paul Brennan",
+        "drawProteins: a Bioconductor/R package for reproducible and programmatic generation of protein schematics [version 1; referees: 2 approved]",
+        "F1000Research 2018, 7:1105")
+)
