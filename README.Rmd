@@ -21,7 +21,6 @@ The Vignette gives a good overview of the package.
 
 Sample script on [R for Biochemists blog](http://rforbiochemists.blogspot.co.uk/2017/11/using-drawproteins-for-draw-nf-kappab.html)
 
-<<<<<<< HEAD
 The `master` version of this package is available through 
 [Bioconductor](http://bioconductor.org/packages/release/bioc/html/drawProteins.html).
 The `development` version is currently available here through GitHub.
