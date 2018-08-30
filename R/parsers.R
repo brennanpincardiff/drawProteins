@@ -21,7 +21,7 @@
 parse_gff <- function(file_or_link){
 
     # key is to skip 2 rows and remove colomn names
-    gff_data <- readr::read_tsv(file_or_link, skip = 2, col_names = FALSE)
+    gff_data <- readr::read_tsv(file_or_link, comment = "##", col_names = FALSE)
     ##
 
     ## transform data so that I can use it to draw...
