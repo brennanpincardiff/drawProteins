@@ -10,7 +10,7 @@ test_that("parse_gff",{
   gff_data <- drawProteins::parse_gff(path_to_gff)
   p <- draw_canvas(gff_data)
   p <- draw_chains(p, gff_data)
-  p <- draw_structures(p, gff_data)
+  p <- draw_folding(p, gff_data)
 
   expect_is(gff_data, "data.frame")
   expect_is(gff_data, "tbl")

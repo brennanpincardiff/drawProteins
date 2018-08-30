@@ -450,10 +450,10 @@ draw_recept_dom <- function(p,
 }
 
 
-### draw_structures
+### draw_folding
 #' Add regions to ggplot object: alpha-helixes, beta-strands and turns.
 #'
-#' \code{draw_structures} adds alpha-helixes, beta-strands and turns to the
+#' \code{draw_folding} adds alpha-helixes, beta-strands and turns to the
 #' ggplot2 object created by \code{\link{draw_chains}}.
 #' It uses the data object.
 #' The ggplot2 function \code{geom_rect} is used to draw parts of the protein
@@ -480,15 +480,15 @@ draw_recept_dom <- function(p,
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_structures(p, five_rel_data)
+#' p <- draw_folding(p, five_rel_data)
 #' p
 #'
 #' # only colour alpha helix regions
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <-draw_structures(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
+#' p <-draw_folding(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
 #' p
-draw_structures <- function(p,
+draw_folding <- function(p,
     data = data,
     show.legend = TRUE,
     show_strand = TRUE,

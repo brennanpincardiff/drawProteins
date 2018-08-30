@@ -350,10 +350,10 @@ test_that("draw_recept_dom",{
 #https://stackoverflow.com/questions/31038709/how-to-write-a-test-for-a-ggplot-plot
 
 
-# unit tests for draw_structures
-context("draw_structures")
+# unit tests for draw_folding
+context("draw_folding")
 
-test_that("draw_structures",{
+test_that("draw_folding",{
 
   # load data from the package
   data("tnfs_data")
@@ -366,7 +366,7 @@ test_that("draw_structures",{
   # tnfs_data is a dataframe - 127 obs of 9 variables.
   p <- draw_canvas(tnfs_data)
   p <- draw_chains(p, tnfs_data)
-  p <- draw_structures(p, tnfs_data)
+  p <- draw_folding(p, tnfs_data)
 
   # p is a ggplot object and as such is a list of 9
   expect_is(p,"ggplot")
