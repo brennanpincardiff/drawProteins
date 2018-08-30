@@ -2,13 +2,13 @@
 % Please edit documentation in R/geoms.R
 \name{draw_phospho}
 \alias{draw_phospho}
-\title{Add protein phosphorylation sites to ggplot object.}
+\title{Add protein phosphorylation sites to ggplot2 object.}
 \usage{
 draw_phospho(p, data = data, size = 2, fill = "yellow",
     show.legend = FALSE)
 }
 \arguments{
-\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
+\item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
 
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -22,14 +22,14 @@ data$type.}
 \item{show.legend}{Option to include legend in this layer}
 }
 \value{
-A ggplot object either in the plot window or as an object with an
+A ggplot2 object either in the plot window or as an object with an
 additional geom_point layer.
 }
 \description{
-\code{draw_phospho} adds phosphorylation sites to ggplot object created by
+\code{draw_phospho} adds phosphorylation sites to ggplot2 object created by
 \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 It uses the data object.
-The ggplot function
+The ggplot2 function
 \code{\link[ggplot2]{geom_point}} is used to draw each of the
 phosphorylation sites at their location as determined by data object.
 }

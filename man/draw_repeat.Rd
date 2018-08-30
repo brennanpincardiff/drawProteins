@@ -2,13 +2,13 @@
 % Please edit documentation in R/geoms.R
 \name{draw_repeat}
 \alias{draw_repeat}
-\title{Add protein repeats sites to ggplot object.}
+\title{Add protein repeats sites to ggplot2 object.}
 \usage{
 draw_repeat(p, data = data, label_size = 2, outline = "dimgrey",
     fill = "dimgrey", label_repeats = TRUE, show.legend = TRUE)
 }
 \arguments{
-\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
+\item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
 
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -26,14 +26,14 @@ data$type.}
 \item{show.legend}{Option to include legend in this layer}
 }
 \value{
-A ggplot object either in the plot window or as an object with an
+A ggplot2 object either in the plot window or as an object with an
 additional geom_rect layer.
 }
 \description{
-\code{draw_repeat} adds protein repeats from Uniprot to ggplot object
+\code{draw_repeat} adds protein repeats from Uniprot to ggplot2 object
 created by \code{\link{draw_canvas}} and \code{\link{draw_chains}}.
 It uses the data object.
-The ggplot function \code{\link[ggplot2]{geom_rect}}
+The ggplot2 function \code{geom_rect}
 is used to draw each of the motifs proportional to their number of
 amino acids (length).
 }

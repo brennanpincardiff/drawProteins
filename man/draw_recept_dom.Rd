@@ -2,13 +2,13 @@
 % Please edit documentation in R/geoms.R
 \name{draw_recept_dom}
 \alias{draw_recept_dom}
-\title{Add receptor domains to ggplot object.}
+\title{Add receptor domains to ggplot2 object.}
 \usage{
 draw_recept_dom(p, data = data, label_domains = FALSE, label_size = 4,
     show.legend = TRUE)
 }
 \arguments{
-\item{p}{ggplot object ideally created with \code{\link{draw_canvas}}.}
+\item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
 
 \item{data}{Dataframe of one or more rows with the following column
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -22,15 +22,14 @@ these parts of receptors}
 \item{show.legend}{Option to include legend in this layer}
 }
 \value{
-A ggplot object either in the plot window or as an object with an
+A ggplot2 object either in the plot window or as an object with an
 additional geom_rect layer.
 }
 \description{
-\code{draw_recept_dom} adds receptor domains to the ggplot object created by
+\code{draw_recept_dom} adds receptor domains to the ggplot2 object created by
 \code{\link{draw_chains}}.
 It uses the data object.
-The ggplot function
-\code{\link[ggplot2]{geom_rect}} is used to draw each of the domain
+The ggplot2 function \code{geom_rect} is used to draw each of the domain
 chains proportional to their number of amino acids (length).
 }
 \examples{
@@ -39,7 +38,7 @@ data("tnfs_data")
 p <- draw_canvas(tnfs_data)
 p <- draw_chains(p, tnfs_data, label_size = 1.25)
 p <- draw_recept_dom(p, tnfs_data)
-# we like to draw receptors vertically so flip using ggplot functions
+# we like to draw receptors vertically so flip using ggplot2 functions
 
 p + ggplot2::scale_x_reverse() + ggplot2::coord_flip()
 

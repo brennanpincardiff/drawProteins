@@ -2,7 +2,7 @@
 % Please edit documentation in R/geoms.R
 \name{draw_canvas}
 \alias{draw_canvas}
-\title{Create ggplot object with protein chains from feature database}
+\title{Create ggplot2 object with protein chains from feature database}
 \usage{
 draw_canvas(data = data)
 }
@@ -13,7 +13,7 @@ names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 data$type.}
 }
 \value{
-A ggplot object either in the plot window or as an object.
+A ggplot2 object either in the plot window or as an object.
 }
 \description{
 \code{draw_canvas} uses the dataframe containing the protein features to
