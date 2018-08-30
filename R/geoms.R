@@ -492,7 +492,6 @@ draw_recept_dom <- function(p,
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
 #' p <-draw_structures(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
 #' p
-
 draw_structures <- function(p,
     data = data,
     show.legend = TRUE,
