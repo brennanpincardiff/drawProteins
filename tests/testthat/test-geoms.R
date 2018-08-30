@@ -303,6 +303,46 @@ test_that("draw_recept_dom",{
   expect_equal(nrow(p$layers[[3]]$data), 4) # 2 receptors - EC and Cyto domain
   expect_equal(nrow(p$layers[[4]]$data), 2) # 2 receptors - 2 TM domain
 
+
+  ## tests for label domains (default is FALSE)
+  # tnfs_data is a dataframe - 127 obs of 9 variables.
+  p <- draw_canvas(tnfs_data)
+  p <- draw_chains(p, tnfs_data)
+  p <- draw_recept_dom(p, tnfs_data, label_domains = TRUE)
+
+  # p is a ggplot object and as such is a list of 9
+  expect_is(p,"ggplot")
+  expect_equal(mode(p), "list")
+  expect_equal(length(p), 9)
+
+  # p should have six layers at this point
+  # because TOPO_DOM and TRANSMEM added separately
+  # and labelling domains gives two more layers which are GeomLable
+  expect_equal(length(p$layers), 6)
+  # https://stackoverflow.com/questions/13457562/how-to-determine-the-geom-type-of-each-layer-of-a-ggplot2-object/43982598#43982598
+  # types of layers...
+  expect_equal(class(p$layers[[1]]$geom)[1], "GeomRect")
+  expect_equal(class(p$layers[[2]]$geom)[1], "GeomText")
+  expect_equal(class(p$layers[[3]]$geom)[1], "GeomRect")
+  expect_equal(class(p$layers[[4]]$geom)[1], "GeomRect")
+  expect_equal(class(p$layers[[5]]$geom)[1], "GeomLabel")
+  expect_equal(class(p$layers[[6]]$geom)[1], "GeomLabel")
+
+  # in this case nrow of layer 5 should be 2
+  # and nrow of layer 6 should be 2
+  expect_equal(nrow(p$layers[[5]]$data), 4) # 2 receptors - EC and Cyto domain
+  expect_equal(nrow(p$layers[[6]]$data), 2) # 2 receptors - 2 TM domain
+
+  # testing data and mapping of layers 5 and 6
+  expect_equal(length(p$layers[[5]]$data), 9)
+  expect_equal(nrow(p$layers[[5]]$data), 4)
+  expect_equal(p$layers[[5]]$data$type[1], "TOPO_DOM")
+  expect_equal(p$layers[[5]]$data$description[1], "Extracellular")
+  expect_equal(p$layers[[5]]$data$description[2], "Cytoplasmic")
+  expect_equal(p$layers[[6]]$mapping$label, "TM")
+  expect_equal(p$layers[[6]]$data$type[1], "TRANSMEM")
+  expect_equal(p$layers[[6]]$data$description[1], "Helical")
+
 })
 
 
