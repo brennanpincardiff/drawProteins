@@ -20,30 +20,33 @@
 #'
 parse_gff <- function(file_or_link){
 
-    # key is to skip 2 rows and remove colomn names
+    # key is to ignore comment rows and remove colomn names
     gff_data <- readr::read_tsv(file_or_link, comment = "##", col_names = FALSE)
-    ##
 
-    ## transform data so that I can use it to draw...
+    ## format should only have 9 columns so remove column 10
+    if(ncol(gff_data)>9){
+      gff_data <- gff_data[,1:9]}
+
+    ## add column names data so that I can use it to draw...
     colnames(gff_data) <- c("accession", "source", "type", "begin", "end",
-    "X6", "X7", "X8", "X9", "X10")
+    "score", "strand", "frame", "attribute")
+
+    # remove rows that don't contain a begin
+    gff_data <- dplyr::filter(gff_data, begin > 0)
+
+    # create description file
+    gff_data <- tidyr::separate(gff_data,
+      attribute, into = c("description", "second"), sep = ";",
+      extra = "merge", fill = "right")
+
+    gff_data$description <- gsub("Note=", "", gff_data$description)
 
     # add order
     gff_data$order <- 1
-    # add entryName
-    gff_data$entryName <- gff_data$accession
     # make capital
     gff_data$type <- toupper(gff_data$type)
-
-    # OK, so description is none so need to use type...
-    # add an if statement.. if there is a description use that but if not...
-    # use type...
-
-    # easiest thing to do is just to see if description is there...
-    temp_text <- stringr::str_c(colnames(gff_data), collapse = "")
-    temp_case <- stringr::str_detect(temp_text, "description")
-    if(temp_case == FALSE){
-        gff_data$description <- gff_data$type
-    }
+    # add entryName
+    gff_chain <- dplyr::filter(gff_data, type == "CHAIN")
+    gff_data$entryName <- gsub("Note=", "", as.character(gff_chain[1,10]))
     return(gff_data)
 }
