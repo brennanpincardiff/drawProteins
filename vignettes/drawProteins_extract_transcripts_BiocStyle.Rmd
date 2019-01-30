@@ -10,7 +10,7 @@ package: drawProteins
 date: "`r Sys.Date()`"
 output: BiocStyle::html_document
 vignette: >
-    %\VignetteIndexEntry{Using drawProteins}
+    %\VignetteIndexEntry{Using extract_transcripts in drawProteins}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}
 ---
