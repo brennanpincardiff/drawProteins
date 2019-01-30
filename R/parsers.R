@@ -19,7 +19,7 @@
 #' data <- parse_gff("https://www.uniprot.org/uniprot/Q04206.gff")
 #'
 parse_gff <- function(file_or_link){
-
+    begin <- attribute <- type <- NULL
     # key is to ignore comment rows and remove colomn names
     gff_data <- readr::read_tsv(file_or_link, comment = "##", col_names = FALSE)
 
