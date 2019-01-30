@@ -15,7 +15,7 @@ vignette: >
     %\VignetteEncoding{UTF-8}
 ---
 
-```{r, eval = TRUE, echo=FALSE}
+```{r load_packages, eval = TRUE, echo=FALSE}
 library(BiocStyle)
 library(drawProteins)
 library(httr)
@@ -127,7 +127,7 @@ To show this visualisation better, a white background helps as well as removing
 the y-axis and the grid.
 Also changing the size of the text using the base_size argument. 
 This can be done with this code:
-```{r, fig.height=3, fig.wide = TRUE}
+```{r white_background, fig.height=3, fig.wide = TRUE}
 # white background and remove y-axis
 p <- p + theme_bw(base_size = 20) + # white background
     theme(panel.grid.minor=element_blank(), 
@@ -141,22 +141,22 @@ p
 
 # Checking the other features
 
-```{r, fig.height=3, fig.wide = TRUE}
+```{r show_draw_regions, fig.height=3, fig.wide = TRUE}
 draw_regions(p, rel_data) # adds activation domain
 
 ```
 
-```{r, fig.height=3, fig.wide = TRUE}
+```{r show_draw_repeat, fig.height=3, fig.wide = TRUE}
 draw_repeat(p, rel_data) # doesn't add anything in this case
 
 ```
 
-```{r, fig.height=3, fig.wide = TRUE}
+```{r show_draw_motif, fig.height=3, fig.wide = TRUE}
 draw_motif(p, rel_data) # adds 9aa Transactivation domain & NLS
 ```
 
 
-```{r, fig.height=3, fig.wide = TRUE}
+```{r show_draw_phospho, fig.height=3, fig.wide = TRUE}
 # add phosphorylation sites from Uniprot
 draw_phospho(p, rel_data, size = 8)
 ```
@@ -166,7 +166,7 @@ In this way it's possible to chose the geoms that give the information desired
 in the way you like. Some customisation is possible as described below. 
 
 For Rel A, my recommendation would be the following workflow.
-```{r, fig.height=3.5, fig.wide = TRUE}
+```{r relA_workflow, fig.height=3.5, fig.wide = TRUE}
 draw_canvas(rel_data) -> p
 p <- draw_chains(p, rel_data)
 p <- draw_domains(p, rel_data)
@@ -186,7 +186,7 @@ p
 ### Adding titles to the plots 
 
 Using ggplot2 then allows the addition of titles:
-```{r, fig.height=4, fig.wide = TRUE}
+```{r add_titles, fig.height=4, fig.wide = TRUE}
 # add titles
 rel_subtitle <- paste0("circles = phosphorylation sites\n",
                 "RHD = Rel Homology Domain\nsource:Uniprot")
@@ -201,7 +201,7 @@ p
 
 With internet access, the script below shows the workflow for five proteins of
 the NFkappaB transcription factor family. 
-```{r, fig.height=10, fig.wide = TRUE}
+```{r five_NFkappaB, fig.height=10, fig.wide = TRUE}
 # accession numbers of five NF-kappaB proteins
 prot_data <- drawProteins::get_features("Q04206 Q01201 Q04864 P19838 Q00653")
 prot_data <- drawProteins::feature_to_dataframe(prot_data)
@@ -240,7 +240,7 @@ p
 Currently, it's possible to customise the chain colour and outline. It's 
 possible to remove the labels. 
 
-```{r, fig.height=6, fig.wide = TRUE}
+```{r customising, fig.height=6, fig.wide = TRUE}
 data("five_rel_data")
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, 
@@ -253,7 +253,7 @@ p
 
 It's also possible to change the size and colour of the phosphorylation symbols.
 
-```{r, fig.height=8, fig.wide = TRUE}
+```{r custom_phospho, fig.height=8, fig.wide = TRUE}
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, 
             fill = "lightsteelblue1", 
@@ -265,7 +265,7 @@ p + theme_bw()
 
 It's also possible to change the labels to a custom list. But remember that the
 plots are drawn from the bottom up. 
-```{r, fig.height=8, fig.wide = TRUE}
+```{r change_labels, fig.height=8, fig.wide = TRUE}
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, 
             fill = "lightsteelblue1", 
@@ -285,6 +285,6 @@ p + theme_bw()
 # Session info
 Here is the output of `sessionInfo()` on the system on which this document was
 compiled:
-```{r, echo=FALSE}
+```{r session_Info, echo=FALSE}
 sessionInfo()
 ```

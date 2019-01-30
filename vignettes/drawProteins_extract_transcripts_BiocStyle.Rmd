@@ -15,7 +15,7 @@ vignette: >
     %\VignetteEncoding{UTF-8}
 ---
 
-```{r, eval = TRUE, echo=FALSE}
+```{r load_packages, eval = TRUE, echo=FALSE}
 library(BiocStyle)
 library(drawProteins)
 library(ggplot2)
@@ -63,7 +63,7 @@ To plot all the transcripts, a new dataframe is produced using the
 has 430 obs of 9 variables and will plot seven chains as shown by checking
 the `max(prot_data$order)` function.
 
-```{r, fig.height=10, fig.wide = TRUE}
+```{r load_NFkappaB_data, fig.height=10, fig.wide = TRUE}
 # load up data for five NF-kappaB proteins
 data("five_rel_data")
 max(five_rel_data$order)
@@ -77,7 +77,7 @@ max(prot_data$order)
 
 Now, let's check out the chains for the two objects for comparison purposes.
 
-```{r, fig.height=10, fig.wide = TRUE}
+```{r check_chains, fig.height=10, fig.wide = TRUE}
 p1 <- draw_canvas(five_rel_data)
 p1 <- draw_chains(p1, five_rel_data)
 p1 <- p1 + ggtitle("Five chains plotted")
@@ -92,7 +92,7 @@ p2
 
 The appropriate domains and phosphorylation sites can be drawn correctly. 
 
-```{r, fig.height=10, fig.wide = TRUE}
+```{r draw_domains_and_phospho, fig.height=10, fig.wide = TRUE}
 p2 <- draw_domains(p2, prot_data)
 p2 <- draw_phospho(p2, prot_data, size =8) 
 p2
@@ -102,7 +102,7 @@ p2
 Note that the names of the different transcripts are the same so it's wise to 
 use the option customize the labels.
 
-```{r, fig.height=8, fig.wide = TRUE}
+```{r draw_canvas_and_chains, fig.height=8, fig.wide = TRUE}
 p2 <- draw_canvas(prot_data)
 p2 <- draw_chains(p2, prot_data,
             fill = "lightsteelblue1", 
@@ -124,6 +124,6 @@ p2 + theme_bw()
 # Session info
 Here is the output of `sessionInfo()` on the system on which this document was
 compiled:
-```{r, echo=FALSE}
+```{r session_Info, echo=FALSE}
 sessionInfo()
 ```
