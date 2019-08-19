@@ -119,6 +119,16 @@ extract_feat_acc <- function(features_list){
     features_dataframe$length <-
         features_dataframe$end - features_dataframe$begin
 
+    # Add 1 chain if missing
+    if(!any(features_dataframe$type=="CHAIN")){
+        features_dataframe <- rbind(features_dataframe,
+                                    data.frame(type = "CHAIN",
+                                               description = "NONE",
+                                               begin = 1,
+                                               end = nchar(features_list$sequence),
+                                               length = nchar(features_list$sequence) - 1))
+    }
+
     # add accession number to each row of dataframe
     features_dataframe$accession <- rep(features_list$accession,
         times = nrow(features_dataframe))
