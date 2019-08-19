@@ -30,8 +30,8 @@ draw_canvas <- function(data = data){
     begin=end=NULL
     p <- ggplot2::ggplot()
     p <- p + ggplot2::ylim(0.5, max(data$order)+0.5)
-    p <- p + ggplot2::xlim(-max(data$end, na.rm=TRUE)*0.2,
-        max(data$end, na.rm=TRUE) + max(data$end, na.rm=TRUE)*0.1)
+    p <- p + ggplot2::xlim(-max(data$end, na.rm=TRUE)*0.1,
+                           max(data$end, na.rm=TRUE) + max(data$end, na.rm=TRUE)*0.1)
     p <- p + ggplot2::labs(x = "Amino acid number") # label x-axis
     p <- p + ggplot2::labs(y = "") # label y-axis
 
@@ -106,11 +106,8 @@ draw_chains <- function(p,
 
     if(label_chains == TRUE){
         p <- p +
-            ggplot2::annotate("text", x = -10,
-                y = data[data$type == "CHAIN",]$order,
-                        label = labels,
-                        hjust = 1,
-                        size = label_size)
+            scale_y_continuous(breaks = seq_along(unique(labels)),
+                               labels = unique(labels))
     }
     return(p)
 }
