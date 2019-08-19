@@ -78,6 +78,31 @@ test_that("extract_feat_acc works to give ",{
 
 })
 
+test_that("extract_feat_acc works with no chains ",{
+
+  # load data from the package - should I move it into the test folder
+  data("rel_A_features")  # this is object created from whole Uniprot GET
+  # creates JSON object  in the environment.
+  # it's the json data for Q04206 - for the transcription factor RelA
+
+  # remove chain feature
+  rel_A_features$features[[1]] <- NULL
+
+  # Nice simple test
+  res <- extract_feat_acc(rel_A_features)
+
+  expect_is(res, "data.frame") # generic
+
+  # Chain should be added, exactly 1
+  expect_equal(sum(res$type=="CHAIN"), 1) # exact for sample data
+  expect_equal(res[which(res$type=="CHAIN"),]$end, max(res$end)) # no feature should be outside the chain
+
+  expect_equal(nrow(res), 75)  # exact for sample data
+  expect_match(colnames(res)[3], "begin") # 3rd column name is begin
+  expect_match(colnames(res)[4], "end") # 4th column name is end
+  expect_match(colnames(res)[6], "accession") # 6th column name is accession
+
+})
 
 
 # write function to do unit tests with is extract_names
