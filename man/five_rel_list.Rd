@@ -4,7 +4,9 @@
 \name{five_rel_list}
 \alias{five_rel_list}
 \title{Features of five human Rel A proteins}
-\format{Large List of 5 elements - one element for each protein}
+\format{
+Large List of 5 elements - one element for each protein
+}
 \source{
 Uniprot {http://www.uniprot.org}
 Accession numbers Q04206 Q01201 Q04864 P19838 Q00653

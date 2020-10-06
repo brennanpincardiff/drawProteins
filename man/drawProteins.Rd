@@ -3,8 +3,4 @@
 \docType{package}
 \name{drawProteins}
 \alias{drawProteins}
-\alias{drawProteins-package}
 \title{drawProteins.}
-\description{
-drawProteins.
-}

@@ -4,7 +4,9 @@
 \name{rel_A_features}
 \alias{rel_A_features}
 \title{Features of human Rel A protein}
-\format{List of 6 - information necessary to draw Rel A/p65}
+\format{
+List of 6 - information necessary to draw Rel A/p65
+}
 \source{
 \url{http://www.uniprot.org/uniprot/Q04206}
 }

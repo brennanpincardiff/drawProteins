@@ -4,8 +4,13 @@
 \alias{draw_recept_dom}
 \title{Add receptor domains to ggplot2 object.}
 \usage{
-draw_recept_dom(p, data = data, label_domains = FALSE, label_size = 4,
-    show.legend = TRUE)
+draw_recept_dom(
+  p,
+  data = data,
+  label_domains = FALSE,
+  label_size = 4,
+  show.legend = TRUE
+)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}

@@ -4,8 +4,14 @@
 \alias{draw_folding}
 \title{Add regions to ggplot object: alpha-helixes, beta-strands and turns.}
 \usage{
-draw_folding(p, data = data, show.legend = TRUE, show_strand = TRUE,
-  show_helix = TRUE, show_turn = TRUE)
+draw_folding(
+  p,
+  data = data,
+  show.legend = TRUE,
+  show_strand = TRUE,
+  show_helix = TRUE,
+  show_turn = TRUE
+)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}

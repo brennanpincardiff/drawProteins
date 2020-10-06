@@ -4,8 +4,14 @@
 \alias{draw_domains}
 \title{Add protein domains to ggplot2 object.}
 \usage{
-draw_domains(p, data = data, label_domains = TRUE, label_size = 4,
-    show.legend = TRUE)
+draw_domains(
+  p,
+  data = data,
+  label_domains = TRUE,
+  label_size = 4,
+  show.legend = TRUE,
+  type = "DOMAIN"
+)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}

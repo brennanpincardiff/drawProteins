@@ -4,7 +4,9 @@
 \name{rel_json}
 \alias{rel_json}
 \title{Human Rel A protein features in JSON format}
-\format{List of 1 with List of 6 - information necessary to draw Rel A/p65}
+\format{
+List of 1 with List of 6 - information necessary to draw Rel A/p65
+}
 \source{
 \url{http://www.uniprot.org/uniprot/Q04206}
 }
