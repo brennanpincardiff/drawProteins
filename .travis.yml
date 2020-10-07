@@ -1,11 +1,14 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: r
-r:
-  - bioc-devel
+r: bioc-devel
 
 cache: packages
-bioc_required: true
+    bioc_required: true
+
+# BiocCheck
+bioc_packages:
+  - BiocCheck
 
 after_success:
   - Rscript -e 'covr::coveralls()'
