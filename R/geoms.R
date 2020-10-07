@@ -14,19 +14,12 @@
 #'
 #' @examples
 #' # draws a blank canvas of the correct size
-#' @usage data("five_rel_data")
-#' draw_canvas(five_rel_data)
-#'
-#' # combines with draw_chains to plot and label chains.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data)
-#' p
+#' @usage draw_canvas(data)
 #'
 #' @import ggplot2
 #'
 #' @export
-draw_canvas <- function(data = data){
+draw_canvas <- function(data){
     begin=end=NULL
     p <- ggplot2::ggplot()
     p <- p + ggplot2::ylim(0.5, max(data$order)+0.5)
@@ -65,25 +58,10 @@ draw_canvas <- function(data = data){
 #'
 #' @examples
 #' # combines with draw_canvas to plot and label chains.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data)
-#' p
-#'
-#' # draws five chains with different colours to default
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' draw_chains(p, five_rel_data,
-#'     label_chains = FALSE,
-#'     fill = "red",
-#'     outline = "grey")
-#'
-#' # combines with draw_chains to plot chains and domains.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_regions(p, five_rel_data)
-#' p
+#' @usage draw_chains(p, data = data,
+#'     outline = "black", fill = "grey",
+#'     label_chains = TRUE, labels = data[data$type == "CHAIN",]$entryName,
+#'     size = 0.5, label_size = 4)
 #'
 #' @export
 draw_chains <- function(p,
@@ -94,6 +72,7 @@ draw_chains <- function(p,
                         labels = data[data$type == "CHAIN",]$entryName,
                         size = 0.5,
                         label_size = 4){
+
     begin=end=NULL
     p <- p + ggplot2::geom_rect(data = data[data$type == "CHAIN",],
                         mapping=ggplot2::aes(xmin=begin,
@@ -133,16 +112,19 @@ draw_chains <- function(p,
 #' @param label_domains Option to label domains or not.
 #' @param label_size Size of the text used for labels.
 #' @param show.legend Option to include legend in this layer
+#' @param type Can change to show other protein features
 #' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and domains.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_domains(p, five_rel_data)
-#' p
+#' @usage
+#' draw_domains(p,
+#'          data = data,
+#'          label_domains = TRUE,
+#'          label_size = 4,
+#'          show.legend = TRUE,
+#'          type = "DOMAIN")
 #'
 #' @export
 # called draw_domains to plot just the domains
@@ -198,11 +180,8 @@ draw_domains <- function(p,
 #'
 #' @examples
 #' # combines will with draw_domains to plot chains and phosphorylation sites.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_phospho(p, five_rel_data)
-#' p
+#' @usage draw_phospho(p, data = data, size = 2,
+#'          fill = "yellow", show.legend = FALSE)
 #'
 #' @export
 # called draw_phospho
@@ -245,11 +224,7 @@ draw_phospho <- function(p, data = data,
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and regions.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_regions(p, five_rel_data)
-#' p
+#' @usage draw_regions(p, data = data, show.legend=TRUE)
 #'
 #' @export
 # called draw_regions
@@ -290,11 +265,7 @@ draw_regions <- function(p, data = data, show.legend=TRUE){
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and motifs
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_motif(p, five_rel_data)
-#' p
+#' @usage draw_motif(p, data = data, show.legend = TRUE)
 #'
 #' @export
 # called draw_motif
@@ -339,12 +310,8 @@ draw_motif <- function(p, data = data, show.legend = TRUE){
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and repeats.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_repeat(p, five_rel_data)
-#' p
-
+#' @usage draw_repeat(p, data = data, label_size = 2, outline = "dimgrey",
+#'             fill = "dimgrey", label_repeats = TRUE, show.legend = TRUE)
 #'
 #' @export
 # called draw_repeat
@@ -400,13 +367,10 @@ draw_repeat <- function(p, data = data,
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and domains.
-#' @usage data("tnfs_data")
-#' p <- draw_canvas(tnfs_data)
-#' p <- draw_chains(p, tnfs_data, label_size = 1.25)
-#' p <- draw_recept_dom(p, tnfs_data)
+#' @usage draw_recept_dom(p, data = data, label_domains = FALSE, label_size = 4,
+#'          show.legend = TRUE)
 #' # we like to draw receptors vertically so flip using ggplot2 functions
-#'
-#' p + ggplot2::scale_x_reverse() + ggplot2::coord_flip()
+#' # scale_x_reverse and coord_flip
 #'
 #' @export
 # called draw_recept_dom - to plot just the domains from receptors
@@ -478,17 +442,10 @@ draw_recept_dom <- function(p,
 #'
 #' @examples
 #' # combines with draw_chains to colour chain with helicies, strands and turns.
-#' @usage data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_folding(p, five_rel_data)
-#' p
+#' @usage
+#' draw_folding(p, data = data,
+#' show.legend = TRUE,show_strand = TRUE,show_helix = TRUE, show_turn = TRUE)
 #'
-#' # only colour alpha helix regions
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <-draw_folding(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
-#' p
 draw_folding <- function(p,
     data = data,
     show.legend = TRUE,

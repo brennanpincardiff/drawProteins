@@ -4,7 +4,8 @@
 \alias{draw_phospho}
 \title{Add protein phosphorylation sites to ggplot2 object.}
 \usage{
-draw_phospho(p, data = data, size = 2, fill = "yellow", show.legend = FALSE)
+draw_phospho(p, data = data, size = 2,
+         fill = "yellow", show.legend = FALSE)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
@@ -34,10 +35,4 @@ phosphorylation sites at their location as determined by data object.
 }
 \examples{
 # combines will with draw_domains to plot chains and phosphorylation sites.
-data("five_rel_data")
-p <- draw_canvas(five_rel_data)
-p <- draw_chains(p, five_rel_data, label_size = 1.25)
-p <- draw_phospho(p, five_rel_data)
-p
-
 }

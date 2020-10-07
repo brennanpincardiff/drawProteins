@@ -4,7 +4,7 @@
 \alias{draw_regions}
 \title{Add protein region sites to ggplot2 object.}
 \usage{
-draw_regions(p, data = data, show.legend = TRUE)
+draw_regions(p, data = data, show.legend=TRUE)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
@@ -29,10 +29,4 @@ regions proportional to their number of amino acids (length).
 }
 \examples{
 # combines with draw_chains to plot chains and regions.
-data("five_rel_data")
-p <- draw_canvas(five_rel_data)
-p <- draw_chains(p, five_rel_data, label_size = 1.25)
-p <- draw_regions(p, five_rel_data)
-p
-
 }
