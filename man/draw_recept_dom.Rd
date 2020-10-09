@@ -6,8 +6,6 @@
 \usage{
 draw_recept_dom(p, data = data, label_domains = FALSE, label_size = 4,
          show.legend = TRUE)
-# we like to draw receptors vertically so flip using ggplot2 functions
-# scale_x_reverse and coord_flip
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
@@ -36,4 +34,12 @@ chains proportional to their number of amino acids (length).
 }
 \examples{
 # combines with draw_chains to plot chains and domains.
+# we like to draw receptors vertically so flip using ggplot2 functions
+# scale_x_reverse and coord_flip
+data("tnfs_data")
+p <- draw_canvas(tnfs_data)
+p <- draw_chains(p, tnfs_data, label_size = 1.25)
+draw_recept_dom(p, tnfs_data) + ggplot2::scale_x_reverse() +
+ggplot2::coord_flip()
+
 }

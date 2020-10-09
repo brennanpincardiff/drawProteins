@@ -42,4 +42,16 @@ chains proportional to their number of amino acids (length).
 }
 \examples{
 # combines with draw_canvas to plot and label chains.
+data("five_rel_data")
+p <- draw_canvas(five_rel_data)
+draw_chains(p, five_rel_data)
+
+# draws five chains with different colours to default
+data("five_rel_data")
+p <- draw_canvas(five_rel_data)
+draw_chains(p, five_rel_data,
+    label_chains = FALSE,
+    fill = "red",
+    outline = "grey")
+
 }
