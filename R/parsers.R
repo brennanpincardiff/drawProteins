@@ -25,7 +25,7 @@ parse_gff <- function(file_or_link){
 
     ## format should only have 9 columns so remove column 10
     if(ncol(gff_data)>9){
-      gff_data <- gff_data[,1:9]}
+        gff_data <- gff_data[,1:9]}
 
     ## add column names data so that I can use it to draw...
     colnames(gff_data) <- c("accession", "source", "type", "begin", "end",
@@ -36,8 +36,8 @@ parse_gff <- function(file_or_link){
 
     # create description file
     gff_data <- tidyr::separate(gff_data,
-      attribute, into = c("description", "second"), sep = ";",
-      extra = "merge", fill = "right")
+        attribute, into = c("description", "second"), sep = ";",
+        extra = "merge", fill = "right")
 
     gff_data$description <- gsub("Note=", "", gff_data$description)
 

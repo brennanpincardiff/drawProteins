@@ -1,21 +1,20 @@
 Package: drawProteins
 Title: Package to Draw Protein Schematics from Uniprot API output
-Version: 1.8.0
+Version: 1.9.0
 Authors@R: person("Paul", "Brennan", email = "brennanpincardiff@gmail.com", 
                     role = c("aut", "cre"))
 Description: This package draws protein schematics from Uniprot API output. 
     From the JSON returned by the GET command, it creates a dataframe from the 
     Uniprot Features API. This dataframe can then be used by geoms based on 
     ggplot2 and base R to draw protein schematics. 
-Depends: R (>= 3.4)
+Depends: R (>= 4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: false
+LazyData: true
 Imports: ggplot2,
     httr,
     dplyr,
     readr,
-    stringr,
     tidyr
 Suggests: covr,
     testthat,
@@ -23,7 +22,7 @@ Suggests: covr,
     rmarkdown,
     BiocStyle
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.1
 URL: https://github.com/brennanpincardiff/drawProteins
 BugReports: https://github.com/brennanpincardiff/drawProteins/issues/new
 biocViews: Visualization, FunctionalPrediction, Proteomics

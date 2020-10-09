@@ -4,8 +4,8 @@
 \alias{draw_folding}
 \title{Add regions to ggplot object: alpha-helixes, beta-strands and turns.}
 \usage{
-draw_folding(p, data = data, show.legend = TRUE, show_strand = TRUE,
-  show_helix = TRUE, show_turn = TRUE)
+draw_folding(p, data = data,
+show.legend = TRUE,show_strand = TRUE,show_helix = TRUE, show_turn = TRUE)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
@@ -40,12 +40,8 @@ number of amino acids (length).
 data("five_rel_data")
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, label_size = 1.25)
-p <- draw_folding(p, five_rel_data)
-p
+draw_folding(p, five_rel_data)
 
-# only colour alpha helix regions
-p <- draw_canvas(five_rel_data)
-p <- draw_chains(p, five_rel_data, label_size = 1.25)
-p <-draw_folding(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
-p
+
+
 }

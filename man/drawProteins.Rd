@@ -3,8 +3,9 @@
 \docType{package}
 \name{drawProteins}
 \alias{drawProteins}
-\alias{drawProteins-package}
 \title{drawProteins.}
 \description{
-drawProteins.
+This package has been created to allow the visualisation of protein
+schematics based on the data obtained from the
+[Uniprot Protein Database](http://www.uniprot.org/).
 }

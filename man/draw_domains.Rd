@@ -4,8 +4,12 @@
 \alias{draw_domains}
 \title{Add protein domains to ggplot2 object.}
 \usage{
-draw_domains(p, data = data, label_domains = TRUE, label_size = 4,
-    show.legend = TRUE)
+draw_domains(p,
+         data = data,
+         label_domains = TRUE,
+         label_size = 4,
+         show.legend = TRUE,
+         type = "DOMAIN")
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
@@ -20,6 +24,8 @@ data$type.}
 \item{label_size}{Size of the text used for labels.}
 
 \item{show.legend}{Option to include legend in this layer}
+
+\item{type}{Can change to show other protein features}
 }
 \value{
 A ggplot2 object either in the plot window or as an object with an
@@ -37,7 +43,6 @@ chains proportional to their number of amino acids (length).
 data("five_rel_data")
 p <- draw_canvas(five_rel_data)
 p <- draw_chains(p, five_rel_data, label_size = 1.25)
-p <- draw_domains(p, five_rel_data)
-p
+draw_domains(p, five_rel_data)
 
 }

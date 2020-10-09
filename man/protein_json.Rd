@@ -4,7 +4,9 @@
 \name{protein_json}
 \alias{protein_json}
 \title{Uniprot infor human Rel A protein in JSON format}
-\format{List of 1 with List of 14 inside}
+\format{
+List of 1 with List of 14 inside
+}
 \source{
 \url{http://www.uniprot.org/uniprot/Q04206}
 }

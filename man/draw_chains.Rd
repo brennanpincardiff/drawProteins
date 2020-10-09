@@ -4,8 +4,9 @@
 \alias{draw_chains}
 \title{Create ggplot2 object with protein chains from feature database}
 \usage{
-draw_chains(p, data = data, outline = "black", fill = "grey",
-    label_chains = TRUE, labels = data[data$type == "CHAIN", ]$entryName,
+draw_chains(p, data = data,
+    outline = "black", fill = "grey",
+    label_chains = TRUE, labels = data[data$type == "CHAIN",]$entryName,
     size = 0.5, label_size = 4)
 }
 \arguments{
@@ -43,8 +44,7 @@ chains proportional to their number of amino acids (length).
 # combines with draw_canvas to plot and label chains.
 data("five_rel_data")
 p <- draw_canvas(five_rel_data)
-p <- draw_chains(p, five_rel_data)
-p
+draw_chains(p, five_rel_data)
 
 # draws five chains with different colours to default
 data("five_rel_data")
@@ -53,12 +53,5 @@ draw_chains(p, five_rel_data,
     label_chains = FALSE,
     fill = "red",
     outline = "grey")
-
-# combines with draw_chains to plot chains and domains.
-data("five_rel_data")
-p <- draw_canvas(five_rel_data)
-p <- draw_chains(p, five_rel_data, label_size = 1.25)
-p <- draw_regions(p, five_rel_data)
-p
 
 }

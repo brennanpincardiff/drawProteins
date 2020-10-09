@@ -4,7 +4,7 @@
 \alias{draw_canvas}
 \title{Create ggplot2 object with protein chains from feature database}
 \usage{
-draw_canvas(data = data)
+draw_canvas(data)
 }
 \arguments{
 \item{data}{Dataframe of one or more rows with the following column
@@ -18,17 +18,11 @@ A ggplot2 object either in the plot window or as an object.
 \description{
 \code{draw_canvas} uses the dataframe containing the protein features to
 creates the basic plot element by determining the length of the longest
-protein.
+protein and the number of proteins to plot.
 }
 \examples{
 # draws a blank canvas of the correct size
 data("five_rel_data")
 draw_canvas(five_rel_data)
-
-# combines with draw_chains to plot and label chains.
-data("five_rel_data")
-p <- draw_canvas(five_rel_data)
-p <- draw_chains(p, five_rel_data)
-p
 
 }

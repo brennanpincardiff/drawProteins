@@ -4,7 +4,8 @@
 \name{five_rel_data}
 \alias{five_rel_data}
 \title{Dataframe features of 5 human NFkappaB proteins Uniprot on 1 Nov 2017}
-\format{A data frame with 320 rows and 9 variables:
+\format{
+A data frame with 320 rows and 9 variables:
 \describe{
     \item{type}{type of features - e.g. chain}
     \item{description}{long name for the protein}
@@ -15,7 +16,8 @@
     \item{entryName}{protein Uniprot entry Name}
     \item{taxid}{taxonomic identification - species}
     \item{order}{plotting order from the bottom of the graph}
-}}
+}
+}
 \source{
 Uniprot {http://www.uniprot.org}
 Accession numbers Q04206 Q01201 Q04864 P19838 Q00653

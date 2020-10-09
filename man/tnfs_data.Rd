@@ -4,7 +4,8 @@
 \name{tnfs_data}
 \alias{tnfs_data}
 \title{Dataframe features of 2 human TNF receptors from Uniprot on 3 Jan 2018}
-\format{A data frame with 127 rows of 9 variables:
+\format{
+A data frame with 127 rows of 9 variables:
 \describe{
     \item{type}{type of features - e.g. chain}
     \item{description}{long name for the protein}
@@ -15,7 +16,8 @@
     \item{entryName}{protein Uniprot entry Name}
     \item{taxid}{taxonomic identification - species}
     \item{order}{plotting order from the bottom of the graph}
-}}
+}
+}
 \source{
 Uniprot {http://www.uniprot.org}
 Accession numbers P19438 P25942

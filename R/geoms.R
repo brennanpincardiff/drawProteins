@@ -3,7 +3,9 @@
 #'
 #' \code{draw_canvas} uses the dataframe containing the protein features to
 #' creates the basic plot element by determining the length of the longest
-#' protein.
+#' protein and the number of proteins to plot.
+#'
+#' @usage draw_canvas(data)
 #'
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -17,16 +19,10 @@
 #' data("five_rel_data")
 #' draw_canvas(five_rel_data)
 #'
-#' # combines with draw_chains to plot and label chains.
-#' data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data)
-#' p
-#'
 #' @import ggplot2
 #'
 #' @export
-draw_canvas <- function(data = data){
+draw_canvas <- function(data){
     begin=end=NULL
     p <- ggplot2::ggplot()
     p <- p + ggplot2::ylim(0.5, max(data$order)+0.5)
@@ -48,6 +44,11 @@ draw_canvas <- function(data = data){
 #' \code{geom_rect} is then used to draw each of the protein
 #' chains proportional to their number of amino acids (length).
 #'
+#' @usage draw_chains(p, data = data,
+#'     outline = "black", fill = "grey",
+#'     label_chains = TRUE, labels = data[data$type == "CHAIN",]$entryName,
+#'     size = 0.5, label_size = 4)
+#'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -67,8 +68,7 @@ draw_canvas <- function(data = data){
 #' # combines with draw_canvas to plot and label chains.
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data)
-#' p
+#' draw_chains(p, five_rel_data)
 #'
 #' # draws five chains with different colours to default
 #' data("five_rel_data")
@@ -77,13 +77,6 @@ draw_canvas <- function(data = data){
 #'     label_chains = FALSE,
 #'     fill = "red",
 #'     outline = "grey")
-#'
-#' # combines with draw_chains to plot chains and domains.
-#' data("five_rel_data")
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_regions(p, five_rel_data)
-#' p
 #'
 #' @export
 draw_chains <- function(p,
@@ -94,6 +87,7 @@ draw_chains <- function(p,
                         labels = data[data$type == "CHAIN",]$entryName,
                         size = 0.5,
                         label_size = 4){
+
     begin=end=NULL
     p <- p + ggplot2::geom_rect(data = data[data$type == "CHAIN",],
                         mapping=ggplot2::aes(xmin=begin,
@@ -125,6 +119,13 @@ draw_chains <- function(p,
 #' The ggplot2 function \code{geom_rect} is used to draw each of the domain
 #' chains proportional to their number of amino acids (length).
 #'
+#' @usage draw_domains(p,
+#'          data = data,
+#'          label_domains = TRUE,
+#'          label_size = 4,
+#'          show.legend = TRUE,
+#'          type = "DOMAIN")
+#'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -133,6 +134,7 @@ draw_chains <- function(p,
 #' @param label_domains Option to label domains or not.
 #' @param label_size Size of the text used for labels.
 #' @param show.legend Option to include legend in this layer
+#' @param type Can change to show other protein features
 #' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -141,8 +143,7 @@ draw_chains <- function(p,
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_domains(p, five_rel_data)
-#' p
+#' draw_domains(p, five_rel_data)
 #'
 #' @export
 # called draw_domains to plot just the domains
@@ -150,9 +151,10 @@ draw_domains <- function(p,
                         data = data,
                         label_domains = TRUE,
                         label_size = 4,
-                        show.legend = TRUE){
+                        show.legend = TRUE,
+                        type = "DOMAIN"){
     begin=end=description=NULL
-    p <- p + ggplot2::geom_rect(data= data[data$type == "DOMAIN",],
+    p <- p + ggplot2::geom_rect(data= data[data$type == type,],
             mapping=ggplot2::aes(xmin=begin,
                         xmax=end,
                         ymin=order-0.25,
@@ -161,7 +163,7 @@ draw_domains <- function(p,
                         show.legend = show.legend)
 
     if(label_domains == TRUE){
-        p <- p + ggplot2::geom_label(data = data[data$type == "DOMAIN", ],
+        p <- p + ggplot2::geom_label(data = data[data$type == type, ],
                         ggplot2::aes(x = begin + (end-begin)/2,
                             y = order,
                             label = description),
@@ -183,6 +185,9 @@ draw_domains <- function(p,
 #' \code{\link[ggplot2]{geom_point}} is used to draw each of the
 #' phosphorylation sites at their location as determined by data object.
 #'
+#' @usage draw_phospho(p, data = data, size = 2,
+#'          fill = "yellow", show.legend = FALSE)
+#'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -200,8 +205,7 @@ draw_domains <- function(p,
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_phospho(p, five_rel_data)
-#' p
+#' draw_phospho(p, five_rel_data)
 #'
 #' @export
 # called draw_phospho
@@ -233,6 +237,8 @@ draw_phospho <- function(p, data = data,
 #' The ggplot2 function \code{geom_rect} is used to draw each of the
 #' regions proportional to their number of amino acids (length).
 #'
+#' @usage draw_regions(p, data = data, show.legend=TRUE)
+#'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -247,8 +253,7 @@ draw_phospho <- function(p, data = data,
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_regions(p, five_rel_data)
-#' p
+#' draw_regions(p, five_rel_data)
 #'
 #' @export
 # called draw_regions
@@ -278,6 +283,8 @@ draw_regions <- function(p, data = data, show.legend=TRUE){
 #' The ggplot2 function \code{geom_rect} is used to draw each of the
 #' motifs proportional to their number of amino acids (length).
 #'
+#' @usage draw_motif(p, data = data, show.legend = TRUE)
+#'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -292,8 +299,7 @@ draw_regions <- function(p, data = data, show.legend=TRUE){
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_motif(p, five_rel_data)
-#' p
+#' draw_motif(p, five_rel_data)
 #'
 #' @export
 # called draw_motif
@@ -323,6 +329,9 @@ draw_motif <- function(p, data = data, show.legend = TRUE){
 #' is used to draw each of the motifs proportional to their number of
 #' amino acids (length).
 #'
+#' @usage draw_repeat(p, data = data, label_size = 2, outline = "dimgrey",
+#'             fill = "dimgrey", label_repeats = TRUE, show.legend = TRUE)
+#'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -341,9 +350,8 @@ draw_motif <- function(p, data = data, show.legend = TRUE){
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_repeat(p, five_rel_data)
-#' p
-
+#' draw_repeat(p, five_rel_data)
+#'
 #'
 #' @export
 # called draw_repeat
@@ -386,6 +394,9 @@ draw_repeat <- function(p, data = data,
 #' The ggplot2 function \code{geom_rect} is used to draw each of the domain
 #' chains proportional to their number of amino acids (length).
 #'
+#' @usage draw_recept_dom(p, data = data, label_domains = FALSE, label_size = 4,
+#'          show.legend = TRUE)
+#'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
 #' names: 'type', 'description', 'begin', 'end', 'length', 'accession',
@@ -399,13 +410,13 @@ draw_repeat <- function(p, data = data,
 #'
 #' @examples
 #' # combines with draw_chains to plot chains and domains.
+#' # we like to draw receptors vertically so flip using ggplot2 functions
+#' # scale_x_reverse and coord_flip
 #' data("tnfs_data")
 #' p <- draw_canvas(tnfs_data)
 #' p <- draw_chains(p, tnfs_data, label_size = 1.25)
-#' p <- draw_recept_dom(p, tnfs_data)
-#' # we like to draw receptors vertically so flip using ggplot2 functions
-#'
-#' p + ggplot2::scale_x_reverse() + ggplot2::coord_flip()
+#' draw_recept_dom(p, tnfs_data) + ggplot2::scale_x_reverse() +
+#' ggplot2::coord_flip()
 #'
 #' @export
 # called draw_recept_dom - to plot just the domains from receptors
@@ -460,6 +471,8 @@ draw_recept_dom <- function(p,
 #' chain which has alpha-helixes, beta-strands and turns proportional to the
 #' number of amino acids (length).
 #'
+#' @usage draw_folding(p, data = data,
+#' show.legend = TRUE,show_strand = TRUE,show_helix = TRUE, show_turn = TRUE)
 #'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
@@ -480,14 +493,10 @@ draw_recept_dom <- function(p,
 #' data("five_rel_data")
 #' p <- draw_canvas(five_rel_data)
 #' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <- draw_folding(p, five_rel_data)
-#' p
+#' draw_folding(p, five_rel_data)
 #'
-#' # only colour alpha helix regions
-#' p <- draw_canvas(five_rel_data)
-#' p <- draw_chains(p, five_rel_data, label_size = 1.25)
-#' p <-draw_folding(p, five_rel_data, show_strand = FALSE, show_turn = FALSE)
-#' p
+#'
+#'
 draw_folding <- function(p,
     data = data,
     show.legend = TRUE,
