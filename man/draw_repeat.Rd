@@ -39,4 +39,10 @@ amino acids (length).
 }
 \examples{
 # combines with draw_chains to plot chains and repeats.
+data("five_rel_data")
+p <- draw_canvas(five_rel_data)
+p <- draw_chains(p, five_rel_data, label_size = 1.25)
+draw_repeat(p, five_rel_data)
+
+
 }

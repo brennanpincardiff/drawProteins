@@ -18,8 +18,11 @@ A ggplot2 object either in the plot window or as an object.
 \description{
 \code{draw_canvas} uses the dataframe containing the protein features to
 creates the basic plot element by determining the length of the longest
-protein.
+protein and the number of proteins to plot.
 }
 \examples{
 # draws a blank canvas of the correct size
+data("five_rel_data")
+draw_canvas(five_rel_data)
+
 }

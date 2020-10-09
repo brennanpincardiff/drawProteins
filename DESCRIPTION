@@ -15,7 +15,6 @@ Imports: ggplot2,
     httr,
     dplyr,
     readr,
-    stringr,
     tidyr
 Suggests: covr,
     testthat,
