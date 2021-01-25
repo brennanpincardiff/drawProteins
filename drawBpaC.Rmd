@@ -1,0 +1,84 @@
+---
+title: "drawBpaC"
+author: "Andreas Kiessling"
+date: "25/01/2021"
+output: html_document
+---
+
+# Domain overview of BpaC using drawProteins
+
+##### Load packages
+
+```{r load_packages1, eval = FALSE, echo=TRUE}
+library(httr)
+library(ggplot2)
+library(knitr)
+```
+
+Install BioCmanager first
+
+```{r install BioCmanager, eval = FALSE, echo=TRUE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("BiocStyle")
+```
+
+Then drawproteins
+
+```{r installdrawproteins, eval = FALSE, echo=TRUE}
+if (!require(devtools)) {
+    install.packages('devtools')
+}
+dev_mode(on=TRUE)
+devtools::install_github('brennanpincardiff/drawProteins')
+```
+
+##### Load remaining packages
+
+```{r load_packages2, eval = FALSE, echo=TRUE}
+library(BiocStyle)
+library(drawProteins)
+opts_chunk$set(comment=NA,
+                fig.align = "center",
+                out.width = "100%",
+                dpi = 100)
+```
+
+##### Get features number of BpaC from UniProt using accession number
+
+```{r retrieve_features , eval = TRUE, echo=TRUE}
+# accession number of BpaC
+  drawProteins::get_features("A0A0H2WHF1") ->
+  bpac_json
+```
+
+##### Listing retrieved features
+
+Convert feature list into dataframe with the name "bpac_data"
+
+```{r list_features, eval = TRUE, echo=TRUE}
+drawProteins::feature_to_dataframe(bpac_json) -> bpac_data
+
+head(bpac_data[1:4])
+```
+
+#### Draw domains
+
+```{r drawdomains, eval = TRUE, echo=TRUE}
+# Draw canvas for BpaC
+drawProteins::draw_canvas(bpac_data) -> p
+# Add chains and rename chain to BpaC
+p <- drawProteins::draw_chains(p, bpac_data, labels = c("BpaC"))
+# Draw regions
+p <- drawProteins::draw_regions(p, bpac_data)
+# Move legend to bottom
+p <- p + ggplot2::theme(legend.position="bottom") + ggplot2::labs(fill="")
+
+# Add title and subtitle
+
+p <- p + ggplot2::labs(title = "BpaC",
+                subtitle = expression(paste("Extracellular adhesion protein from ",italic("B. pseudomallei"))))
+p
+```
+
