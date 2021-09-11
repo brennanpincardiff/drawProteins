@@ -60,7 +60,7 @@ draw_canvas <- function(data){
 #' @param labels Vector with source of names for the chains. EntryName used as
 #' default but can be changed.
 #' @param size Size of the outline of the chains.
-#' @param alpha Transparency of the chains.
+#' @param alpha Transparency of the rectangles representing the chains.
 #' @param label_size Size of the text used for labels.
 #'
 #' @return A ggplot2 object either in the plot window or as an object.
@@ -87,7 +87,7 @@ draw_chains <- function(p,
                         label_chains = TRUE,
                         labels = data[data$type == "CHAIN",]$entryName,
                         size = 0.5,
-                        alpha = 1,
+                        alpha = 1.0,
                         label_size = 4){
 
     begin=end=NULL
@@ -139,7 +139,7 @@ draw_chains <- function(p,
 #' @param label_size Size of the text used for labels.
 #' @param show.legend Option to include legend in this layer
 #' @param type Can change to show other protein features
-#' @param alpha Transparency of the domain chains.
+#' @param alpha Transparency of the rectangles representing the domains.
 #' @return A ggplot2 object either in the plot window or as an object with an
 #' additional geom_rect layer.
 #'
@@ -193,7 +193,7 @@ draw_domains <- function(p,
 #' phosphorylation sites at their location as determined by data object.
 #'
 #' @usage draw_phospho(p, data = data, size = 2,
-#'          fill = "yellow", show.legend = FALSE)
+#'          fill = "yellow", alpha = 1.0, show.legend = FALSE)
 #'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
@@ -202,7 +202,8 @@ draw_domains <- function(p,
 #' data$type.
 #' @param size Size of the circle
 #' @param fill Colour of the circle.
-#' @param alpha Transparency of the circle.
+#' @param alpha Transparency of the circles representing the protein
+#' phosphorylation sites.
 #' @param show.legend Option to include legend in this layer
 #'
 #' @return A ggplot2 object either in the plot window or as an object with an
