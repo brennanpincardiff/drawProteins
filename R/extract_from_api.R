@@ -33,7 +33,7 @@ feature_to_dataframe <- function(features_in_lists_of_six){
     for(i in 1:length(features_in_lists_of_six)){
         # the extract_feat_acc() function takes features into a data.frame
         features_temp <-
-            drawProteins::extract_feat_acc(features_in_lists_of_six[[i]])
+            extract_feat_acc(features_in_lists_of_six[[i]])
         features_temp$order <- i  # this order is needed for plotting later
         features_total_plot <- rbind(features_total_plot, features_temp)
     }

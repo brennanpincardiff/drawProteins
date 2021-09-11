@@ -225,7 +225,7 @@ draw_phospho <- function(p, data = data,
                         alpha = 1.0,
                         show.legend = FALSE){
     begin=end=description=NULL
-    p <- p + ggplot2::geom_point(data = drawProteins::phospho_site_info(data),
+    p <- p + ggplot2::geom_point(data = phospho_site_info(data),
                                 ggplot2::aes(x = begin,
                         y = order+0.25),
                         shape = 21,
