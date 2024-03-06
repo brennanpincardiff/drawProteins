@@ -3,8 +3,9 @@ the length of the ggplot object.
 
 
 CHANGES IN VERSION 1.9.0 (devel)
- -----------------------
- Default addition of chain where it is absent.
+------------------------
+
+    o Default addition of chain where it is absent.
 
 
 CHANGES IN VERSION 1.1.1 (devel)
@@ -69,7 +70,7 @@ FEATURES
 
 
 
-LAUNCH VERSION 0.98.1
+CHANGES VERSION 0.98.1
 -------------------------
 
 FEATURES
