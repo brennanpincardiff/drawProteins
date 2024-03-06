@@ -2,10 +2,23 @@
 % Please edit documentation in R/drawProteins-package.r
 \docType{package}
 \name{drawProteins}
+\alias{drawProteins-package}
 \alias{drawProteins}
 \title{drawProteins.}
 \description{
 This package has been created to allow the visualisation of protein
 schematics based on the data obtained from the
 [Uniprot Protein Database](http://www.uniprot.org/).
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/brennanpincardiff/drawProteins}
+  \item Report bugs at \url{https://github.com/brennanpincardiff/drawProteins/issues/new}
+}
+
+}
+\author{
+\strong{Maintainer}: Paul Brennan \email{brennanpincardiff@gmail.com}
+
 }

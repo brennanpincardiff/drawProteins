@@ -5,7 +5,8 @@
 \title{Add regions to ggplot object: alpha-helixes, beta-strands and turns.}
 \usage{
 draw_folding(p, data = data,
-show.legend = TRUE,show_strand = TRUE,show_helix = TRUE, show_turn = TRUE)
+show.legend = TRUE,show_strand = TRUE,show_helix = TRUE, show_turn = TRUE,
+alpha = 1.0)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
@@ -22,6 +23,8 @@ these parts of the proteins.}
 \item{show_helix}{Option to show HELIX in this layer}
 
 \item{show_turn}{Option to show TURN in this layer}
+
+\item{alpha}{alpha Transparency of the rectangles representing the folds.}
 }
 \value{
 A ggplot2 object either in the plot window or as an object with an

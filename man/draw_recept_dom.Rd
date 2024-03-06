@@ -4,7 +4,7 @@
 \alias{draw_recept_dom}
 \title{Add receptor domains to ggplot2 object.}
 \usage{
-draw_recept_dom(p, data = data, label_domains = FALSE, label_size = 4,
+draw_recept_dom(p, data = data, alpha = 1.0, label_domains = FALSE, label_size = 4,
          show.legend = TRUE)
 }
 \arguments{
@@ -14,6 +14,8 @@ draw_recept_dom(p, data = data, label_domains = FALSE, label_size = 4,
 names: 'type', 'description', 'begin', 'end', 'length', 'accession',
 'entryName', 'taxid', 'order'. Uses TOPO_DOM and TRANSMEM type to plot
 these parts of receptors}
+
+\item{alpha}{Transparency of the rectangles representing the receptor domains.}
 
 \item{label_domains}{Option to label receptor domains or not.}
 
