@@ -13,10 +13,10 @@ test_that("draw_canvas",{
   # five_rel_data is a dataframe - 320 obs of 9 variables.
   p <- draw_canvas(five_rel_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have some labels
   expect_equal(p$labels$x, "Amino acid number")
@@ -42,10 +42,10 @@ test_that("draw_chains",{
   p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have two layers at this point
   expect_equal(length(p$layers), 2)
@@ -77,9 +77,9 @@ test_that("draw_domains",{
   p <- draw_chains(p, five_rel_data)
   p <- draw_domains(p, five_rel_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have four layers at this point
   expect_equal(length(p$layers), 4)
@@ -115,9 +115,9 @@ test_that("draw_phospho",{
   p <- draw_chains(p, five_rel_data)
   p <- draw_phospho(p, five_rel_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have three layers at this point
   expect_equal(length(p$layers), 3)
@@ -148,10 +148,10 @@ test_that("draw_motif",{
   p <- draw_chains(p, five_rel_data)
   p <- draw_motif(p, five_rel_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have three layers at this point
   expect_equal(length(p$layers), 3)
@@ -193,10 +193,10 @@ test_that("draw_regions",{
   p <- draw_chains(p, five_rel_data)
   p <- draw_regions(p, five_rel_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have three layers at this point
   expect_equal(length(p$layers), 3)
@@ -239,10 +239,10 @@ test_that("draw_repeat",{
   p <- draw_chains(p, five_rel_data)
   p <- draw_repeat(p, five_rel_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have four layers at this point
   expect_equal(length(p$layers), 4)
@@ -283,10 +283,10 @@ test_that("draw_recept_dom",{
   p <- draw_chains(p, tnfs_data)
   p <- draw_recept_dom(p, tnfs_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have four layers at this point
   # because TOPO_DOM and TRANSMEM added separately
@@ -310,10 +310,10 @@ test_that("draw_recept_dom",{
   p <- draw_chains(p, tnfs_data)
   p <- draw_recept_dom(p, tnfs_data, label_domains = TRUE)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have six layers at this point
   # because TOPO_DOM and TRANSMEM added separately
@@ -368,10 +368,10 @@ test_that("draw_folding",{
   p <- draw_chains(p, tnfs_data)
   p <- draw_folding(p, tnfs_data)
 
-  # p is a ggplot object and as such is a list of 9
+  # p is a ggplot object and as such is a list of 11
   expect_is(p,"ggplot")
   expect_equal(mode(p), "list")
-  expect_equal(length(p), 9)
+  expect_equal(length(p), 11)
 
   # p should have five layers at this point
   # because HELIX, STRAND and TURN added separately

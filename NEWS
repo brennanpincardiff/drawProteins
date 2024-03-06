@@ -1,3 +1,7 @@
+Changing tests based on an updated version of ggplot2 to 3.5.0 which changes
+the length of the ggplot object.
+
+
 CHANGES IN VERSION 1.9.0 (devel)
  -----------------------
  Default addition of chain where it is absent.
