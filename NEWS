@@ -1,3 +1,6 @@
+12 Jan 2026: Changing tests based on an updated version of ggplot2 to
+4.0.0 which changes the plot object from S3 to S7. 
+
 Changing tests based on an updated version of ggplot2 to 3.5.0 which changes
 the length of the ggplot object.
 
