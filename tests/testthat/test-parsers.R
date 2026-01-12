@@ -25,33 +25,33 @@ test_that("parse_gff",{
   expect_equal(as.numeric(gff_data[1,11]), 1)
 
   # testing p made with this data
-  # p is a ggplot object and as such is a list of 11
+  # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
-  expect_equal(mode(p), "list")
-  expect_equal(length(p), 11)
+  expect_equal(mode(p), "object")
+  expect_equal(length(p), 1)
 
   # number of layers
   expect_equal(length(p$layers), 5)
 
   # type of each layer
   # types of layers...
-  expect_equal(class(p$layers[[1]]$geom)[1], "GeomRect")
-  expect_equal(class(p$layers[[2]]$geom)[1], "GeomText")
-  expect_equal(class(p$layers[[3]]$geom)[1], "GeomRect")
-  expect_equal(class(p$layers[[4]]$geom)[1], "GeomRect")
-  expect_equal(class(p$layers[[5]]$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$geom_rect$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$annotate$geom)[1], "GeomText")
+  expect_equal(class(p@layers$geom_rect...3$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$geom_rect...4$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$geom_rect...5$geom)[1], "GeomRect")
 
 
   # p should have some labels
-  expect_equal(p$labels$x, "Amino acid number")
-  expect_equal(p$labels$y, "")
+  expect_equal(p@labels$x, "Amino acid number")
+  expect_equal(p@labels$y, "")
 
   # type/features of data in each layer
-  expect_equal(p$layers[[1]]$data$type[1], "CHAIN")
-  expect_equal(as.numeric(p$layers[[2]]$data[2]), 1)
-  expect_equal(p$layers[[3]]$data$type[1], "BETA STRAND")
-  expect_equal(p$layers[[4]]$data$type[1], "HELIX")
-  expect_equal(p$layers[[5]]$data$type[1], "TURN")
+  expect_equal(p@layers$geom_rect$data$type[1], "CHAIN")
+  expect_equal(as.numeric(p@layers$annotate$data[2]), 1)
+  expect_equal(p@layers$geom_rect...3$data$type[1], "BETA STRAND")
+  expect_equal(p@layers$geom_rect...4$data$type[1], "HELIX")
+  expect_equal(p@layers$geom_rect...5$data$type[1], "TURN")
 
   # test for a web link
   protease_data <- parse_gff("https://www.uniprot.org/uniprot/P0A7B8.gff")
@@ -73,21 +73,21 @@ test_that("parse_gff",{
 
   # then test the ggplot2 object again...
   # testing p made with this data
-  # p is a ggplot object and as such is a list of 11
+  # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
-  expect_equal(mode(p), "list")
-  expect_equal(length(p), 11)
+  expect_equal(mode(p), "object")
+  expect_equal(length(p), 1)
 
   # number of layers
-  expect_equal(length(p$layers), 5)
+  expect_equal(length(p@layers), 5)
 
   # type of each layer
   # types of layers...
-  expect_equal(class(p$layers[[1]]$geom)[1], "GeomRect")
-  expect_equal(class(p$layers[[2]]$geom)[1], "GeomText")
-  expect_equal(class(p$layers[[3]]$geom)[1], "GeomRect")
-  expect_equal(class(p$layers[[4]]$geom)[1], "GeomRect")
-  expect_equal(class(p$layers[[5]]$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$geom_rect$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$annotate$geom)[1], "GeomText")
+  expect_equal(class(p@layers$geom_rect...3$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$geom_rect...4$geom)[1], "GeomRect")
+  expect_equal(class(p@layers$geom_rect...5$geom)[1], "GeomRect")
 })
 
 
