@@ -13,10 +13,17 @@ test_that("draw_canvas",{
   # five_rel_data is a dataframe - 320 obs of 9 variables.
   p <- draw_canvas(five_rel_data)
 
+<<<<<<< HEAD
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
   expect_equal(length(p), 1)
+=======
+  # p is a ggplot object and as such is a list of 11
+  expect_is(p,"ggplot")
+  expect_equal(mode(p), "list")
+  expect_equal(length(p), 11)
+>>>>>>> upstream/devel
 
   # p should have some labels
   expect_equal(p@labels$x, "Amino acid number")
@@ -42,10 +49,12 @@ test_that("draw_chains",{
   p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
 
+
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
   expect_equal(length(p), 1)
+
 
   # p should have two layers at this point
   expect_equal(length(p@layers), 2)
@@ -76,6 +85,7 @@ test_that("draw_domains",{
   p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
   p <- draw_domains(p, five_rel_data)
+
 
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
@@ -150,6 +160,7 @@ test_that("draw_motif",{
   p <- draw_chains(p, five_rel_data)
   p <- draw_motif(p, five_rel_data)
 
+
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
@@ -194,6 +205,7 @@ test_that("draw_regions",{
   p <- draw_canvas(five_rel_data)
   p <- draw_chains(p, five_rel_data)
   p <- draw_regions(p, five_rel_data)
+
 
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
@@ -285,10 +297,12 @@ test_that("draw_recept_dom",{
   p <- draw_chains(p, tnfs_data)
   p <- draw_recept_dom(p, tnfs_data)
 
+
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
   expect_equal(length(p), 1)
+
 
   # p should have four layers at this point
   # because TOPO_DOM and TRANSMEM added separately
@@ -316,6 +330,7 @@ test_that("draw_recept_dom",{
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
   expect_equal(length(p), 1)
+
 
   # p should have six layers at this point
   # because TOPO_DOM and TRANSMEM added separately
@@ -370,10 +385,12 @@ test_that("draw_folding",{
   p <- draw_chains(p, tnfs_data)
   p <- draw_folding(p, tnfs_data)
 
+
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
   expect_equal(length(p), 1)
+
 
   # p should have five layers at this point
   # because HELIX, STRAND and TURN added separately

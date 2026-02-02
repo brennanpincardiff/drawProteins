@@ -25,10 +25,12 @@ test_that("parse_gff",{
   expect_equal(as.numeric(gff_data[1,11]), 1)
 
   # testing p made with this data
+
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
   expect_equal(length(p), 1)
+
 
   # number of layers
   expect_equal(length(p$layers), 5)
@@ -73,6 +75,7 @@ test_that("parse_gff",{
 
   # then test the ggplot2 object again...
   # testing p made with this data
+
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
