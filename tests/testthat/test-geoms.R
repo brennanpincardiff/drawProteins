@@ -13,17 +13,11 @@ test_that("draw_canvas",{
   # five_rel_data is a dataframe - 320 obs of 9 variables.
   p <- draw_canvas(five_rel_data)
 
-<<<<<<< HEAD
+
   # p is an S7 object with class "ggplot"; as such is a list of 1
   expect_is(p,"ggplot")
   expect_equal(mode(p), "object")
   expect_equal(length(p), 1)
-=======
-  # p is a ggplot object and as such is a list of 11
-  expect_is(p,"ggplot")
-  expect_equal(mode(p), "list")
-  expect_equal(length(p), 11)
->>>>>>> upstream/devel
 
   # p should have some labels
   expect_equal(p@labels$x, "Amino acid number")
