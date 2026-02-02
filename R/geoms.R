@@ -47,7 +47,7 @@ draw_canvas <- function(data){
 #' @usage draw_chains(p, data = data,
 #'     outline = "black", fill = "grey",
 #'     label_chains = TRUE, labels = data[data$type == "CHAIN",]$entryName,
-#'     size = 0.5, alpha = 1.0, label_size = 4)
+#'     linewidth = 0.5, alpha = 1.0, label_size = 4)
 #'
 #' @param p ggplot2 object ideally created with \code{\link{draw_canvas}}.
 #' @param data Dataframe of one or more rows with the following column
@@ -59,7 +59,7 @@ draw_canvas <- function(data){
 #' @param label_chains Option to label chains or not.
 #' @param labels Vector with source of names for the chains. EntryName used as
 #' default but can be changed.
-#' @param size Size of the outline of the chains.
+#' @param linewidth Thickness of the outline of the chains.
 #' @param alpha Transparency of the rectangles representing the chains.
 #' @param label_size Size of the text used for labels.
 #'
@@ -86,7 +86,7 @@ draw_chains <- function(p,
                         fill = "grey",
                         label_chains = TRUE,
                         labels = data[data$type == "CHAIN",]$entryName,
-                        size = 0.5,
+                        linewidth = 0.5,
                         alpha = 1.0,
                         label_size = 4){
 
@@ -98,7 +98,7 @@ draw_chains <- function(p,
                                             ymax=order+0.2),
                         colour = outline,
                         fill = fill,
-                        size = size,
+                        linewidth = linewidth,
                         alpha = alpha)
 
     if(label_chains == TRUE){

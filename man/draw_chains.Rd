@@ -7,7 +7,7 @@
 draw_chains(p, data = data,
     outline = "black", fill = "grey",
     label_chains = TRUE, labels = data[data$type == "CHAIN",]$entryName,
-    size = 0.5, alpha = 1.0, label_size = 4)
+    linewidth = 0.5, alpha = 1.0, label_size = 4)
 }
 \arguments{
 \item{p}{ggplot2 object ideally created with \code{\link{draw_canvas}}.}
@@ -26,7 +26,7 @@ data$type.}
 \item{labels}{Vector with source of names for the chains. EntryName used as
 default but can be changed.}
 
-\item{size}{Size of the outline of the chains.}
+\item{linewidth}{Thickness of the outline of the chains.}
 
 \item{alpha}{Transparency of the rectangles representing the chains.}
 
