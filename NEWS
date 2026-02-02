@@ -1,8 +1,14 @@
-12 Jan 2026: Changing tests based on an updated version of ggplot2 to
-4.0.0 which changes the plot object from S3 to S7. 
+CHANGES IN VERSION 1.10.0 (devel)
+------------------------
 
-Changing tests based on an updated version of ggplot2 to 3.5.0 which changes
+    o Changing tests based on an updated version of ggplot2 to
+4.0.0 which changes the plot object from S3 to S7.
+    o Changing tests based on an updated version of ggplot2 to 3.5.0 which changes
 the length of the ggplot object.
+
+ARGUMENT
+    o Replace size with linewidth in function draw_chain() following a
+    depreciation in ggplot.
 
 
 CHANGES IN VERSION 1.9.0 (devel)
@@ -72,10 +78,7 @@ FEATURES
     more helpful and a better reflection of the function.
 
 
-
-CHANGES VERSION 0.98.1
+CHANGES IN VERSION 0.98.1
 -------------------------
-
 FEATURES
-
     o Drawing protein schematics from Uniprot database with Accession numbers
